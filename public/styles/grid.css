@@ -1,0 +1,909 @@
+/* Using CSS vars for some elements like: */
+:root {
+    --main-bg-color: #C6B290;
+    --main-text-color: #63666A;
+    --caption-bg-color: #F2F2F2;
+    --caption-text-color: #63666A;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+body {
+    overflow: visible !important;
+}
+
+p:not([class]) {
+    color: var(--main-text-color);
+}
+
+.text-part {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem;
+}
+
+.image-caption {
+    background: var(--caption-bg-color);
+    color: var(--caption-text-color);
+}
+
+.firstline {
+    font-size: 1.8rem;
+    font-family: gt sectra bold, serif;
+}
+
+.topbuffer {
+    margin-top: 10rem;
+}
+
+.textblock {
+    background: #fff;
+    padding: 3rem;
+    text-align: left;
+}
+
+.bg-fixed {
+    background-attachment: fixed;
+}
+
+/* Deactive following two classes to remove header image brightness */
+.field-name-field-fullscreen-header-media img {
+    filter: none;
+    will-change: filter;
+    transition: filter 1.5s;
+    -webkit-transition: filter 1.5s;
+    -moz-transition: filter 1.5s;
+}
+
+.field-name-field-fullscreen-header-media img {
+    filter: brightness(0.8);
+}
+
+@media screen and (max-width: 500px) {
+    .bg-fixed {
+        background-attachment: scroll;
+    }
+}
+
+.bg-fixed {
+    background-attachment: fixed;
+}
+
+@media screen and (max-width: 500px) {
+    .bg-fixed {
+        background-attachment: scroll;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .desktop-only {
+        display: none;
+    }
+}
+
+/* This following rule is only used for anchor links can for now be ignored: */
+/*[id] {
+		padding-top: 8rem;
+		margin-top: -8rem;
+	}
+	*/
+/* No parenting element is allowed having overflow: auto;
+		or hidden;
+		or scroll;
+		in order for sticky behaviour to work!
+	*/
+.wrapper {
+    overflow-x: hidden;
+    overflow: visible !important;
+}
+
+/*.article__bulk {
+		background-color: var(--main-bg-color);
+	}*/
+/*@media screen and (min-width: 501px) {
+		.article__bulk {
+			max-width: calc(100% - 1.5rem);
+		}
+	}
+	@media screen and (max-width: 500px) {
+		.article__bulk {
+			max-width: 100%;
+			padding-top: 2rem;
+		}
+	}*/
+.article__author-location {
+    color: #C8C8C8;
+    margin-top: 6rem;
+}
+
+/*
+	.article__title--fullscreen,
+	.article__subheading--fullscreen,
+	.author-info__text--fullscreen {
+	    text-shadow: 0 0 10px #000;
+		-webkit-text-shadow: 0 0 10px #000;
+		-moz-text-shadow: 0 0 10px #000;
+		-khtml-text-shadow: 0 0 10px #000;
+	}*/
+.author-info__text--fullscreen a {
+    text-decoration: none;
+    font-family: "GT Sectra Medium", serif;
+}
+
+.article__title--fullscreen {
+    margin-top: 10rem;
+}
+
+.article__authors--fullscreen {
+    margin-top: 4rem;
+}
+
+.bgd {
+    /* Sets map background behind images, showing border in the Ukraine */
+    background: url(https://assets.irinnews.org/s3fs-public/styles/responsive_large/public/ukraine-contact-line-illustration.jpg?uXw99KhGaoq77YS_cdhvv8zNfrV4axG0);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: right;
+    padding: 3rem 0 2rem 0;
+}
+
+.bgdtown {
+    /* Sets map background behind images, showing border in the Ukraine */
+    background: url(https://assets.irinnews.org/s3fs-public/styles/responsive_large/public/ukraine-contact-line-illustration-donetsk.jpg?EGauYDJpDoVRkfHTM2lAPsFHviRntyFm);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: right;
+    padding: 3rem 0 2rem 0;
+}
+
+.article__notes {
+    margin-top: 5rem;
+    margin-bottom: -1rem;
+}
+
+.article__body .media-element-container {
+    width: 100%;
+    max-width: 100rem;
+    position: relative;
+    padding: 0;
+    margin: 8rem auto;
+}
+
+@media screen and (max-width: 500px) {
+    .article__body .media-element-container {
+        margin: auto;
+    }
+}
+
+.article__body,
+.content__bulk-inner {
+    padding-top: 1.5rem !important;
+    margin: -2rem auto;
+    padding-bottom: 0;
+}
+
+@media screen and (max-width: 500px) {
+    .article__body {
+        padding-top: 0 !important;
+    }
+}
+
+/* Hides share icons and breadcrumps (top) */
+.article__aside-share.visible,
+.region-breadcrumb {
+    z-index: 999;
+    display: none;
+}
+
+/* Hides normal advanced report items */
+alt-reports,
+.related-reports {
+    display: none;
+}
+
+/* Hides side related articles */
+.article__aside-related {
+    display: none;
+}
+
+.blockquote,
+.yazzy {
+    border-left: none;
+    padding: 5.5rem;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-family: gt sectra medium, serif;
+    font-size: 2.3rem;
+    line-height: 1.25;
+}
+
+/* Using Flexbox Grid */
+.flow blockquote {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.flexbox-grid {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+@media screen and (max-width: 500px) {
+    .flexbox-grid {
+        display: block;
+    }
+}
+
+.column {
+    padding: 3rem;
+}
+
+/* Column styles for mobile */
+@media screen and (max-width: 500px) {
+    .col-5 {
+        padding: 0 3rem;
+    }
+}
+
+.content {
+    width: calc(100vw - 8px) !important;
+}
+
+/* Sticky content styles */
+.sticky-content-element {
+    padding: 0;
+}
+
+.row.sticky:first-child {
+    margin: 0 auto 2rem auto;
+}
+
+@media screen and (min-width: 501px) {
+    .column.sticky {
+        /* Safari attribute */
+        position: -webkit-sticky;
+        position: sticky;
+        /* Set where it should start being sticky */
+        top: 8rem;
+        /* Important when using display: flex;
+			and position: sticky;
+			*/
+        align-self: flex-start;
+    }
+
+    .desktop-hidden {
+        display: none;
+    }
+}
+
+@media screen and (max-height: 800px) and (min-width: 501px) {
+    .column.sticky {
+        top: 5rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .mobile-hidden {
+        display: none;
+    }
+
+    .mobile.sticky {
+        background: white;
+        /* Safari attribute */
+        position: -webkit-sticky;
+        position: sticky;
+        /* Set where it should start being sticky */
+        top: 5rem;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        align-self: flex-start;
+    }
+
+    .column,
+    .column:first-child {
+        width: 100%;
+        margin-top: 5rem;
+    }
+
+    .column.sticky {
+        display: flex;
+        /* Fallback background colour */
+        background: white;
+        top: 7rem;
+        margin-top: 0;
+        padding: 0 1rem 0 1.6rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .column.sticky:first-child {
+        padding-bottom: 1rem;
+    }
+
+    .column.sticky:last-child {
+        padding-bottom: 1rem;
+    }
+
+    .flex-break {
+        flex-basis: 100%;
+        height: 0;
+    }
+
+    .sticky-content-element {
+        padding: 2rem 0 1rem 0;
+        flex: auto;
+    }
+
+    blockquote p:not([class]) {
+        font-size: 1.5rem !important;
+        line-height: 1.25 !important;
+    }
+
+    .yazzy {
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+}
+
+/* New classes for better portrait images on small screens */
+.height-sensitive img {
+    width: 100% !important;
+    margin: 0 auto;
+}
+
+@media screen and (max-height: 1380px) and (min-width: 750px) and (orientation: landscape) {
+    .height-sensitive img {
+        max-height: 75vh;
+        object-fit: cover;
+    }
+
+    .height-sensitive blockquote p {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-height: 1200px) and (min-width: 750px) and (orientation: landscape) {
+    .height-sensitive img {
+        max-height: 80vh;
+    }
+
+    .height-sensitive {
+        padding: 0.5rem 0;
+    }
+
+    .height-sensitive blockquote p {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-height: 850px) and (min-width: 750px) and (orientation: landscape) {
+    .height-sensitive {
+        padding: 0.5rem 0;
+    }
+
+    .very.height-sensitive img {
+        max-height: 30vh;
+    }
+
+    .height-sensitive img {
+        max-height: 60vh;
+        object-fit: cover;
+    }
+
+    .height-sensitive blockquote {
+        margin: 0 auto 2rem auto;
+    }
+
+    .height-sensitive blockquote p {
+        font-size: 2rem;
+    }
+
+    .very.height-sensitive blockquote p {
+        font-size: 1.5rem;
+    }
+
+    .height-sensitive blockquote.yazzy {
+        padding: 3rem;
+    }
+}
+
+/* Image grid styles */
+.grid {
+    display: grid;
+    margin-top: 8rem;
+    grid-gap: 1rem;
+    padding: 1rem 1rem 1rem 1.6rem;
+}
+
+.grid &amp;
+amp;
+gt;
+
+div {
+    position: relative;
+}
+
+.column.sticky &amp;
+amp;
+gt;
+
+div {
+    position: relative;
+}
+
+/* Transition for image-numbers, also: set display: none if
+	we won't use any images numbers, for all of them, here... */
+.image-number {
+    display: none;
+    opacity: 0;
+    will-change: opacity;
+    transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+}
+
+/* Set position for sticky image numbers */
+.column.sticky .image-number {
+    top: 0;
+    left: 0;
+}
+
+/* Set position for grid image numbers */
+.grid .image-number {
+    top: 0;
+    left: 0;
+}
+
+/* .grid:hover .image-number {
+		opacity: 1;
+	}*/
+/*.column.sticky:hover .image-number {
+		opacity: 1;
+	}*/
+.column.sticky .image-number,
+.grid .image-number {
+    /* Option with faint dark background: */
+    /* background: rgba(0,0,0,0.6); */
+    /*padding: 1rem;
+		font-size: 1.8rem;
+		padding: 0.5rem;*/
+    /* Option with number and text shadow: */
+    ;
+    display: none;
+    text-shadow: 0 0 10px #000;
+    -webkit-text-shadow: 0 0 10px #000;
+    -moz-text-shadow: 0 0 10px #000;
+    -khtml-text-shadow: 0 0 10px #000;
+    font-family: 'GT Sectra', serif;
+    color: white;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    min-width: 2rem;
+    min-height: 2rem;
+}
+
+.field-name-field-caption {
+    font-size: 115% !important;
+}
+
+.grid .field-name-field-caption {
+    height: 100%;
+}
+
+.grid img {
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Grid for "winter" photos with one big photo, 
+	two small ones next to each other and one caption underneath each row */
+.grid--container_winter {
+    grid-template-areas:
+        'one one one one one'
+        'two two two two two'
+        'three three three four four'
+        'five five five five five';
+}
+
+@media screen and (max-width: 500px) {
+    .grid--container_winter {
+        grid-template-areas:
+            'one'
+            'two'
+            'three'
+            'four'
+            'five';
+    }
+}
+
+.grid--item_winter-one {
+    grid-area: one;
+}
+
+.grid--item_winter-two {
+    grid-area: two;
+}
+
+.grid--item_winter-three {
+    grid-area: three;
+}
+
+.grid--item_winter-four {
+    grid-area: four;
+}
+
+.grid--item_winter-five {
+    grid-area: five;
+}
+
+/* Grid for "Recreation" photos with one big photo, 
+	two small ones next to each other and one caption underneath */
+.grid--container_recreation {
+    grid-template-areas:
+        'one one one one'
+        'two two three three'
+        'four four four four';
+}
+
+@media screen and (max-width: 500px) {
+    .grid--container_recreation {
+        grid-template-areas:
+            'one'
+            'two'
+            'three'
+            'four';
+    }
+}
+
+.grid--item_recreation-one {
+    grid-area: one;
+}
+
+.grid--item_recreation-two {
+    grid-area: two;
+}
+
+.grid--item_recreation-three {
+    grid-area: three;
+}
+
+.grid--item_recreation-four {
+    grid-area: four;
+}
+
+/* Special grid for life on the front line with 4 photos and 3 captions */
+.grid--container_frontline {
+    grid-template-areas:
+        'one one one one one one two two two'
+        'three three three three three three four four four'
+        'five five five five five five five five five '
+        'six six six seven seven seven seven seven seven';
+}
+
+@media screen and (max-width: 500px) {
+    .grid--container_frontline {
+        grid-template-areas:
+            'one'
+            'two'
+            'three'
+            'four'
+            'five'
+            'seven'
+            'six';
+    }
+}
+
+.grid--item_frontline-one {
+    grid-area: one;
+}
+
+.grid--item_frontline-two {
+    grid-area: two;
+}
+
+.grid--item_frontline-three {
+    grid-area: three;
+}
+
+.grid--item_frontline-four {
+    grid-area: four;
+}
+
+.grid--item_frontline-five {
+    grid-area: five;
+}
+
+.grid--item_frontline-six {
+    grid-area: six;
+}
+
+.grid--item_frontline-seven {
+    grid-area: seven;
+}
+
+/* Special grids for hospitals, first line 50/50 second line 70/30 */
+.grid--container_hospitals-first {
+    grid-template-areas:
+        'one one one one one two two two two two'
+        'three three three three three three three three three three';
+}
+
+.grid--container_hospitals-second {
+    margin-top: 0;
+    grid-template-areas:
+        'four four four four four four four five five five';
+}
+
+@media screen and (max-width: 500px) {
+    .grid--container_hospitals-first {
+        grid-template-areas:
+            'one'
+            'two'
+            'three';
+    }
+
+    .grid--container_hospitals-second {
+        grid-template-areas:
+            'four'
+            'five';
+    }
+}
+
+.grid--item_hospitals-first-one {
+    grid-area: one;
+}
+
+.grid--item_hospitals-first-two {
+    grid-area: two;
+}
+
+.grid--item_hospitals-first-three {
+    grid-area: three;
+}
+
+.grid--item_hospitals-second-four {
+    grid-area: four;
+}
+
+.grid--item_hospitals-second-five {
+    grid-area: five;
+}
+
+/* Grid for full width image with caption undernath (one photo) */
+.grid--container_single-image {
+    grid-gap: 0;
+    grid-template-areas:
+        'one'
+        'two';
+}
+
+.grid--item_single-image-one {
+    grid-area: one;
+}
+
+.grid--item_single-image-two {
+    grid-area: two;
+}
+
+/* Grid for two images next to each other with a caption underneath them */
+.grid--container_double-image {
+    grid-template-areas:
+        'one two'
+        'three three';
+}
+
+.grid--item_double-image-one {
+    grid-area: one;
+}
+
+.grid--item_double-image-two {
+    grid-area: two;
+}
+
+.grid--item_double-image-three {
+    grid-area: three;
+}
+
+@media screen and (max-width: 500px) {
+    .grid--container_double-image {
+        grid-template-areas:
+            'one'
+            'two'
+            'three';
+    }
+}
+
+/* Special grid for life on the displaced grid with five photos and three captions */
+.grid--container_displaced {
+    grid-template-areas:
+        'one one one one one one'
+        'two two two two two two'
+        'three three three four four four'
+        'five five five five five five'
+        'six six six six six six';
+}
+
+@media screen and (max-width: 500px) {
+    .grid--container_displaced {
+        grid-template-areas:
+            'one one'
+            'two two'
+            'three four'
+            'five six'
+            'eight'
+            'seven';
+    }
+}
+
+.grid--item_displaced-one {
+    grid-area: one;
+}
+
+.grid--item_displaced-two {
+    grid-area: two;
+}
+
+.grid--item_displaced-three {
+    grid-area: three;
+}
+
+.grid--item_displaced-four {
+    grid-area: four;
+}
+
+.grid--item_displaced-five {
+    grid-area: five;
+}
+
+.grid--item_displaced-six {
+    grid-area: six;
+}
+
+.grid--item_displaced-seven {
+    grid-area: seven;
+}
+
+.grid--item_displaced-eight {
+    grid-area: eight;
+}
+
+/* Grid for two images next to each other with a caption underneath them */
+.grid--container_triple-image {
+    grid-template-areas:
+        'one two two two'
+        'one two two two'
+        'one three three three'
+        'four three three three'
+        'four three three three';
+}
+
+.grid--item_triple-image-one {
+    grid-area: one;
+}
+
+.grid--item_triple-image-two {
+    grid-area: two;
+}
+
+.grid--item_triple-image-three {
+    grid-area: three;
+}
+
+.grid--item_triple-image-four {
+    grid-area: four;
+}
+
+@media screen and (max-width: 1000px) {
+    .grid--container_triple-image {
+        grid-template-areas:
+            'one two two two'
+            'one two two two'
+            'four four three three'
+            'four four three three'
+            'four four three three';
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .grid--container_triple-image {
+        grid-template-areas:
+            'one'
+            'two'
+            'three'
+            'four';
+    }
+}
+
+/* End image grid styles */
+/* Special full bleed video header styles */
+.full-bleed-image--wrapper {
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%;
+    position: relative;
+    overflow: hidden;
+}
+
+.full-bleed-image--image {
+    width: 100%;
+    z-index: 9999;
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.full-bleed-image--caption {
+    background: rgba(230, 230, 230, 0.5);
+    padding: 1rem;
+    font-size: 100% !important;
+    color: #282828;
+}
+
+.article__aside-share.visible,
+.region-breadcrumb,
+.article__banner {
+    display: none;
+}
+
+.author-info__text {
+    max-width: 50rem;
+}
+
+.article__header {
+    padding: 2rem 1rem;
+}
+
+.article__title,
+.article__subheading,
+.meta-list {
+    text-align: center;
+}
+
+.article__title {
+    margin-top: 1rem;
+}
+
+.article__subheading {
+    margin-top: 2rem;
+}
+
+.article__overview {
+    flex: 100% 0 0;
+}
+
+.article__subheading {
+    max-width: 100%;
+}
+
+.article__author-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.article__banner {
+    display: none;
+}
+
+/* End of full bleed video header styles */
