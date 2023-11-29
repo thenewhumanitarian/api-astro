@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "install": "npm install --platform=darwin --arch=x64 sharp",
+    "install": "npm install",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -20,6 +20,7 @@
     "astro": "^3.0.9",
     "crypto": "^1.0.1",
     "crypto-js": "^4.2.0",
+    "esbuild": "^0.19.8",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "sharp": "^0.32.6",
