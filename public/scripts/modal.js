@@ -1,4 +1,7 @@
 (function () {
+    // Read Mailchimp tag name from site variable or set to default
+    var tagName = window.tagName || 'Registration Wall'; // Use the global variable or default to 'Registration Wall'
+
     // Create modal elements
     var modal = document.createElement('div');
     modal.id = 'registration-wall';
@@ -21,22 +24,37 @@
     intro.style.marginBottom = '20px';
     form.appendChild(intro);
 
+    // Append hidden input field to pass on tagName
+    var hiddenInput = document.createElement('input');
+    hiddenInput.type = 'hidden';
+    hiddenInput.name = 'tagName';
+    hiddenInput.value = tagName;
+
+    // Append it to your form
+    form.appendChild(hiddenInput);
+
     var fields = [
-        { label: 'Name', type: 'text', id: 'name' },
-        { label: 'Job Title', type: 'text', id: 'jobTitle' },
-        { label: 'Organisation', type: 'text', id: 'organisation' },
-        { label: 'Your Email', type: 'email', id: 'email' }
+        { label: 'First name *', type: 'text', id: 'firstName', required: true },
+        { label: 'Last name *', type: 'text', id: 'lastName', required: true },
+        { label: 'Job Title', type: 'text', id: 'jobTitle', required: false },
+        { label: 'Organisation', type: 'text', id: 'organisation', required: false },
+        { label: 'Your Email *', type: 'email', id: 'email', required: true }
     ];
 
     fields.forEach(function (field) {
         var label = document.createElement('label');
         label.htmlFor = field.id;
         label.textContent = field.label + ':';
+        label.className = 'form-label';
 
         var input = document.createElement('input');
         input.type = field.type;
         input.id = field.id;
         input.name = field.id;
+        // Set required based on the field object
+        if (field.required) {
+            input.required = true;
+        }
 
         form.appendChild(label);
         form.appendChild(input);
@@ -48,15 +66,22 @@
     interestsLabel.classList.add('interests-label');
     form.appendChild(interestsLabel);
 
+
     // Create a grid div to hold all the checkboxContainer divs
     var grid = document.createElement('div');
     grid.classList.add('interest-grid');
     form.appendChild(grid);
 
+    // Add hidden error message container
+    var errorMessage = document.createElement('div');
+    errorMessage.id = 'error-message';
+    errorMessage.style.color = 'red';
+    errorMessage.style.display = 'none';
+    form.appendChild(errorMessage);
+
     var interests = ['Aid and Policy', 'Conflict', 'Environment and Disasters', 'Investigations', 'Migration'];
     interests.forEach(function (interest) {
         var checkboxContainer = document.createElement('div');
-        checkboxContainer.style.marginBottom = '10px';
         checkboxContainer.classList.add('checkbox-container');
 
         var checkbox = document.createElement('input');
@@ -138,6 +163,13 @@
         margin-bottom: 0.5rem;
     }
 
+    #error-message {
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.4rem;
+        padding: 0.5rem 0;
+    }
+
     #registration-form input {
         font-family: 'Roboto', sans-serif;
         font-size: 1.4rem;
@@ -151,11 +183,15 @@
     }
 
     .checkbox-container {
-        margin-bottom: 1rem;
+        margin-bottom: 0.35rem;
         display: flex;
         column-gap: 1rem;
         justify-content: start;
         align-items: center;
+    }
+
+    .form-label {
+        margin-bottom: 0.25rem;
     }
 
     .checkbox-label {
@@ -185,7 +221,7 @@
 
     input[type=submit] {
         width: 100%;
-        font-weight: bold;
+        font-weight: 600;
         font-size: 1rem;
         background-color: #9f3e52;
         color: white;
@@ -209,16 +245,62 @@
     styleSheet.innerText = styles;
     document.head.appendChild(styleSheet);
 
-    // Form submission logic
-    form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', async function (event) {
         event.preventDefault();
 
-        // Your form submission logic here
-        // Example: Send data to server, then...
-        closeModal();
+        // Collect form data
+        var formData = new FormData(form);
+
+        // Collect checked checkboxes
+        var checkedInterests = [];
+        document.querySelectorAll('#registration-form input[type="checkbox"]:checked').forEach(function (checkbox) {
+            checkedInterests.push(checkbox.value);
+        });
+
+        // Prepare data for sending (convert to JSON)
+        var jsonObject = {};
+        formData.forEach(function (value, key) {
+            jsonObject[key] = value;
+        });
+        jsonObject['interests'] = checkedInterests; // Add the array of checked interests
+
+        var jsonToSend = JSON.stringify(jsonObject);
+
+        try {
+            const response = await fetch('http://localhost:4321/registration', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: jsonToSend
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                displayErrorMessage(errorData.error);
+            } else {
+                // Handle successful submission
+                displayErrorMessage(""); // Clear any existing error messages
+                // Additional logic for successful submission
+                closeModal();
+            }
+        } catch (error) {
+            displayErrorMessage("An error occurred while submitting the form.");
+        }
     });
 
+    function displayErrorMessage(message) {
+        const errorMessageDiv = document.getElementById('error-message');
+        if (message) {
+            errorMessageDiv.textContent = message;
+            errorMessageDiv.style.display = 'block';
+        } else {
+            errorMessageDiv.style.display = 'none';
+        }
+    };
+
     function closeModal() {
+        // Send GA Tracking event "close registration wall modal"
         modal.style.display = 'none';
         document.body.style.overflow = 'auto'; // re-enable scrolling
         pageContent.style.filter = 'none'; // remove blur
