@@ -94,6 +94,7 @@ export const POST = async ({ request }) => {
         const response = await fetch(`https://${mailchimpServerPrefix}.api.mailchimp.com/3.0/lists/${mailchimpListId}/members/${emailHash}/tags`, {
             method: 'POST',
             headers: {
+                "Access-Control-Allow-Origin": "*", // Allows all origins
                 'Authorization': `Bearer ${mailchimpApiKey}`,
                 'Content-Type': 'application/json'
             },
