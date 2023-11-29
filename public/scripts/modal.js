@@ -1,19 +1,18 @@
 (function () {
     // Create modal elements
     var modal = document.createElement('div');
-    modal.id = 'myModal';
+    modal.id = 'registration-wall';
     modal.className = 'modal';
 
     var modalContent = document.createElement('div');
     modalContent.className = 'modal-content';
 
     var form = document.createElement('form');
-    form.id = 'registrationForm';
+    form.id = 'registration-form';
 
     var title = document.createElement('h2');
     title.textContent = "We'd like to get to know you.";
-    title.style.color = '#9f3e52';
-    title.style.textAlign = 'center';
+    title.classList.add('modal-title');
     form.appendChild(title);
 
     var intro = document.createElement('p');
@@ -46,12 +45,19 @@
 
     var interestsLabel = document.createElement('p');
     interestsLabel.textContent = 'Your Interests:';
+    interestsLabel.classList.add('interests-label');
     form.appendChild(interestsLabel);
+
+    // Create a grid div to hold all the checkboxContainer divs
+    var grid = document.createElement('div');
+    grid.classList.add('interest-grid');
+    form.appendChild(grid);
 
     var interests = ['Aid and Policy', 'Conflict', 'Environment and Disasters', 'Investigations', 'Migration'];
     interests.forEach(function (interest) {
         var checkboxContainer = document.createElement('div');
         checkboxContainer.style.marginBottom = '10px';
+        checkboxContainer.classList.add('checkbox-container');
 
         var checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -62,11 +68,11 @@
         var label = document.createElement('label');
         label.htmlFor = interest;
         label.textContent = interest;
-        label.style.marginLeft = '5px';
+        label.classList.add('checkbox-label');
 
         checkboxContainer.appendChild(checkbox);
         checkboxContainer.appendChild(label);
-        form.appendChild(checkboxContainer);
+        grid.appendChild(checkboxContainer);
     });
 
     var submitButton = document.createElement('input');
@@ -93,6 +99,16 @@
     h2 {
         margin-top: 0.25rem;
     }
+
+    #registration-wall {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .modal {
         font-family: 'Roboto', sans-serif;
         display: block;
@@ -112,12 +128,43 @@
         margin: 15% auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 80%;
-        max-width: 500px;
+        width: 90%;
+        max-width: 640px;
     }
 
-    input {
+    .modal-title {
+        color: #9f3e52;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    #registration-form input {
         font-family: 'Roboto', sans-serif;
+        font-size: 1.4rem;
+    }
+
+    .interest-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        column-gap: 1rem;
+        row-gap: 0.5rem;
+    }
+
+    .checkbox-container {
+        margin-bottom: 1rem;
+        display: flex;
+        column-gap: 1rem;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .checkbox-label {
+        margin: 0;
+        font-size: 1.4rem;
+    }
+
+    .interests-label {
+        margin: 1rem 0;
     }
 
     input[type=text], input[type=email], select {
