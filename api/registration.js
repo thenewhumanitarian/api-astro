@@ -22,7 +22,8 @@ export const POST = async ({ request }) => {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${mailchimpApiKey}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "*", // Allows all origins
             }
         });
 
