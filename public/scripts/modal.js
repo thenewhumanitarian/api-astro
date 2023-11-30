@@ -267,7 +267,7 @@
         var jsonToSend = JSON.stringify(jsonObject);
 
         try {
-            const response = await fetch('https://api.thenewhumanitarian.org/registration', {
+            const response = await fetch('https://api.thenewhumanitarian.org/api/registration', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
