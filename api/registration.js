@@ -1,5 +1,5 @@
 import client from "@mailchimp/mailchimp_marketing";
-const md5 = require('crypto-js/md5');
+import md5 from 'crypto-js/md5.js';
 
 export const POST = async ({ request }) => {
     const listId = "d842d98289";
