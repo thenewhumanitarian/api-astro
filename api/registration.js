@@ -1,10 +1,6 @@
 import client from "@mailchimp/mailchimp_marketing";
 import md5 from 'crypto-js/md5';
 
-export const config = {
-    runtime: 'edge',
-};
-
 export const POST = async ({ request }) => {
     const listId = "d842d98289";
 
