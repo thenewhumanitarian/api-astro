@@ -79,7 +79,9 @@
     errorMessage.style.display = 'none';
     form.appendChild(errorMessage);
 
-    var interests = ['Aid and Policy', 'Conflict', 'Environment and Disasters', 'Investigations', 'Migration'];
+    // Read interests from site variable or set to default
+    var interests = window.interests || ['Aid and Policy', 'Conflict', 'Environment and Disasters', 'Investigations', 'Migration'];
+
     interests.forEach(function (interest) {
         var checkboxContainer = document.createElement('div');
         checkboxContainer.classList.add('checkbox-container');
