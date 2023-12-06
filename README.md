@@ -1,2 +1,2 @@
 # TNH API project
-Using AstroJS
+Using Astro JS

@@ -269,6 +269,7 @@
         var jsonToSend = JSON.stringify(jsonObject);
 
         try {
+            // const response = await fetch('http://localhost:8787', {
             const response = await fetch('https://tnh-registration-wall.admin-f00.workers.dev', {
                 method: 'POST',
                 headers: {
@@ -312,3 +313,11 @@
         document.body.removeChild(pageContent);
     }
 })();
+
+function getGAClientId() {
+    const gaCookie = document.cookie.split('; ').find(row => row.startsWith('_ga='));
+    return gaCookie ? gaCookie.split('=')[1].split('.').slice(-2).join('.') : null;
+}
+
+const clientId = getGAClientId();
+console.log('GA Client ID:', clientId);
