@@ -251,6 +251,9 @@
         // Collect form data
         var formData = new FormData(form);
 
+        // Retrieve the GA Client ID
+        const clientId = getGAClientId();
+
         // Collect checked checkboxes
         var checkedInterests = [];
         document.querySelectorAll('#registration-form input[type="checkbox"]:checked').forEach(function (checkbox) {
@@ -262,7 +265,10 @@
         formData.forEach(function (value, key) {
             jsonObject[key] = value;
         });
+
         jsonObject['interests'] = checkedInterests; // Add the array of checked interests
+        jsonObject['gaClientId'] = clientId; // Add the GA Client ID
+
 
         var jsonToSend = JSON.stringify(jsonObject);
 
@@ -315,6 +321,3 @@ function getGAClientId() {
     const gaCookie = document.cookie.split('; ').find(row => row.startsWith('_ga='));
     return gaCookie ? gaCookie.split('=')[1].split('.').slice(-2).join('.') : null;
 }
-
-const clientId = getGAClientId();
-console.log('GA Client ID:', clientId);
