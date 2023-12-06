@@ -310,3 +310,11 @@
         document.body.removeChild(pageContent);
     }
 })();
+
+function getGAClientId() {
+    const gaCookie = document.cookie.split('; ').find(row => row.startsWith('_ga='));
+    return gaCookie ? gaCookie.split('=')[1].split('.').slice(-2).join('.') : null;
+}
+
+const clientId = getGAClientId();
+console.log('GA Client ID:', clientId);
