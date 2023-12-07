@@ -163,8 +163,8 @@
 
             // Sign up new member
             try {
-                const response = await fetch('http://localhost:8787', {
-                    // const response = await fetch('https://tnh-registration-wall.admin-f00.workers.dev', {
+                // const response = await fetch('http://localhost:8787', {
+                const response = await fetch('https://tnh-registration-wall.admin-f00.workers.dev', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
