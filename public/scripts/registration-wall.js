@@ -1,4 +1,6 @@
 (function () {
+    var alreadySignedUp = false;
+
     var tagNameSlug = slugify(window.tagName || 'Registration Wall');
     var localStorageKey = `registration-${tagNameSlug}`;
 
@@ -18,30 +20,187 @@
     var modalContent = document.createElement('div');
     modalContent.className = 'modal-content';
 
-    var form = document.createElement('form');
-    form.id = 'registration-form';
+    // Create function that creates the form
+    function createForm(id, titleText, introText, toggleButton, fields, submitButton) {
+        var form = document.createElement('form');
+        form.id = id || 'registration-form';
 
-    var title = document.createElement('h2');
-    title.textContent = "We'd like to get to know you.";
-    title.classList.add('modal-title');
-    form.appendChild(title);
+        var title = document.createElement('h2');
+        title.textContent = titleText || "We'd like to get to know you.";
+        title.classList.add('modal-title');
+        form.appendChild(title);
 
-    var intro = document.createElement('p');
-    intro.textContent = 'Please fill out this form to read this article. We value your privacy and will never share your information with anyone else.';
-    intro.style.textAlign = 'center';
-    intro.style.marginBottom = '20px';
-    form.appendChild(intro);
+        var intro = document.createElement('p');
+        intro.textContent = introText || 'Please fill out this form to read this article. We value your privacy and will never share your information with anyone else.';
+        intro.classList.add('intro-text');
+        form.appendChild(intro);
 
-    // Append hidden input field to pass on tagName
-    var hiddenInput = document.createElement('input');
-    hiddenInput.type = 'hidden';
-    hiddenInput.name = 'tagName';
-    hiddenInput.value = tagName;
+        if (toggleButton) {
+            form.appendChild(toggleButton);
+            toggleButton.addEventListener('click', function () {
+                alreadySignedUp = !alreadySignedUp;
 
-    // Append it to your form
-    form.appendChild(hiddenInput);
+                // Optionally, perform additional actions based on the new value
+                if (alreadySignedUp) {
+                    // Actions when alreadySignedUp is true
+                    console.log('User is already signed up.');
+                    // Hide the new registration form
+                    document.getElementById('new-registration').style.display = 'none';
+                    // Show the existing member form
+                    document.getElementById('existing-member').style.display = 'block';
+                } else {
+                    // Actions when alreadySignedUp is false
+                    console.log('User is not signed up.');
+                    // Hide the existing member form
+                    document.getElementById('existing-member').style.display = 'none';
+                    // Show the new registration form
+                    document.getElementById('new-registration').style.display = 'block';
+                }
+            })
+        }
 
-    var fields = [
+        // Append hidden input field to pass on tagName
+        var hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'tagName';
+        hiddenInput.value = tagName;
+
+        // Append it to your form
+        form.appendChild(hiddenInput);
+
+        // Append form fields
+        fields.forEach(function (field) {
+            var label = document.createElement('label');
+            label.htmlFor = field.id;
+            label.textContent = field.label + ':';
+            label.className = 'form-label';
+
+            var input = document.createElement('input');
+            input.type = field.type;
+            input.id = field.id;
+            input.name = field.id;
+
+            // Set required based on the field object
+            if (field.required) {
+                input.required = true;
+            }
+
+            form.appendChild(label);
+            form.appendChild(input);
+            // form.appendChild(document.createElement('br'));
+        });
+
+        var interestsLabel = document.createElement('p');
+        interestsLabel.textContent = 'Your Interests:';
+        interestsLabel.classList.add('interests-label');
+        form.appendChild(interestsLabel);
+
+        // Create a grid div to hold all the checkboxContainer divs
+        var grid = document.createElement('div');
+        grid.classList.add('interest-grid');
+        form.appendChild(grid);
+
+        // Add hidden error message container
+        var errorMessage = document.createElement('div');
+        errorMessage.id = `error-message-${id}`
+        errorMessage.style.color = 'red';
+        errorMessage.style.display = 'none';
+        errorMessage.classList.add('error-message');
+        form.appendChild(errorMessage);
+
+        var interests = window.interests || ['Aid and Policy', 'Conflict', 'Environment and Disasters', 'Investigations', 'Migration'];
+        interests.forEach(function (interest) {
+            var checkboxContainer = document.createElement('div');
+            checkboxContainer.classList.add('checkbox-container');
+
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = interest;
+            checkbox.name = 'interests';
+            checkbox.value = interest;
+
+            var label = document.createElement('label');
+            label.htmlFor = interest;
+            label.textContent = interest;
+            label.classList.add('checkbox-label');
+
+            checkboxContainer.appendChild(checkbox);
+            checkboxContainer.appendChild(label);
+            grid.appendChild(checkboxContainer);
+        });
+
+        form.appendChild(submitButton);
+
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Collect form data
+            var formData = new FormData(form);
+
+            // Retrieve the GA Client ID
+            const clientId = getGAClientId();
+
+            // Collect checked checkboxes
+            var checkedInterests = [];
+            document.querySelectorAll(`#${id} input[type="checkbox"]:checked`).forEach(function (checkbox) {
+                checkedInterests.push(checkbox.value);
+            });
+
+            // Prepare data for sending (convert to JSON)
+            var jsonObject = {};
+            formData.forEach(function (value, key) {
+                jsonObject[key] = value;
+            });
+
+            jsonObject['interests'] = checkedInterests; // Add the array of checked interests
+            jsonObject['gaClientId'] = clientId; // Add the GA Client ID
+
+            // Check if value "existing" is present
+            if (jsonObject.existing === '' || jsonObject.existing) {
+                console.log('Existing member, looking up email on Mailchimp');
+                jsonObject['existing'] = 'yes';
+            }
+
+            // Sign up new member
+            try {
+                const response = await fetch('http://localhost:8787', {
+                    // const response = await fetch('https://tnh-registration-wall.admin-f00.workers.dev', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(jsonObject)
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    displayErrorMessage(errorData.error, `error-message-${id}`);
+                } else {
+                    // Handle successful submission
+                    displayErrorMessage("", `error-message-${id}`); // Clear any existing error messages
+                    // Save registration progress to localStorage for future use
+                    saveRegistrationProgress(jsonObject.email);
+                    // Additional logic for successful submission
+                    closeModal();
+                }
+            } catch (error) {
+                displayErrorMessage("An error occurred while submitting the form.", `error-message-${id}`);
+            }
+
+        });
+
+        modalContent.appendChild(form);
+        modal.appendChild(modalContent);
+    }
+
+    // Create form for "New"
+    var toggleButtonNew = document.createElement('a');
+    toggleButtonNew.href = '#';
+    toggleButtonNew.textContent = 'Already signed up?';
+    toggleButtonNew.classList.add('toggle-button');
+    toggleButtonNew.id = 'toggle-button-new';
+
+    // Define form fields
+    var formFieldsNew = [
         { label: 'First name *', type: 'text', id: 'firstName', required: true },
         { label: 'Last name *', type: 'text', id: 'lastName', required: true },
         { label: 'Job Title', type: 'text', id: 'jobTitle', required: false },
@@ -49,72 +208,46 @@
         { label: 'Your Email *', type: 'email', id: 'email', required: true }
     ];
 
-    fields.forEach(function (field) {
-        var label = document.createElement('label');
-        label.htmlFor = field.id;
-        label.textContent = field.label + ':';
-        label.className = 'form-label';
+    var submitButtonNew = document.createElement('input');
+    submitButtonNew.type = 'submit';
+    submitButtonNew.value = 'Submit';
+    submitButtonNew.classList.add('submit-existing-member');
 
-        var input = document.createElement('input');
-        input.type = field.type;
-        input.id = field.id;
-        input.name = field.id;
-        // Set required based on the field object
-        if (field.required) {
-            input.required = true;
-        }
+    createForm(
+        'new-registration',
+        "We'd like to get to know you.",
+        'Please fill out this form to read this article. We value your privacy and will never share your information with anyone else.',
+        toggleButtonNew,
+        formFieldsNew,
+        submitButtonNew
+    );
 
-        form.appendChild(label);
-        form.appendChild(input);
-        form.appendChild(document.createElement('br'));
-    });
+    // Create form for "Existing"
+    var toggleButtonExisting = document.createElement('a');
+    toggleButtonExisting.href = '#';
+    toggleButtonExisting.textContent = 'Register with a new email address';
+    toggleButtonExisting.classList.add('toggle-button');
+    toggleButtonExisting.id = 'toggle-button-existing';
 
-    var interestsLabel = document.createElement('p');
-    interestsLabel.textContent = 'Your Interests:';
-    interestsLabel.classList.add('interests-label');
-    form.appendChild(interestsLabel);
+    // Define form fields
+    var formFieldsExisting = [
+        { label: 'Your Email *', type: 'email', id: 'email', required: true },
+        { label: 'Hidden field', type: 'hidden', id: 'existing', required: false },
+    ];
 
+    var submitButtonExisting = document.createElement('input');
+    submitButtonExisting.type = 'submit';
+    submitButtonExisting.value = 'Submit';
+    submitButtonExisting.classList.add('submit-new-registration');
 
-    // Create a grid div to hold all the checkboxContainer divs
-    var grid = document.createElement('div');
-    grid.classList.add('interest-grid');
-    form.appendChild(grid);
-
-    // Add hidden error message container
-    var errorMessage = document.createElement('div');
-    errorMessage.id = 'error-message';
-    errorMessage.style.color = 'red';
-    errorMessage.style.display = 'none';
-    form.appendChild(errorMessage);
-
-    var interests = window.interests || ['Aid and Policy', 'Conflict', 'Environment and Disasters', 'Investigations', 'Migration'];
-    interests.forEach(function (interest) {
-        var checkboxContainer = document.createElement('div');
-        checkboxContainer.classList.add('checkbox-container');
-
-        var checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = interest;
-        checkbox.name = 'interests';
-        checkbox.value = interest;
-
-        var label = document.createElement('label');
-        label.htmlFor = interest;
-        label.textContent = interest;
-        label.classList.add('checkbox-label');
-
-        checkboxContainer.appendChild(checkbox);
-        checkboxContainer.appendChild(label);
-        grid.appendChild(checkboxContainer);
-    });
-
-    var submitButton = document.createElement('input');
-    submitButton.type = 'submit';
-    submitButton.value = 'Submit';
-    form.appendChild(submitButton);
-
-    modalContent.appendChild(form);
-    modal.appendChild(modalContent);
+    createForm(
+        'existing-member',
+        "Signed up before?",
+        'Please give us your email address so we can check that.',
+        toggleButtonExisting,
+        formFieldsExisting,
+        submitButtonExisting
+    );
 
     // Append modal to body and blur the rest of the content
     document.body.appendChild(modal);
@@ -129,6 +262,10 @@
 
     // CSS styles
     var styles = `
+    #existing-member {
+        display: none;
+    }
+
     h2 {
         margin-top: 0.25rem;
     }
@@ -171,11 +308,11 @@
         margin-bottom: 0.5rem;
     }
 
-    #error-message {
+    .error-message {
         text-align: center;
         font-family: 'Roboto', sans-serif;
         font-size: 1.4rem;
-        padding: 0.5rem 0;
+        padding: 1rem 0;
     }
 
     #registration-form input {
@@ -246,6 +383,16 @@
     #pageContent {
         transition: filter 0.3s;
     }
+
+    .toggle-button {
+        color: #9f3e52;
+        display: block;
+        margin-bottom: 1rem;
+    }
+    .intro-text {
+        text-align: center;
+        margin-bottom: 20px;
+    }
     `;
 
     var styleSheet = document.createElement("style");
@@ -253,62 +400,10 @@
     styleSheet.innerText = styles;
     document.head.appendChild(styleSheet);
 
-    form.addEventListener('submit', async function (event) {
-        event.preventDefault();
-
-        // Collect form data
-        var formData = new FormData(form);
-
-        // Retrieve the GA Client ID
-        const clientId = getGAClientId();
-
-        // Collect checked checkboxes
-        var checkedInterests = [];
-        document.querySelectorAll('#registration-form input[type="checkbox"]:checked').forEach(function (checkbox) {
-            checkedInterests.push(checkbox.value);
-        });
-
-        // Prepare data for sending (convert to JSON)
-        var jsonObject = {};
-        formData.forEach(function (value, key) {
-            jsonObject[key] = value;
-        });
-
-        jsonObject['interests'] = checkedInterests; // Add the array of checked interests
-        jsonObject['gaClientId'] = clientId; // Add the GA Client ID
-
-        var jsonToSend = JSON.stringify(jsonObject);
-
-        try {
-            // const response = await fetch('http://localhost:8787', {
-            const response = await fetch('https://tnh-registration-wall.admin-f00.workers.dev', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: jsonToSend
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                displayErrorMessage(errorData.error);
-            } else {
-                // Handle successful submission
-                displayErrorMessage(""); // Clear any existing error messages
-                // Save registration progress to localStorage for future use
-                saveRegistrationProgress(jsonObject.email);
-                // Additional logic for successful submission
-                closeModal();
-            }
-        } catch (error) {
-            displayErrorMessage("An error occurred while submitting the form.");
-        }
-    });
-
     /* Helper functions */
 
-    function displayErrorMessage(message) {
-        const errorMessageDiv = document.getElementById('error-message');
+    function displayErrorMessage(message, containerId) {
+        const errorMessageDiv = document.getElementById(containerId);
         if (message) {
             errorMessageDiv.textContent = message;
             errorMessageDiv.style.display = 'block';
