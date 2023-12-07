@@ -296,7 +296,7 @@
                 // Handle successful submission
                 displayErrorMessage(""); // Clear any existing error messages
                 // Save registration progress to localStorage for future use
-                saveRegistrationProgress();
+                saveRegistrationProgress(jsonObject.email);
                 // Additional logic for successful submission
                 closeModal();
             }
@@ -344,12 +344,13 @@
     }
 
     // Save Registration Progress Function
-    function saveRegistrationProgress() {
+    function saveRegistrationProgress(email) {
         const tagNameSlug = slugify(window.tagName || 'Registration Wall');
         const registrationData = {
             tagName: window.tagName || 'Registration Wall',
             timestamp: new Date().toISOString(),
-            googleClientId: getGAClientId()
+            googleClientId: getGAClientId(),
+            email: email
         };
 
         localStorage.setItem(`registration-${tagNameSlug}`, JSON.stringify(registrationData));
