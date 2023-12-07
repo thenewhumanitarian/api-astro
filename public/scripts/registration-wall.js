@@ -279,9 +279,11 @@
 
         var jsonToSend = JSON.stringify(jsonObject);
 
+        const env = import.meta.env.ENV || 'production'; // Default to production if ENV is not set
+        const url = env === 'dev' ? 'http://localhost:8787' : 'https://tnh-registration-wall.admin-f00.workers.dev';
+
         try {
-            const response = await fetch('http://localhost:8787', {
-                // const response = await fetch('https://tnh-registration-wall.admin-f00.workers.dev', {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
