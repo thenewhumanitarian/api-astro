@@ -1,4 +1,12 @@
 (function () {
+    var tagNameSlug = slugify(window.tagName || 'Registration Wall');
+    var localStorageKey = `registration-${tagNameSlug}`;
+
+    // Check if registration data already exists in localStorage
+    if (localStorage.getItem(localStorageKey)) {
+        return; // Exit the function to avoid creating the modal
+    }
+
     // Read Mailchimp tag name from site variable or set to default
     var tagName = window.tagName || 'Registration Wall'; // Use the global variable or default to 'Registration Wall'
 
@@ -79,7 +87,7 @@
     errorMessage.style.display = 'none';
     form.appendChild(errorMessage);
 
-    var interests = ['Aid and Policy', 'Conflict', 'Environment and Disasters', 'Investigations', 'Migration'];
+    var interests = window.interests || ['Aid and Policy', 'Conflict', 'Environment and Disasters', 'Investigations', 'Migration'];
     interests.forEach(function (interest) {
         var checkboxContainer = document.createElement('div');
         checkboxContainer.classList.add('checkbox-container');
@@ -269,11 +277,11 @@
         jsonObject['interests'] = checkedInterests; // Add the array of checked interests
         jsonObject['gaClientId'] = clientId; // Add the GA Client ID
 
-
         var jsonToSend = JSON.stringify(jsonObject);
 
         try {
-            const response = await fetch('https://tnh-registration-wall.admin-f00.workers.dev', {
+            const response = await fetch('http://localhost:8787', {
+                // const response = await fetch('https://tnh-registration-wall.admin-f00.workers.dev', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -287,6 +295,8 @@
             } else {
                 // Handle successful submission
                 displayErrorMessage(""); // Clear any existing error messages
+                // Save registration progress to localStorage for future use
+                saveRegistrationProgress();
                 // Additional logic for successful submission
                 closeModal();
             }
@@ -294,6 +304,8 @@
             displayErrorMessage("An error occurred while submitting the form.");
         }
     });
+
+    /* Helper functions */
 
     function displayErrorMessage(message) {
         const errorMessageDiv = document.getElementById('error-message');
@@ -315,9 +327,32 @@
         }
         document.body.removeChild(pageContent);
     }
-})();
 
-function getGAClientId() {
-    const gaCookie = document.cookie.split('; ').find(row => row.startsWith('_ga='));
-    return gaCookie ? gaCookie.split('=')[1].split('.').slice(-2).join('.') : null;
-}
+    function getGAClientId() {
+        const gaCookie = document.cookie.split('; ').find(row => row.startsWith('_ga='));
+        return gaCookie ? gaCookie.split('=')[1].split('.').slice(-2).join('.') : null;
+    }
+
+    // Slugify Function
+    function slugify(text) {
+        return text.toString().toLowerCase()
+            .replace(/\s+/g, '-')           // Replace spaces with -
+            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+            .replace(/^-+/, '')             // Trim - from start of text
+            .replace(/-+$/, '');            // Trim - from end of text
+    }
+
+    // Save Registration Progress Function
+    function saveRegistrationProgress() {
+        const tagNameSlug = slugify(window.tagName || 'Registration Wall');
+        const registrationData = {
+            tagName: window.tagName || 'Registration Wall',
+            timestamp: new Date().toISOString(),
+            googleClientId: getGAClientId()
+        };
+
+        localStorage.setItem(`registration-${tagNameSlug}`, JSON.stringify(registrationData));
+    }
+
+})();
