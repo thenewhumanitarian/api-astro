@@ -18,6 +18,12 @@ modalAnnotation.addEventListener('click', function () {
     }
 });
 
+// Find out if the tooltip string contains any HTML tags
+function containsHTML(str) {
+    const regex = /<[^>]*>/;
+    return regex.test(str);
+}
+
 // Define the function to create annotations
 function createAnnotations() {
     const divElements = document.querySelectorAll('.field-name-body');
@@ -38,7 +44,12 @@ function createAnnotations() {
         // Create a new element with the unique ID
         const newElement = document.createElement('div');
         newElement.id = annotationID;
-        newElement.textContent = tooltipContent;
+        // Check if tooltipContent contains HTML
+        if (containsHTML(tooltipContent)) {
+            newElement.innerHTML = tooltipContent; // Use innerHTML for HTML content
+        } else {
+            newElement.textContent = tooltipContent; // Use textContent for plain text
+        }
         // Set the CSS styles for the new element
         newElement.classList.add('side-annotation');
         newElement.style.top = `${positionFromTop}px`; // Use the calculated position + 100px
@@ -56,7 +67,6 @@ function createAnnotations() {
             const clickedAnnotation = document.getElementById(annotationID);
             clickedAnnotation.style.opacity = '1';
         });
-
         spanElement.addEventListener("click", function () {
             // Toggle the 'active' class for the modal annotation (for mobile)
             const modalAnnotation = document.querySelector('.modal-annotation');
