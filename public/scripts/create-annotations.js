@@ -73,7 +73,11 @@ function createAnnotations() {
             modalAnnotation.classList.add('active');
             // Update the content of the modal annotation
             const modalAnnotationContent = document.getElementById('modal-annotation-content');
-            modalAnnotationContent.textContent = tooltipContent; we
+            if (containsHTML(tooltipContent)) {
+                modalAnnotationContent.innerHTML = tooltipContent; // Use innerHTML for HTML content
+            } else {
+                modalAnnotationContent.textContent = tooltipContent; // Use textContent for plain text
+            }
         })
     });
 }
