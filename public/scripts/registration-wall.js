@@ -270,7 +270,6 @@
 
     // CSS styles
     var styles = `
-    /* Typography */
     h2 {
         margin-top: 0.25rem;
     }
@@ -363,12 +362,12 @@
     input[type=email],
     select {
         width: 100%;
-        padding: 0.78rem;
+        padding: 0.8rem;
         display: inline-block;
         border: 1px solid #ccc;
         box-sizing: border-box;
         margin-bottom: 0.75rem;
-        font-size: 1rem;
+        // font-size: 1rem;
     }
 
     input[type=text]:focus,
@@ -448,8 +447,6 @@
     .modal-annotation.active {
         display: none;
     }
-
-    /* Responsive breakpoints */
 
     @media screen and (max-width: 1250px) {
         .side-annotation {
@@ -566,7 +563,6 @@
     styleSheet.type = "text/css";
     styleSheet.innerText = styles;
     document.head.appendChild(styleSheet);
-
 
     /* Helper functions */
 
