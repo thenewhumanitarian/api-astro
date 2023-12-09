@@ -68,7 +68,7 @@ h2 {
     margin-bottom: 0.35rem;
     display: flex;
     column-gap: 1rem;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -251,10 +251,20 @@ input[type=submit]:hover {
 
     .interest-grid {
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        column-gap: 0.5rem;
+        row-gap: 0.25rem;
     }
 
     .checkbox-container * {
         font-size: 1.2rem;
+    }
+
+    .title-text {
+        font-size: 1.2rem;
+    }
+
+    .intro-text {
+        font-size: 1rem;
     }
 
     .modal-title,
@@ -262,9 +272,19 @@ input[type=submit]:hover {
         text-align: left;
     }
 
-    #registration-form input {
+    #new-registration label {
+        font-size: 0.9rem;
+    }
+
+    #new-registration input:not([type="submit"]) {
         font-family: 'Roboto', sans-serif;
-        font-size: 1.2rem;
-        padding: 0;
+        font-size: 1rem;
+        padding: 0.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    #new-registration input[type="submit"] {
+        margin-top: 0.7rem;
+        padding: 0.6rem;
     }
 }
