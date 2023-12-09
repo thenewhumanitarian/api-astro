@@ -1,6 +1,8 @@
 (function () {
     var alreadySignedUp = false;
 
+    var formTitle = window.formTitle;
+    var formText = window.formText;
     var tagNameSlug = slugify(window.tagName || 'Registration Wall');
     var localStorageKey = `registration-${tagNameSlug}`;
 
@@ -25,15 +27,19 @@
         var form = document.createElement('form');
         form.id = id || 'registration-form';
 
-        var title = document.createElement('h2');
-        title.textContent = titleText || "We'd like to get to know you.";
-        title.classList.add('modal-title');
-        form.appendChild(title);
+        if (titleText) {
+            var title = document.createElement('h2');
+            title.textContent = titleText;
+            title.classList.add('modal-title');
+            form.appendChild(title);
+        }
 
-        var intro = document.createElement('p');
-        intro.textContent = introText || 'Please fill out this form to read this article. We value your privacy and will never share your information with anyone else.';
-        intro.classList.add('intro-text');
-        form.appendChild(intro);
+        if (introText) {
+            var intro = document.createElement('p');
+            intro.textContent = introText;
+            intro.classList.add('intro-text');
+            form.appendChild(intro);
+        }
 
         if (toggleButton) {
             form.appendChild(toggleButton);
@@ -215,8 +221,8 @@
 
     createForm(
         'new-registration',
-        "We'd like to get to know you.",
-        'Please fill out this form to read this article. We value your privacy and will never share your information with anyone else.',
+        formTitle,
+        formText,
         toggleButtonNew,
         formFieldsNew,
         submitButtonNew
@@ -259,146 +265,6 @@
     }
     document.body.insertBefore(pageContent, modal);
     pageContent.style.filter = 'blur(5px)'; // blur effect
-
-    // CSS styles
-    var styles = `
-    #existing-member {
-        display: none;
-    }
-
-    h2 {
-        margin-top: 0.25rem;
-    }
-
-    #registration-wall {
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .modal {
-        font-family: 'Roboto', sans-serif;
-        display: block;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4);
-        backdrop-filter: blur(8px);
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 90%;
-        max-width: 640px;
-    }
-
-    .modal-title {
-        color: #9f3e52;
-        text-align: center;
-        margin-bottom: 0.5rem;
-    }
-
-    .error-message {
-        text-align: center;
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.4rem;
-        padding: 1rem 0;
-    }
-
-    #registration-form input {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.4rem;
-    }
-
-    .interest-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        column-gap: 1rem;
-        row-gap: 0.5rem;
-    }
-
-    .checkbox-container {
-        margin-bottom: 0.35rem;
-        display: flex;
-        column-gap: 1rem;
-        justify-content: start;
-        align-items: center;
-    }
-
-    .form-label {
-        margin-bottom: 0.25rem;
-    }
-
-    .checkbox-label {
-        margin: 0;
-        font-size: 1.4rem;
-    }
-
-    .interests-label {
-        margin: 1rem 0;
-    }
-
-    input[type=text], input[type=email], select {
-        width: 100%;
-        padding: 0.78rem;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        margin-bottom: 0.75rem;
-        font-size: 1rem;
-    }
-
-    input[type=text]:focus, input[type=email]:focus, input[type=checkbox]:focus {
-        outline: none;
-        border-color: #9f3e52;
-        box-shadow: 0 0 0 2px rgba(159, 62, 82, 0.2);
-    }
-
-    input[type=submit] {
-        width: 100%;
-        font-weight: 600;
-        font-size: 1rem;
-        background-color: #9f3e52;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        cursor: pointer;
-    }
-
-    input[type=submit]:hover {
-        background-color: #8d3749;
-    }
-
-    #pageContent {
-        transition: filter 0.3s;
-    }
-
-    .toggle-button {
-        color: #9f3e52;
-        display: block;
-        margin-bottom: 1rem;
-    }
-    .intro-text {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    `;
-
-    var styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = styles;
-    document.head.appendChild(styleSheet);
 
     /* Helper functions */
 
