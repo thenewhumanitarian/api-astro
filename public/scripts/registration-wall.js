@@ -11,6 +11,9 @@
         return; // Exit the function to avoid creating the modal
     }
 
+    // At the start
+    saveViewportSettings();
+
     // Read Mailchimp tag name from site variable or set to default
     var tagName = window.tagName || 'Registration Wall'; // Use the global variable or default to 'Registration Wall'
 
@@ -257,6 +260,9 @@
         submitButtonExisting
     );
 
+    // When you need to change settings
+    changeViewportSettings();
+
     // Append modal to body and blur the rest of the content
     document.body.appendChild(modal);
     document.body.style.overflow = 'hidden'; // disable body scroll
@@ -295,6 +301,8 @@
             document.body.appendChild(pageContent.firstChild);
         }
         document.body.removeChild(pageContent);
+        // Later, to restore original settings
+        restoreOriginalViewportSettings();
     }
 
     function getGAClientId() {
@@ -323,6 +331,42 @@
         };
 
         localStorage.setItem(`registration-${tagNameSlug}`, JSON.stringify(registrationData));
+    }
+
+    var originalViewportContent;
+
+    function saveViewportSettings() {
+        var viewportMetaTag = document.querySelector('meta[name="viewport"]');
+        if (viewportMetaTag) {
+            originalViewportContent = viewportMetaTag.content;
+        }
+    }
+
+    function removeViewportTag() {
+        var metaTags = document.getElementsByTagName('meta');
+        for (var i = 0; i < metaTags.length; i++) {
+            if (metaTags[i].name === 'viewport') {
+                metaTags[i].parentNode.removeChild(metaTags[i]);
+                break;
+            }
+        }
+    }
+
+    function changeViewportSettings() {
+        var viewportMetaTag = document.querySelector('meta[name="viewport"]');
+        if (!viewportMetaTag) {
+            viewportMetaTag = document.createElement('meta');
+            viewportMetaTag.name = 'viewport';
+            document.head.appendChild(viewportMetaTag);
+        }
+        viewportMetaTag.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+    }
+
+    function restoreOriginalViewportSettings() {
+        var viewportMetaTag = document.querySelector('meta[name="viewport"]');
+        if (viewportMetaTag && originalViewportContent) {
+            viewportMetaTag.content = originalViewportContent;
+        }
     }
 
 })();
