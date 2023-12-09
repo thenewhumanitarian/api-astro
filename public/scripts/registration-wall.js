@@ -367,7 +367,7 @@
         border: 1px solid #ccc;
         box-sizing: border-box;
         margin-bottom: 0.75rem;
-        // font-size: 1rem;
+        font-sizer: 1.6rem;
     }
 
     input[type=text]:focus,
