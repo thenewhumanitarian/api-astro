@@ -72,7 +72,7 @@ h2 {
     align-items: center;
 }
 
-.checkbox-container label:hover {
+.checkbox-container *:hover {
     cursor: pointer;
 }
 
