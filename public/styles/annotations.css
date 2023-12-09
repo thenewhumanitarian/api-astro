@@ -72,6 +72,10 @@ h2 {
     align-items: center;
 }
 
+.checkbox-container label:hover {
+    cursor: pointer;
+}
+
 /* Form elements */
 
 .form-label {
