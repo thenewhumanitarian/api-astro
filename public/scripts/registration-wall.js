@@ -77,13 +77,13 @@
         // Append form fields
         fields.forEach(function (field) {
             var label = document.createElement('label');
-            label.htmlFor = field.id;
+            label.htmlFor = slugify(field.id);
             label.textContent = field.label + ':';
             label.className = 'form-label';
 
             var input = document.createElement('input');
             input.type = field.type;
-            input.id = field.id;
+            input.id = slugify(field.id);
             input.name = field.id;
 
             // Set required based on the field object
