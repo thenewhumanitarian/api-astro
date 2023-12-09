@@ -122,12 +122,12 @@
 
                 var checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.id = interest;
+                checkbox.id = slugify(interest);
                 checkbox.name = 'interests';
                 checkbox.value = interest;
 
                 var label = document.createElement('label');
-                label.htmlFor = interest;
+                label.htmlFor = slugify(interest);
                 label.textContent = interest;
                 label.classList.add('checkbox-label');
 
