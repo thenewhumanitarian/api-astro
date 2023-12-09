@@ -269,300 +269,306 @@
     pageContent.style.filter = 'blur(5px)'; // blur effect
 
     // CSS styles
-    var styles = `
-    h2 {
-        margin-top: 0.25rem;
-    }
+    // var styles = `
+    // h2 {
+    //     margin-top: 0.25rem;
+    // }
 
-    #existing-member {
-        display: none;
-    }
+    // #existing-member {
+    //     display: none;
+    // }
 
-    #registration-wall {
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    // #registration-wall {
+    //     width: 100%;
+    //     height: 100vh;
+    //     overflow: hidden;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    // }
 
-    .modal {
-        font-family: 'Roboto', sans-serif;
-        display: block;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(8px);
-    }
+    // .modal {
+    //     font-family: 'Roboto', sans-serif;
+    //     display: block;
+    //     position: fixed;
+    //     z-index: 1;
+    //     left: 0;
+    //     top: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     overflow: auto;
+    //     background-color: rgba(0, 0, 0, 0.4);
+    //     backdrop-filter: blur(8px);
+    // }
 
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 90%;
-        max-width: 640px;
-    }
+    // .modal-content {
+    //     background-color: #fefefe;
+    //     margin: 15% auto;
+    //     padding: 20px;
+    //     border: 1px solid #888;
+    //     width: 90%;
+    //     max-width: 640px;
+    // }
 
-    .modal-title {
-        color: #9f3e52;
-        text-align: left;
-        margin-bottom: 0.5rem;
-    }
+    // .modal-title {
+    //     color: #9f3e52;
+    //     text-align: left;
+    //     margin-bottom: 0.5rem;
+    // }
 
-    .error-message {
-        text-align: center;
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.4rem;
-        padding: 1rem 0;
-    }
+    // .error-message {
+    //     text-align: center;
+    //     font-family: 'Roboto', sans-serif;
+    //     font-size: 1.4rem;
+    //     padding: 1rem 0;
+    // }
 
-    #registration-form input {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.4rem;
-    }
+    // #registration-form input {
+    //     font-family: 'Roboto', sans-serif;
+    //     font-size: 1.4rem;
+    // }
 
-    .interest-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        column-gap: 1rem;
-        row-gap: 0.5rem;
-    }
+    // .interest-grid {
+    //     display: grid;
+    //     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    //     column-gap: 1rem;
+    //     row-gap: 0.5rem;
+    // }
 
-    .checkbox-container {
-        margin-bottom: 0.35rem;
-        display: flex;
-        column-gap: 1rem;
-        justify-content: flex-start;
-        align-items: center;
-    }
+    // .checkbox-container {
+    //     margin-bottom: 0.35rem;
+    //     display: flex;
+    //     column-gap: 1rem;
+    //     justify-content: flex-start;
+    //     align-items: center;
+    // }
 
-    /* Form elements */
+    // /* Form elements */
 
-    .form-label {
-        margin-bottom: 0.25rem;
-    }
+    // .form-label {
+    //     margin-bottom: 0.25rem;
+    // }
 
-    .checkbox-label {
-        margin: 0;
-        font-size: 1.4rem;
-    }
+    // .checkbox-label {
+    //     margin: 0;
+    //     font-size: 1.4rem;
+    // }
 
-    .interests-label {
-        margin: 1rem 0;
-    }
+    // .interests-label {
+    //     margin: 1rem 0;
+    // }
 
-    input[type=text],
-    input[type=email],
-    select {
-        width: 100%;
-        padding: 0.8rem;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        margin-bottom: 0.75rem;
-        font-sizer: 1.6rem;
-    }
+    // input[type=text],
+    // input[type=email],
+    // select {
+    //     width: 100%;
+    //     padding: 0.8rem;
+    //     display: inline-block;
+    //     border: 1px solid #ccc;
+    //     box-sizing: border-box;
+    //     margin-bottom: 0.75rem;
+    //     font-sizer: 1.6rem;
+    // }
 
-    input[type=text]:focus,
-    input[type=email]:focus,
-    input[type=checkbox]:focus {
-        outline: none;
-        border-color: #9f3e52;
-        box-shadow: 0 0 0 2px rgba(159, 62, 82, 0.2);
-    }
+    // input[type=text]:focus,
+    // input[type=email]:focus,
+    // input[type=checkbox]:focus {
+    //     outline: none;
+    //     border-color: #9f3e52;
+    //     box-shadow: 0 0 0 2px rgba(159, 62, 82, 0.2);
+    // }
 
-    input[type=submit] {
-        width: 100%;
-        font-weight: 600;
-        font-size: 1rem;
-        background-color: #9f3e52;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        cursor: pointer;
-    }
+    // input[type=submit] {
+    //     width: 100%;
+    //     font-weight: 600;
+    //     font-size: 1rem;
+    //     background-color: #9f3e52;
+    //     color: white;
+    //     padding: 14px 20px;
+    //     margin: 8px 0;
+    //     border: none;
+    //     cursor: pointer;
+    // }
 
-    input[type=submit]:hover {
-        background-color: #8d3749;
-    }
+    // input[type=submit]:hover {
+    //     background-color: #8d3749;
+    // }
 
-    #pageContent {
-        transition: filter 0.3s;
-    }
+    // #pageContent {
+    //     transition: filter 0.3s;
+    // }
 
-    .toggle-button {
-        color: #9f3e52;
-        display: block;
-        margin-bottom: 1rem;
-    }
+    // .toggle-button {
+    //     color: #9f3e52;
+    //     display: block;
+    //     margin-bottom: 1rem;
+    // }
 
-    .intro-text {
-        text-align: left;
-        margin-bottom: 20px;
-    }
+    // .intro-text {
+    //     text-align: left;
+    //     margin-bottom: 20px;
+    // }
 
-    /* Tooltips */
+    // /* Tooltips */
 
-    .tooltip {
-        position: relative;
-        display: inline-block;
-        text-decoration-line: underline;
-        text-decoration-style: wavy;
-        text-decoration-color: #5d5d5d;
-        text-decoration-thickness: 1px;
-        font-weight: bold;
-    }
+    // .tooltip {
+    //     position: relative;
+    //     display: inline-block;
+    //     text-decoration-line: underline;
+    //     text-decoration-style: wavy;
+    //     text-decoration-color: #5d5d5d;
+    //     text-decoration-thickness: 1px;
+    //     font-weight: bold;
+    // }
 
-    .tooltip:hover {
-        cursor: help;
-        color: #9f3e52;
-    }
+    // .tooltip:hover {
+    //     cursor: help;
+    //     color: #9f3e52;
+    // }
 
-    .field-name-body {
-        position: relative;
-    }
+    // .field-name-body {
+    //     position: relative;
+    // }
 
-    .side-annotation {
-        padding-top: 1rem;
-        margin-top: 0;
-        position: absolute;
-        left: 105%;
-        width: 100%;
-        max-width: 30rem;
-        border-top: .1rem solid #000;
-        transition: opacity 0.2s ease-in, opacity 0.5s ease-out;
-        /* Add transitions with different timing functions */
-        will-change: opacity;
-    }
+    // .side-annotation {
+    //     padding-top: 1rem;
+    //     margin-top: 0;
+    //     position: absolute;
+    //     left: 105%;
+    //     width: 100%;
+    //     max-width: 30rem;
+    //     border-top: .1rem solid #000;
+    //     transition: opacity 0.2s ease-in, opacity 0.5s ease-out;
+    //     /* Add transitions with different timing functions */
+    //     will-change: opacity;
+    // }
 
-    .modal-annotation,
-    .modal-annotation.active {
-        display: none;
-    }
+    // .modal-annotation,
+    // .modal-annotation.active {
+    //     display: none;
+    // }
 
-    @media screen and (max-width: 1250px) {
-        .side-annotation {
-            width: 25%;
-        }
-    }
+    // @media screen and (max-width: 1250px) {
+    //     .side-annotation {
+    //         width: 25%;
+    //     }
+    // }
 
-    @media screen and (max-width: 1150px) {
-        .side-annotation {
-            width: 20%;
-        }
-    }
+    // @media screen and (max-width: 1150px) {
+    //     .side-annotation {
+    //         width: 20%;
+    //     }
+    // }
 
-    @media screen and (max-width: 1050px) {
-        .side-annotation {
-            display: none;
-        }
+    // @media screen and (max-width: 1050px) {
+    //     .side-annotation {
+    //         display: none;
+    //     }
 
-        .modal-annotation {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
+    //     .modal-annotation {
+    //         display: none;
+    //         position: fixed;
+    //         top: 0;
+    //         left: 0;
+    //         width: 100%;
+    //         height: 100%;
+    //         background-color: rgba(0, 0, 0, 0.8);
+    //         justify-content: center;
+    //         align-items: center;
+    //     }
 
-        /* Show the modal box when the class 'active' is added */
-        .modal-annotation.active {
-            display: flex;
-        }
+    //     /* Show the modal box when the class 'active' is added */
+    //     .modal-annotation.active {
+    //         display: flex;
+    //     }
 
-        .modal-content {
-            position: relative;
-            background-color: #fff;
-            padding: 2rem;
-            margin: auto 2rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
+    //     .modal-content {
+    //         position: relative;
+    //         background-color: #fff;
+    //         padding: 2rem;
+    //         margin: auto 2rem;
+    //         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    //     }
 
-        .modal-close {
-            position: absolute;
-            font-size: 3rem;
-            top: -6px;
-            right: 8px;
-            cursor: pointer;
-        }
+    //     .modal-close {
+    //         position: absolute;
+    //         font-size: 3rem;
+    //         top: -6px;
+    //         right: 8px;
+    //         cursor: pointer;
+    //     }
 
-        .modal-close:hover {
-            color: red;
-        }
+    //     .modal-close:hover {
+    //         color: red;
+    //     }
 
-        .modal-content {
-            margin: 0;
-            max-width: unset;
-        }
-    }
+    //     .modal-content {
+    //         margin: 0;
+    //         max-width: unset;
+    //     }
+    // }
 
-    @media screen and (max-width: 500px) {
-        .modal-content {
-            max-width: 100%;
-            margin: 0;
-            overflow: scroll;
-            height: 90vh;
-            min-height: 90vh;
-            min-height: -webkit-fill-available;
-        }
+    // @media screen and (max-width: 500px) {
+    //     .modal-content {
+    //         max-width: 100%;
+    //         margin: 0;
+    //         overflow: scroll;
+    //         height: 90vh;
+    //         min-height: 90vh;
+    //         min-height: -webkit-fill-available;
+    //     }
 
-        .interest-grid {
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            column-gap: 0.5rem;
-            row-gap: 0.25rem;
-        }
+    //     .interest-grid {
+    //         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    //         column-gap: 0.5rem;
+    //         row-gap: 0.25rem;
+    //     }
 
-        .checkbox-container * {
-            font-size: 1.2rem;
-        }
+    //     .checkbox-container * {
+    //         font-size: 1.2rem;
+    //     }
 
-        .title-text {
-            font-size: 1.2rem;
-        }
+    //     .title-text {
+    //         font-size: 1.2rem;
+    //     }
 
-        .intro-text {
-            font-size: 1rem;
-        }
+    //     .intro-text {
+    //         font-size: 1rem;
+    //     }
 
-        .modal-title,
-        .intro-text {
-            text-align: left;
-        }
+    //     .modal-title,
+    //     .intro-text {
+    //         text-align: left;
+    //     }
 
-        #new-registration label {
-            font-size: 0.9rem;
-        }
+    //     #new-registration label {
+    //         font-size: 0.9rem;
+    //     }
 
-        #new-registration input:not([type="submit"]) {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            padding: 0.25rem;
-            margin-bottom: 0.5rem;
-        }
+    //     #new-registration input:not([type="submit"]) {
+    //         font-family: 'Roboto', sans-serif;
+    //         font-size: 1rem;
+    //         padding: 0.25rem;
+    //         margin-bottom: 0.5rem;
+    //     }
 
-        #new-registration input[type="submit"] {
-            margin-top: 0.7rem;
-            padding: 0.6rem;
-        }
-    }
-    `;
+    //     #new-registration input[type="submit"] {
+    //         margin-top: 0.7rem;
+    //         padding: 0.6rem;
+    //     }
+    // }
+    // `;
 
-    var styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = styles;
-    document.head.appendChild(styleSheet);
+    // var styleSheet = document.createElement("style");
+    // styleSheet.type = "text/css";
+    // styleSheet.innerText = styles;
+    // document.head.appendChild(styleSheet);
+
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://api.thenewhumanitarian.org/styles/annotations.css";
+
+    document.head.appendChild(link);
 
     /* Helper functions */
 
