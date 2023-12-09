@@ -243,8 +243,9 @@ input[type=submit]:hover {
     .modal-content {
         max-width: 100%;
         margin: 0;
-        overflow: scroll;
+        overflow: auto;
         height: 90vh;
+        width: 100vh;
         min-height: 90vh;
         min-height: -webkit-fill-available;
     }
