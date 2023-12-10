@@ -244,18 +244,19 @@ input[type=submit]:hover {
 }
 
 @media screen and (max-width: 500px) {
-    .modal-content {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        width: 100vh;
+    #registration-wall {
+        padding: 0;
         margin: 0;
+    }
+
+    .modal-content {
         overflow: auto;
+        width: 100%;
+        max-width: 100%;
         height: 100vh;
         min-height: 100vh;
         min-height: -webkit-fill-available;
+        padding: 1rem;
     }
 
     .interest-grid {
@@ -279,12 +280,15 @@ input[type=submit]:hover {
     .modal-title,
     .intro-text {
         text-align: left;
+        margin-top: 1rem;
     }
 
+    #existing-member label,
     #new-registration label {
         font-size: 0.9rem;
     }
 
+    #existing-member input:not([type="submit"]),
     #new-registration input:not([type="submit"]) {
         font-family: 'Roboto', sans-serif;
         font-size: 1rem;
@@ -292,6 +296,7 @@ input[type=submit]:hover {
         margin-bottom: 0.5rem;
     }
 
+    #existing-member input[type="submit"],
     #new-registration input[type="submit"] {
         margin-top: 0.7rem;
         padding: 0.6rem;
