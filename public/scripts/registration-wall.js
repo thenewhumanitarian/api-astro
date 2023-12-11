@@ -77,12 +77,24 @@
         // Append it to your form
         form.appendChild(hiddenInput);
 
+        // Create grid div for form fields
+        var fieldGrid = document.createElement('div');
+        fieldGrid.classList.add('field-grid');
+
         // Append form fields
         fields.forEach(function (field) {
-            var label = document.createElement('label');
-            label.htmlFor = slugify(field.id);
-            label.textContent = field.label + ':';
-            label.className = 'form-label';
+            // Create div as container for each field
+            var fieldContainer = document.createElement('div');
+            fieldContainer.classList.add('field-container');
+            fieldContainer.classList.add(`col-span-${field.colSpan}`);
+
+            if (field.type !== 'hidden') {
+                var label = document.createElement('label');
+                label.htmlFor = slugify(field.id);
+                label.textContent = field.label + ':';
+                label.className = 'form-label';
+                fieldContainer.appendChild(label);
+            }
 
             var input = document.createElement('input');
             input.type = field.type;
@@ -94,10 +106,13 @@
                 input.required = true;
             }
 
-            form.appendChild(label);
-            form.appendChild(input);
-            // form.appendChild(document.createElement('br'));
+            fieldContainer.appendChild(input);
+
+            fieldGrid.appendChild(fieldContainer);
         });
+
+        // Append fieldGrid div to form
+        form.appendChild(fieldGrid);
 
         var interestsLabel = document.createElement('p');
         interestsLabel.textContent = 'Your Interests:';
@@ -111,7 +126,7 @@
 
         // Add hidden error message container
         var errorMessage = document.createElement('div');
-        errorMessage.id = `error-message-${id}`
+        errorMessage.id = `error - message - ${id}`
         errorMessage.style.color = 'red';
         errorMessage.style.display = 'none';
         errorMessage.classList.add('error-message');
@@ -153,7 +168,7 @@
 
             // Collect checked checkboxes
             var checkedInterests = [];
-            document.querySelectorAll(`#${id} input[type="checkbox"]:checked`).forEach(function (checkbox) {
+            document.querySelectorAll(`#${id} input[type = "checkbox"]: checked`).forEach(function (checkbox) {
                 checkedInterests.push(checkbox.value);
             });
 
@@ -184,17 +199,17 @@
                 });
                 if (!response.ok) {
                     const errorData = await response.json();
-                    displayErrorMessage(errorData.error, `error-message-${id}`);
+                    displayErrorMessage(errorData.error, `error - message - ${id}`);
                 } else {
                     // Handle successful submission
-                    displayErrorMessage("", `error-message-${id}`); // Clear any existing error messages
+                    displayErrorMessage("", `error - message - ${id}`); // Clear any existing error messages
                     // Save registration progress to localStorage for future use
                     saveRegistrationProgress(jsonObject.email);
                     // Additional logic for successful submission
                     closeModal();
                 }
             } catch (error) {
-                displayErrorMessage("An error occurred while submitting the form.", `error-message-${id}`);
+                displayErrorMessage("An error occurred while submitting the form.", `error - message - ${id}`);
             }
 
         });
@@ -212,11 +227,11 @@
 
     // Define form fields
     var formFieldsNew = [
-        { label: 'First name *', type: 'text', id: 'firstName', required: true },
-        { label: 'Last name *', type: 'text', id: 'lastName', required: true },
-        { label: 'Job Title', type: 'text', id: 'jobTitle', required: false },
-        { label: 'Organisation', type: 'text', id: 'organisation', required: false },
-        { label: 'Your Email *', type: 'email', id: 'email', required: true }
+        { label: 'First name *', type: 'text', id: 'firstName', required: true, colSpan: 1 },
+        { label: 'Last name *', type: 'text', id: 'lastName', required: true, colSpan: 1 },
+        { label: 'Job title', type: 'text', id: 'jobTitle', required: false, colSpan: 1 },
+        { label: 'Organisation', type: 'text', id: 'organisation', required: false, colSpan: 1 },
+        { label: 'Your email *', type: 'email', id: 'email', required: true, colSpan: 2 }
     ];
 
     var submitButtonNew = document.createElement('input');
@@ -242,7 +257,7 @@
 
     // Define form fields
     var formFieldsExisting = [
-        { label: 'Your Email *', type: 'email', id: 'email', required: true },
+        { label: 'Your Email *', type: 'email', id: 'email', required: true, colSpan: 2 },
         { label: 'Hidden field', type: 'hidden', id: 'existing', required: false },
     ];
 
@@ -334,7 +349,7 @@
             email: email
         };
 
-        localStorage.setItem(`registration-${tagNameSlug}`, JSON.stringify(registrationData));
+        localStorage.setItem(`registration - ${tagNameSlug}`, JSON.stringify(registrationData));
     }
 
     var originalViewportContent;
