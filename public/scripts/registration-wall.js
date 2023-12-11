@@ -275,7 +275,7 @@
     pageContent.style.filter = 'blur(5px)'; // blur effect
 
     console.log(window.location)
-    var styleSheetUrl = window.location.hostname === "localhost" ? "/styles/annotations.css" : "https://api.thenewhumanitarian.org/styles/annotations";
+    var styleSheetUrl = window.location.hostname === "localhost" ? "/styles/annotations.css" : "https://api.thenewhumanitarian.org/styles/annotations.css";
 
 
     var link = document.createElement("link");
