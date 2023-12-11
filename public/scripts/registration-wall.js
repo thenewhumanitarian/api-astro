@@ -88,7 +88,7 @@
             fieldContainer.classList.add('field-container');
             fieldContainer.classList.add(`col-span-${field.colSpan}`);
 
-            if (field.type !== 'hidden') {
+            if (field.type !== 'hidden' && field.label !== '' && field.label) {
                 var label = document.createElement('label');
                 label.htmlFor = slugify(field.id);
                 label.textContent = field.label + ':';
@@ -258,7 +258,7 @@
     // Define form fields
     var formFieldsExisting = [
         { label: 'Your Email *', type: 'email', id: 'email', required: true, colSpan: 2 },
-        { label: 'Hidden field', type: 'hidden', id: 'existing', required: false },
+        { label: '', type: 'hidden', id: 'existing', required: false },
     ];
 
     var submitButtonExisting = document.createElement('input');

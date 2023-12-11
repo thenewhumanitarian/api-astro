@@ -310,14 +310,14 @@ input[type=submit]:hover {
     #existing-member input:not([type="submit"]),
     #new-registration input:not([type="submit"]) {
         font-family: 'Roboto', sans-serif;
-        font-size: 1rem;
-        padding: 0.25rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        padding: 0.25rem 0.4rem;
+        margin-bottom: 0.25rem;
     }
 
     #existing-member input[type="submit"],
     #new-registration input[type="submit"] {
         margin-top: 0.7rem;
-        padding: 0.6rem;
+        padding: 0.5rem;
     }
 }
