@@ -37,6 +37,8 @@ h2 {
     border: 1px solid #888;
     width: 90%;
     max-width: 640px;
+    max-height: 90vh;
+    overflow: auto;
 }
 
 .modal-title {
