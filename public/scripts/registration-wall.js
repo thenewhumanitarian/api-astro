@@ -45,6 +45,8 @@
         }
 
         if (toggleButton) {
+
+
             form.appendChild(toggleButton);
             toggleButton.addEventListener('click', function () {
                 alreadySignedUp = !alreadySignedUp;
@@ -90,7 +92,7 @@
 
             if (field.type !== 'hidden' && field.label !== '' && field.label) {
                 var label = document.createElement('label');
-                label.htmlFor = slugify(field.id);
+                label.htmlFor = slugify(`${field.id}-${id}`);
                 label.textContent = field.label + ':';
                 label.className = 'form-label';
                 fieldContainer.appendChild(label);
@@ -98,7 +100,7 @@
 
             var input = document.createElement('input');
             input.type = field.type;
-            input.id = slugify(field.id);
+            input.id = slugify(`${field.id}-${id}`);
             input.name = field.id;
 
             // Set required based on the field object
@@ -122,6 +124,7 @@
         // Create a grid div to hold all the checkboxContainer divs
         var grid = document.createElement('div');
         grid.classList.add('interest-grid');
+
         form.appendChild(grid);
 
         // Add hidden error message container
@@ -140,12 +143,12 @@
 
                 var checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.id = slugify(interest);
+                checkbox.id = slugify(`${interest}-${id}`);
                 checkbox.name = 'interests';
                 checkbox.value = interest;
 
                 var label = document.createElement('label');
-                label.htmlFor = slugify(interest);
+                label.htmlFor = slugify(`${interest}-${id}`);
                 label.textContent = interest;
                 label.classList.add('checkbox-label');
 
@@ -168,7 +171,7 @@
 
             // Collect checked checkboxes
             var checkedInterests = [];
-            document.querySelectorAll(`#${id} input[type = "checkbox"]: checked`).forEach(function (checkbox) {
+            document.querySelectorAll(`#${form.id} input[type="checkbox"]:checked`).forEach(function (checkbox) {
                 checkedInterests.push(checkbox.value);
             });
 
@@ -292,7 +295,6 @@
     console.log(window.location)
     var styleSheetUrl = window.location.hostname === "localhost" ? "/styles/annotations.css" : "https://api.thenewhumanitarian.org/styles/annotations.css";
 
-
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = styleSheetUrl;
@@ -300,7 +302,6 @@
     document.head.appendChild(link);
 
     /* Helper functions */
-
     function displayErrorMessage(message, containerId) {
         const errorMessageDiv = document.getElementById(containerId);
         if (message) {
@@ -349,7 +350,7 @@
             email: email
         };
 
-        localStorage.setItem(`registration - ${tagNameSlug}`, JSON.stringify(registrationData));
+        localStorage.setItem(`registration-${tagNameSlug}`, JSON.stringify(registrationData));
     }
 
     var originalViewportContent;
@@ -387,5 +388,21 @@
             viewportMetaTag.content = originalViewportContent;
         }
     }
+
+    // Function to handle the scroll event
+    function handleScroll() {
+        // Calculate the scroll position relative to the page height
+        const scrollPosition = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+
+        // Check if the scroll position is greater than or equal to 25%
+        if (scrollPosition >= 0.25) {
+            // Trigger your event here
+            console.log('Scrolled 25% of the page.');
+            // You can replace the console.log with your specific event logic.
+        }
+    }
+
+    // Add the scroll event listener to the window
+    window.addEventListener('scroll', handleScroll);
 
 })();
