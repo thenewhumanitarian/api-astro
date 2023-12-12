@@ -116,10 +116,12 @@
         // Append fieldGrid div to form
         form.appendChild(fieldGrid);
 
-        var interestsLabel = document.createElement('p');
-        interestsLabel.textContent = 'Your Interests:';
-        interestsLabel.classList.add('interests-label');
-        form.appendChild(interestsLabel);
+        if (window.interests && window.interests.length > 0) {
+            var interestsLabel = document.createElement('p');
+            interestsLabel.textContent = 'Your Interests:';
+            interestsLabel.classList.add('interests-label');
+            form.appendChild(interestsLabel);
+        }
 
         // Create a grid div to hold all the checkboxContainer divs
         var grid = document.createElement('div');
@@ -230,8 +232,8 @@
 
     // Define form fields
     var formFieldsNew = [
-        { label: 'First name *', type: 'text', id: 'firstName', required: true, colSpan: 1 },
-        { label: 'Last name *', type: 'text', id: 'lastName', required: true, colSpan: 1 },
+        { label: 'First name', type: 'text', id: 'firstName', required: false, colSpan: 1 },
+        { label: 'Last name', type: 'text', id: 'lastName', required: false, colSpan: 1 },
         { label: 'Job title', type: 'text', id: 'jobTitle', required: false, colSpan: 1 },
         { label: 'Organisation', type: 'text', id: 'organisation', required: false, colSpan: 1 },
         { label: 'Your email *', type: 'email', id: 'email', required: true, colSpan: 2 }
@@ -281,25 +283,27 @@
     // When you need to change settings
     changeViewportSettings();
 
-    // Append modal to body and blur the rest of the content
-    document.body.appendChild(modal);
-    document.body.style.overflow = 'hidden'; // disable body scroll
-    var pageContent = document.createElement('div');
-    pageContent.id = 'pageContent';
-    while (document.body.firstChild !== modal) {
-        pageContent.appendChild(document.body.firstChild);
+    function appendModal() {
+        // Append modal to body and blur the rest of the content
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden'; // disable body scroll
+        var pageContent = document.createElement('div');
+        pageContent.id = 'pageContent';
+        while (document.body.firstChild !== modal) {
+            pageContent.appendChild(document.body.firstChild);
+        }
+        document.body.insertBefore(pageContent, modal);
+        pageContent.style.filter = 'blur(5px)'; // blur effect
+
+        console.log(window.location)
+        var styleSheetUrl = window.location.hostname === "localhost" ? "/styles/annotations.css" : "https://api.thenewhumanitarian.org/styles/annotations.css";
+
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = styleSheetUrl;
+
+        document.head.appendChild(link);
     }
-    document.body.insertBefore(pageContent, modal);
-    pageContent.style.filter = 'blur(5px)'; // blur effect
-
-    console.log(window.location)
-    var styleSheetUrl = window.location.hostname === "localhost" ? "/styles/annotations.css" : "https://api.thenewhumanitarian.org/styles/annotations.css";
-
-    var link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = styleSheetUrl;
-
-    document.head.appendChild(link);
 
     /* Helper functions */
     function displayErrorMessage(message, containerId) {
@@ -395,14 +399,14 @@
         const scrollPosition = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
 
         // Check if the scroll position is greater than or equal to 25%
-        if (scrollPosition >= 0.25) {
+        if (scrollPosition >= 0.5) {
             // Trigger your event here
             console.log('Scrolled 25% of the page.');
+            appendModal();
             // You can replace the console.log with your specific event logic.
         }
     }
 
     // Add the scroll event listener to the window
     window.addEventListener('scroll', handleScroll);
-
 })();
