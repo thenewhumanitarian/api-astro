@@ -52,88 +52,88 @@ const countries = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'South Sudan', 'Syr
 // Example min and max y values for each year
 const minMaxY = [
   {
-    2000: 100
+    2000: 168
   }, {
-    2001: 100
+    2001: 168
   }, {
-    2002: 100
+    2002: 168
   }, {
-    2003: 100
+    2003: 168
   }, {
-    2004: 100
+    2004: 168
   }, {
-    2005: 100
+    2005: 168
   }, {
-    2006: 100
+    2006: 168
   }, {
-    2007: 100
+    2007: 168
   }, {
-    2008: 100
+    2008: 168
   }, {
-    2009: 100
+    2009: 168
   }, {
-    2090: 100
+    2090: 168
   }, {
-    2011: 100
+    2011: 168
   }, {
-    2012: 100
+    2012: 168
   }, {
-    2013: 100
+    2013: 168
   }, {
-    2014: 100
+    2014: 168
   }, {
-    2015: 100
+    2015: 168
   }, {
-    2016: 100
+    2016: 168
   }, {
-    2017: 100
+    2017: 168
   }, {
-    2018: 100
+    2018: 168
   }, {
-    2019: 100
+    2019: 168
   }, {
-    2020: 100
+    2020: 168
   }, {
-    2021: 100
+    2021: 168
   }, {
-    2022: 100
+    2022: 168
   }, {
-    2023: 200
+    2023: 168
   },
 ]; // Extend this as needed
 
 // Define the grid lines you want to show for each year
 const gridLinesByYear = {
-  2000: [5, 10, 100], // Grid lines at 5 and 10 for the year 2000
-  2001: [5, 10, 100],
-  2002: [5, 10, 100],
-  2003: [5, 10, 100],
-  2004: [5, 10, 100],
-  2005: [5, 10, 100],
-  2006: [5, 10, 100],
-  2007: [5, 10, 100],
-  2008: [5, 10, 100],
-  2009: [5, 10, 100],
-  2010: [5, 10, 100],
-  2011: [5, 10, 100],
-  2012: [5, 10, 100],
-  2012: [5, 10, 100],
-  2013: [5, 10, 100],
-  2014: [5, 10, 100],
-  2015: [5, 10, 100],
-  2016: [5, 10, 100],
-  2017: [5, 10, 100],
-  2018: [5, 10, 100],
-  2019: [5, 10, 100],
-  2020: [5, 10, 100],
-  2021: [5, 10, 100],
-  2022: [5, 10, 100],
-  2023: [5, 10, 200]
+  2000: [10, 50, 100,150,200], // Grid lines at 5 and 10 for the year 2000
+  2001: [10, 50, 100,150,200],
+  2002: [10, 50, 100,150,200],
+  2003: [10, 50, 100,150,200],
+  2004: [10, 50, 100,150,200],
+  2005: [10, 50, 100,150,200],
+  2006: [10, 50, 100,150,200],
+  2007: [10, 50, 100,150,200],
+  2008: [10, 50, 100,150,200],
+  2009: [10, 50, 100,150,200],
+  2010: [10, 50, 100,150,200],
+  2011: [10, 50, 100,150,200],
+  2012: [10, 50, 100,150,200],
+  2012: [10, 50, 100,150,200],
+  2013: [10, 50, 100,150,200],
+  2014: [10, 50, 100,150,200],
+  2015: [10, 50, 100,150,200],
+  2016: [10, 50, 100,150,200],
+  2017: [10, 50, 100,150,200],
+  2018: [10, 50, 100,150,200],
+  2019: [10, 50, 100,150,200],
+  2020: [10, 50, 100,150,200],
+  2021: [10, 50, 100,150,200],
+  2022: [10, 50, 100,150,200],
+  2023: [10, 50, 100,150,200]
 };
 
 // Define chart dimensions
 let svgWidth = 800, svgHeight = 400, barPadding = 5;
-let margin = { top: 50, right: 50, bottom: 50, left: 100 }; // Adjusted to include space for labels
+let margin = { top: 50, right: 50, bottom: 50, left: 168 }; // Adjusted to include space for labels
 let svg, yScale, barWidth;
 
 // Initialize D3 chart
@@ -146,7 +146,8 @@ function initD3Chart() {
     .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-  d3.csv('./data.csv').then(function (data) {
+  // d3.csv('./data.csv').then(function (data) {
+  d3.csv('http://api.thenewhumanitarian.org/d3/data.csv').then(function (data) {
     const firstYear = data[0].year; // Assuming data is sorted and the first element has the earliest year
 
     // Filter data to only show the countries from the array
@@ -270,6 +271,8 @@ function updateChartForYear(year) {
     // Enter selection - Append new rects for new data
     bars.enter().append('rect')
       .merge(bars) // Merge enter and update selections
+      .transition()
+      .duration(50)
       .attr('x', (d, i) => i * (barWidth + barPadding))
       .attr('y', d => yScale(+d.total_killed))
       .attr('height', d => svgHeight - yScale(parseInt(d.total_killed)))
