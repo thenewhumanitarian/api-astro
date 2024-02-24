@@ -147,7 +147,7 @@ function initD3Chart() {
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
   // d3.csv('./data.csv').then(function (data) {
-  d3.csv('http://api.thenewhumanitarian.org/d3/data.csv').then(function (data) {
+  d3.csv('https://api.thenewhumanitarian.org/d3/data.csv').then(function (data) {
     const firstYear = data[0].year; // Assuming data is sorted and the first element has the earliest year
 
     // Filter data to only show the countries from the array
