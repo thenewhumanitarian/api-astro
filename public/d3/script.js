@@ -1,5 +1,1808 @@
 /* Script for changing Drupal CMS article style */
 
+const data = [
+  {
+    "year": 2000,
+    "country": "Afghanistan",
+    "total_killed": 8
+  },
+  {
+    "year": 2001,
+    "country": "Afghanistan",
+    "total_killed": 2
+  },
+  {
+    "year": 2002,
+    "country": "Afghanistan",
+    "total_killed": 3
+  },
+  {
+    "year": 2003,
+    "country": "Afghanistan",
+    "total_killed": 13
+  },
+  {
+    "year": 2004,
+    "country": "Afghanistan",
+    "total_killed": 26
+  },
+  {
+    "year": 2005,
+    "country": "Afghanistan",
+    "total_killed": 20
+  },
+  {
+    "year": 2006,
+    "country": "Afghanistan",
+    "total_killed": 30
+  },
+  {
+    "year": 2007,
+    "country": "Afghanistan",
+    "total_killed": 21
+  },
+  {
+    "year": 2008,
+    "country": "Afghanistan",
+    "total_killed": 32
+  },
+  {
+    "year": 2009,
+    "country": "Afghanistan",
+    "total_killed": 24
+  },
+  {
+    "year": 2010,
+    "country": "Afghanistan",
+    "total_killed": 34
+  },
+  {
+    "year": 2011,
+    "country": "Afghanistan",
+    "total_killed": 31
+  },
+  {
+    "year": 2012,
+    "country": "Afghanistan",
+    "total_killed": 11
+  },
+  {
+    "year": 2013,
+    "country": "Afghanistan",
+    "total_killed": 48
+  },
+  {
+    "year": 2014,
+    "country": "Afghanistan",
+    "total_killed": 42
+  },
+  {
+    "year": 2015,
+    "country": "Afghanistan",
+    "total_killed": 41
+  },
+  {
+    "year": 2016,
+    "country": "Afghanistan",
+    "total_killed": 14
+  },
+  {
+    "year": 2017,
+    "country": "Afghanistan",
+    "total_killed": 15
+  },
+  {
+    "year": 2018,
+    "country": "Afghanistan",
+    "total_killed": 14
+  },
+  {
+    "year": 2019,
+    "country": "Afghanistan",
+    "total_killed": 18
+  },
+  {
+    "year": 2020,
+    "country": "Afghanistan",
+    "total_killed": 2
+  },
+  {
+    "year": 2021,
+    "country": "Afghanistan",
+    "total_killed": 21
+  },
+  {
+    "year": 2022,
+    "country": "Afghanistan",
+    "total_killed": 9
+  },
+  {
+    "year": 2023,
+    "country": "Afghanistan",
+    "total_killed": 0
+  },
+  {
+    "year": 2000,
+    "country": "CAR",
+    "total_killed": 0
+  },
+  {
+    "year": 2001,
+    "country": "CAR",
+    "total_killed": 1
+  },
+  {
+    "year": 2002,
+    "country": "CAR",
+    "total_killed": 0
+  },
+  {
+    "year": 2003,
+    "country": "CAR",
+    "total_killed": 0
+  },
+  {
+    "year": 2004,
+    "country": "CAR",
+    "total_killed": 0
+  },
+  {
+    "year": 2005,
+    "country": "CAR",
+    "total_killed": 0
+  },
+  {
+    "year": 2006,
+    "country": "CAR",
+    "total_killed": 2
+  },
+  {
+    "year": 2007,
+    "country": "CAR",
+    "total_killed": 2
+  },
+  {
+    "year": 2008,
+    "country": "CAR",
+    "total_killed": 0
+  },
+  {
+    "year": 2009,
+    "country": "CAR",
+    "total_killed": 4
+  },
+  {
+    "year": 2010,
+    "country": "CAR",
+    "total_killed": 0
+  },
+  {
+    "year": 2011,
+    "country": "CAR",
+    "total_killed": 1
+  },
+  {
+    "year": 2012,
+    "country": "CAR",
+    "total_killed": 0
+  },
+  {
+    "year": 2013,
+    "country": "CAR",
+    "total_killed": 4
+  },
+  {
+    "year": 2014,
+    "country": "CAR",
+    "total_killed": 10
+  },
+  {
+    "year": 2015,
+    "country": "CAR",
+    "total_killed": 6
+  },
+  {
+    "year": 2016,
+    "country": "CAR",
+    "total_killed": 5
+  },
+  {
+    "year": 2017,
+    "country": "CAR",
+    "total_killed": 17
+  },
+  {
+    "year": 2018,
+    "country": "CAR",
+    "total_killed": 10
+  },
+  {
+    "year": 2019,
+    "country": "CAR",
+    "total_killed": 6
+  },
+  {
+    "year": 2020,
+    "country": "CAR",
+    "total_killed": 3
+  },
+  {
+    "year": 2021,
+    "country": "CAR",
+    "total_killed": 8
+  },
+  {
+    "year": 2022,
+    "country": "CAR",
+    "total_killed": 2
+  },
+  {
+    "year": 2023,
+    "country": "CAR",
+    "total_killed": 2
+  },
+  {
+    "year": 2000,
+    "country": "DR Congo",
+    "total_killed": 2
+  },
+  {
+    "year": 2001,
+    "country": "DR Congo",
+    "total_killed": 7
+  },
+  {
+    "year": 2002,
+    "country": "DR Congo",
+    "total_killed": 0
+  },
+  {
+    "year": 2003,
+    "country": "DR Congo",
+    "total_killed": 4
+  },
+  {
+    "year": 2004,
+    "country": "DR Congo",
+    "total_killed": 1
+  },
+  {
+    "year": 2005,
+    "country": "DR Congo",
+    "total_killed": 0
+  },
+  {
+    "year": 2006,
+    "country": "DR Congo",
+    "total_killed": 2
+  },
+  {
+    "year": 2007,
+    "country": "DR Congo",
+    "total_killed": 0
+  },
+  {
+    "year": 2008,
+    "country": "DR Congo",
+    "total_killed": 4
+  },
+  {
+    "year": 2009,
+    "country": "DR Congo",
+    "total_killed": 7
+  },
+  {
+    "year": 2010,
+    "country": "DR Congo",
+    "total_killed": 2
+  },
+  {
+    "year": 2011,
+    "country": "DR Congo",
+    "total_killed": 5
+  },
+  {
+    "year": 2012,
+    "country": "DR Congo",
+    "total_killed": 1
+  },
+  {
+    "year": 2013,
+    "country": "DR Congo",
+    "total_killed": 2
+  },
+  {
+    "year": 2014,
+    "country": "DR Congo",
+    "total_killed": 2
+  },
+  {
+    "year": 2015,
+    "country": "DR Congo",
+    "total_killed": 0
+  },
+  {
+    "year": 2016,
+    "country": "DR Congo",
+    "total_killed": 3
+  },
+  {
+    "year": 2017,
+    "country": "DR Congo",
+    "total_killed": 0
+  },
+  {
+    "year": 2018,
+    "country": "DR Congo",
+    "total_killed": 7
+  },
+  {
+    "year": 2019,
+    "country": "DR Congo",
+    "total_killed": 12
+  },
+  {
+    "year": 2020,
+    "country": "DR Congo",
+    "total_killed": 2
+  },
+  {
+    "year": 2021,
+    "country": "DR Congo",
+    "total_killed": 6
+  },
+  {
+    "year": 2022,
+    "country": "DR Congo",
+    "total_killed": 6
+  },
+  {
+    "year": 2023,
+    "country": "DR Congo",
+    "total_killed": 4
+  },
+  {
+    "year": 2000,
+    "country": "Ethiopia",
+    "total_killed": 1
+  },
+  {
+    "year": 2001,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2002,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2003,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2004,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2005,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2006,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2007,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2008,
+    "country": "Ethiopia",
+    "total_killed": 3
+  },
+  {
+    "year": 2009,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2010,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2011,
+    "country": "Ethiopia",
+    "total_killed": 1
+  },
+  {
+    "year": 2012,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2013,
+    "country": "Ethiopia",
+    "total_killed": 1
+  },
+  {
+    "year": 2014,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2015,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2016,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2017,
+    "country": "Ethiopia",
+    "total_killed": 0
+  },
+  {
+    "year": 2018,
+    "country": "Ethiopia",
+    "total_killed": 2
+  },
+  {
+    "year": 2019,
+    "country": "Ethiopia",
+    "total_killed": 5
+  },
+  {
+    "year": 2020,
+    "country": "Ethiopia",
+    "total_killed": 14
+  },
+  {
+    "year": 2021,
+    "country": "Ethiopia",
+    "total_killed": 20
+  },
+  {
+    "year": 2022,
+    "country": "Ethiopia",
+    "total_killed": 2
+  },
+  {
+    "year": 2023,
+    "country": "Ethiopia",
+    "total_killed": 6
+  },
+  {
+    "year": 2000,
+    "country": "Iraq",
+    "total_killed": 2
+  },
+  {
+    "year": 2001,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2002,
+    "country": "Iraq",
+    "total_killed": 1
+  },
+  {
+    "year": 2003,
+    "country": "Iraq",
+    "total_killed": 29
+  },
+  {
+    "year": 2004,
+    "country": "Iraq",
+    "total_killed": 11
+  },
+  {
+    "year": 2005,
+    "country": "Iraq",
+    "total_killed": 5
+  },
+  {
+    "year": 2006,
+    "country": "Iraq",
+    "total_killed": 4
+  },
+  {
+    "year": 2007,
+    "country": "Iraq",
+    "total_killed": 5
+  },
+  {
+    "year": 2008,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2009,
+    "country": "Iraq",
+    "total_killed": 1
+  },
+  {
+    "year": 2010,
+    "country": "Iraq",
+    "total_killed": 7
+  },
+  {
+    "year": 2011,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2012,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2013,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2014,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2015,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2016,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2017,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2018,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2019,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2020,
+    "country": "Iraq",
+    "total_killed": 1
+  },
+  {
+    "year": 2021,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2022,
+    "country": "Iraq",
+    "total_killed": 1
+  },
+  {
+    "year": 2023,
+    "country": "Iraq",
+    "total_killed": 0
+  },
+  {
+    "year": 2000,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2001,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2002,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2003,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2004,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2005,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2006,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2007,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2008,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2009,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2010,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2011,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2012,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2013,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2014,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2015,
+    "country": "Myanmar",
+    "total_killed": 1
+  },
+  {
+    "year": 2016,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2017,
+    "country": "Myanmar",
+    "total_killed": 0
+  },
+  {
+    "year": 2018,
+    "country": "Myanmar",
+    "total_killed": 1
+  },
+  {
+    "year": 2019,
+    "country": "Myanmar",
+    "total_killed": 1
+  },
+  {
+    "year": 2020,
+    "country": "Myanmar",
+    "total_killed": 1
+  },
+  {
+    "year": 2021,
+    "country": "Myanmar",
+    "total_killed": 14
+  },
+  {
+    "year": 2022,
+    "country": "Myanmar",
+    "total_killed": 20
+  },
+  {
+    "year": 2023,
+    "country": "Myanmar",
+    "total_killed": 2
+  },
+  {
+    "year": 2000,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2001,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2002,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2003,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2004,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2005,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2006,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2007,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2008,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2009,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2010,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2011,
+    "country": "Nigeria",
+    "total_killed": 9
+  },
+  {
+    "year": 2012,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2013,
+    "country": "Nigeria",
+    "total_killed": 8
+  },
+  {
+    "year": 2014,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2015,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2016,
+    "country": "Nigeria",
+    "total_killed": 0
+  },
+  {
+    "year": 2017,
+    "country": "Nigeria",
+    "total_killed": 11
+  },
+  {
+    "year": 2018,
+    "country": "Nigeria",
+    "total_killed": 5
+  },
+  {
+    "year": 2019,
+    "country": "Nigeria",
+    "total_killed": 14
+  },
+  {
+    "year": 2020,
+    "country": "Nigeria",
+    "total_killed": 6
+  },
+  {
+    "year": 2021,
+    "country": "Nigeria",
+    "total_killed": 5
+  },
+  {
+    "year": 2022,
+    "country": "Nigeria",
+    "total_killed": 1
+  },
+  {
+    "year": 2023,
+    "country": "Nigeria",
+    "total_killed": 2
+  },
+  {
+    "year": 2000,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2001,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2002,
+    "country": "Palestine",
+    "total_killed": 5
+  },
+  {
+    "year": 2003,
+    "country": "Palestine",
+    "total_killed": 1
+  },
+  {
+    "year": 2004,
+    "country": "Palestine",
+    "total_killed": 2
+  },
+  {
+    "year": 2005,
+    "country": "Palestine",
+    "total_killed": 1
+  },
+  {
+    "year": 2006,
+    "country": "Palestine",
+    "total_killed": 4
+  },
+  {
+    "year": 2007,
+    "country": "Palestine",
+    "total_killed": 3
+  },
+  {
+    "year": 2008,
+    "country": "Palestine",
+    "total_killed": 1
+  },
+  {
+    "year": 2009,
+    "country": "Palestine",
+    "total_killed": 13
+  },
+  {
+    "year": 2010,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2011,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2012,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2013,
+    "country": "Palestine",
+    "total_killed": 1
+  },
+  {
+    "year": 2014,
+    "country": "Palestine",
+    "total_killed": 14
+  },
+  {
+    "year": 2015,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2016,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2017,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2018,
+    "country": "Palestine",
+    "total_killed": 3
+  },
+  {
+    "year": 2019,
+    "country": "Palestine",
+    "total_killed": 2
+  },
+  {
+    "year": 2020,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2021,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2022,
+    "country": "Palestine",
+    "total_killed": 0
+  },
+  {
+    "year": 2023,
+    "country": "Palestine",
+    "total_killed": 168
+  },
+  {
+    "year": 2000,
+    "country": "Pakistan",
+    "total_killed": 0
+  },
+  {
+    "year": 2001,
+    "country": "Pakistan",
+    "total_killed": 0
+  },
+  {
+    "year": 2002,
+    "country": "Pakistan",
+    "total_killed": 0
+  },
+  {
+    "year": 2003,
+    "country": "Pakistan",
+    "total_killed": 0
+  },
+  {
+    "year": 2004,
+    "country": "Pakistan",
+    "total_killed": 0
+  },
+  {
+    "year": 2005,
+    "country": "Pakistan",
+    "total_killed": 0
+  },
+  {
+    "year": 2006,
+    "country": "Pakistan",
+    "total_killed": 0
+  },
+  {
+    "year": 2007,
+    "country": "Pakistan",
+    "total_killed": 4
+  },
+  {
+    "year": 2008,
+    "country": "Pakistan",
+    "total_killed": 8
+  },
+  {
+    "year": 2009,
+    "country": "Pakistan",
+    "total_killed": 18
+  },
+  {
+    "year": 2010,
+    "country": "Pakistan",
+    "total_killed": 14
+  },
+  {
+    "year": 2011,
+    "country": "Pakistan",
+    "total_killed": 5
+  },
+  {
+    "year": 2012,
+    "country": "Pakistan",
+    "total_killed": 13
+  },
+  {
+    "year": 2013,
+    "country": "Pakistan",
+    "total_killed": 22
+  },
+  {
+    "year": 2014,
+    "country": "Pakistan",
+    "total_killed": 8
+  },
+  {
+    "year": 2015,
+    "country": "Pakistan",
+    "total_killed": 1
+  },
+  {
+    "year": 2016,
+    "country": "Pakistan",
+    "total_killed": 1
+  },
+  {
+    "year": 2017,
+    "country": "Pakistan",
+    "total_killed": 2
+  },
+  {
+    "year": 2018,
+    "country": "Pakistan",
+    "total_killed": 1
+  },
+  {
+    "year": 2019,
+    "country": "Pakistan",
+    "total_killed": 2
+  },
+  {
+    "year": 2020,
+    "country": "Pakistan",
+    "total_killed": 2
+  },
+  {
+    "year": 2021,
+    "country": "Pakistan",
+    "total_killed": 4
+  },
+  {
+    "year": 2022,
+    "country": "Pakistan",
+    "total_killed": 0
+  },
+  {
+    "year": 2023,
+    "country": "Pakistan",
+    "total_killed": 0
+  },
+  {
+    "year": 2000,
+    "country": "Somalia",
+    "total_killed": 11
+  },
+  {
+    "year": 2001,
+    "country": "Somalia",
+    "total_killed": 6
+  },
+  {
+    "year": 2002,
+    "country": "Somalia",
+    "total_killed": 4
+  },
+  {
+    "year": 2003,
+    "country": "Somalia",
+    "total_killed": 6
+  },
+  {
+    "year": 2004,
+    "country": "Somalia",
+    "total_killed": 2
+  },
+  {
+    "year": 2005,
+    "country": "Somalia",
+    "total_killed": 5
+  },
+  {
+    "year": 2006,
+    "country": "Somalia",
+    "total_killed": 5
+  },
+  {
+    "year": 2007,
+    "country": "Somalia",
+    "total_killed": 9
+  },
+  {
+    "year": 2008,
+    "country": "Somalia",
+    "total_killed": 46
+  },
+  {
+    "year": 2009,
+    "country": "Somalia",
+    "total_killed": 19
+  },
+  {
+    "year": 2010,
+    "country": "Somalia",
+    "total_killed": 5
+  },
+  {
+    "year": 2011,
+    "country": "Somalia",
+    "total_killed": 13
+  },
+  {
+    "year": 2012,
+    "country": "Somalia",
+    "total_killed": 8
+  },
+  {
+    "year": 2013,
+    "country": "Somalia",
+    "total_killed": 15
+  },
+  {
+    "year": 2014,
+    "country": "Somalia",
+    "total_killed": 9
+  },
+  {
+    "year": 2015,
+    "country": "Somalia",
+    "total_killed": 11
+  },
+  {
+    "year": 2016,
+    "country": "Somalia",
+    "total_killed": 10
+  },
+  {
+    "year": 2017,
+    "country": "Somalia",
+    "total_killed": 9
+  },
+  {
+    "year": 2018,
+    "country": "Somalia",
+    "total_killed": 3
+  },
+  {
+    "year": 2019,
+    "country": "Somalia",
+    "total_killed": 5
+  },
+  {
+    "year": 2020,
+    "country": "Somalia",
+    "total_killed": 11
+  },
+  {
+    "year": 2021,
+    "country": "Somalia",
+    "total_killed": 5
+  },
+  {
+    "year": 2022,
+    "country": "Somalia",
+    "total_killed": 14
+  },
+  {
+    "year": 2023,
+    "country": "Somalia",
+    "total_killed": 4
+  },
+  {
+    "year": 2000,
+    "country": "South Sudan",
+    "total_killed": 0
+  },
+  {
+    "year": 2001,
+    "country": "South Sudan",
+    "total_killed": 0
+  },
+  {
+    "year": 2002,
+    "country": "South Sudan",
+    "total_killed": 1
+  },
+  {
+    "year": 2003,
+    "country": "South Sudan",
+    "total_killed": 1
+  },
+  {
+    "year": 2004,
+    "country": "South Sudan",
+    "total_killed": 0
+  },
+  {
+    "year": 2005,
+    "country": "South Sudan",
+    "total_killed": 2
+  },
+  {
+    "year": 2006,
+    "country": "South Sudan",
+    "total_killed": 0
+  },
+  {
+    "year": 2007,
+    "country": "South Sudan",
+    "total_killed": 0
+  },
+  {
+    "year": 2008,
+    "country": "South Sudan",
+    "total_killed": 0
+  },
+  {
+    "year": 2009,
+    "country": "South Sudan",
+    "total_killed": 0
+  },
+  {
+    "year": 2010,
+    "country": "South Sudan",
+    "total_killed": 0
+  },
+  {
+    "year": 2011,
+    "country": "South Sudan",
+    "total_killed": 9
+  },
+  {
+    "year": 2012,
+    "country": "South Sudan",
+    "total_killed": 9
+  },
+  {
+    "year": 2013,
+    "country": "South Sudan",
+    "total_killed": 15
+  },
+  {
+    "year": 2014,
+    "country": "South Sudan",
+    "total_killed": 11
+  },
+  {
+    "year": 2015,
+    "country": "South Sudan",
+    "total_killed": 15
+  },
+  {
+    "year": 2016,
+    "country": "South Sudan",
+    "total_killed": 26
+  },
+  {
+    "year": 2017,
+    "country": "South Sudan",
+    "total_killed": 33
+  },
+  {
+    "year": 2018,
+    "country": "South Sudan",
+    "total_killed": 16
+  },
+  {
+    "year": 2019,
+    "country": "South Sudan",
+    "total_killed": 6
+  },
+  {
+    "year": 2020,
+    "country": "South Sudan",
+    "total_killed": 24
+  },
+  {
+    "year": 2021,
+    "country": "South Sudan",
+    "total_killed": 29
+  },
+  {
+    "year": 2022,
+    "country": "South Sudan",
+    "total_killed": 23
+  },
+  {
+    "year": 2023,
+    "country": "South Sudan",
+    "total_killed": 34
+  },
+  {
+    "year": 2000,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2001,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2002,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2003,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2004,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2005,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2006,
+    "country": "Sri Lanka",
+    "total_killed": 24
+  },
+  {
+    "year": 2007,
+    "country": "Sri Lanka",
+    "total_killed": 16
+  },
+  {
+    "year": 2008,
+    "country": "Sri Lanka",
+    "total_killed": 3
+  },
+  {
+    "year": 2009,
+    "country": "Sri Lanka",
+    "total_killed": 8
+  },
+  {
+    "year": 2010,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2011,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2012,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2013,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2014,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2015,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2016,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2017,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2018,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2019,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2020,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2021,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2022,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2023,
+    "country": "Sri Lanka",
+    "total_killed": 0
+  },
+  {
+    "year": 2000,
+    "country": "Sudan",
+    "total_killed": 15
+  },
+  {
+    "year": 2001,
+    "country": "Sudan",
+    "total_killed": 2
+  },
+  {
+    "year": 2002,
+    "country": "Sudan",
+    "total_killed": 1
+  },
+  {
+    "year": 2003,
+    "country": "Sudan",
+    "total_killed": 8
+  },
+  {
+    "year": 2004,
+    "country": "Sudan",
+    "total_killed": 6
+  },
+  {
+    "year": 2005,
+    "country": "Sudan",
+    "total_killed": 11
+  },
+  {
+    "year": 2006,
+    "country": "Sudan",
+    "total_killed": 12
+  },
+  {
+    "year": 2007,
+    "country": "Sudan",
+    "total_killed": 11
+  },
+  {
+    "year": 2008,
+    "country": "Sudan",
+    "total_killed": 20
+  },
+  {
+    "year": 2009,
+    "country": "Sudan",
+    "total_killed": 6
+  },
+  {
+    "year": 2010,
+    "country": "Sudan",
+    "total_killed": 4
+  },
+  {
+    "year": 2011,
+    "country": "Sudan",
+    "total_killed": 6
+  },
+  {
+    "year": 2012,
+    "country": "Sudan",
+    "total_killed": 1
+  },
+  {
+    "year": 2013,
+    "country": "Sudan",
+    "total_killed": 7
+  },
+  {
+    "year": 2014,
+    "country": "Sudan",
+    "total_killed": 2
+  },
+  {
+    "year": 2015,
+    "country": "Sudan",
+    "total_killed": 5
+  },
+  {
+    "year": 2016,
+    "country": "Sudan",
+    "total_killed": 0
+  },
+  {
+    "year": 2017,
+    "country": "Sudan",
+    "total_killed": 1
+  },
+  {
+    "year": 2018,
+    "country": "Sudan",
+    "total_killed": 3
+  },
+  {
+    "year": 2019,
+    "country": "Sudan",
+    "total_killed": 1
+  },
+  {
+    "year": 2020,
+    "country": "Sudan",
+    "total_killed": 1
+  },
+  {
+    "year": 2021,
+    "country": "Sudan",
+    "total_killed": 3
+  },
+  {
+    "year": 2022,
+    "country": "Sudan",
+    "total_killed": 10
+  },
+  {
+    "year": 2023,
+    "country": "Sudan",
+    "total_killed": 22
+  },
+  {
+    "year": 2000,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2001,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2002,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2003,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2004,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2005,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2006,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2007,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2008,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2009,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2010,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2011,
+    "country": "Syrian Arab Republic",
+    "total_killed": 0
+  },
+  {
+    "year": 2012,
+    "country": "Syrian Arab Republic",
+    "total_killed": 19
+  },
+  {
+    "year": 2013,
+    "country": "Syrian Arab Republic",
+    "total_killed": 25
+  },
+  {
+    "year": 2014,
+    "country": "Syrian Arab Republic",
+    "total_killed": 18
+  },
+  {
+    "year": 2015,
+    "country": "Syrian Arab Republic",
+    "total_killed": 9
+  },
+  {
+    "year": 2016,
+    "country": "Syrian Arab Republic",
+    "total_killed": 37
+  },
+  {
+    "year": 2017,
+    "country": "Syrian Arab Republic",
+    "total_killed": 43
+  },
+  {
+    "year": 2018,
+    "country": "Syrian Arab Republic",
+    "total_killed": 56
+  },
+  {
+    "year": 2019,
+    "country": "Syrian Arab Republic",
+    "total_killed": 36
+  },
+  {
+    "year": 2020,
+    "country": "Syrian Arab Republic",
+    "total_killed": 24
+  },
+  {
+    "year": 2021,
+    "country": "Syrian Arab Republic",
+    "total_killed": 14
+  },
+  {
+    "year": 2022,
+    "country": "Syrian Arab Republic",
+    "total_killed": 6
+  },
+  {
+    "year": 2023,
+    "country": "Syrian Arab Republic",
+    "total_killed": 1
+  },
+  {
+    "year": 2000,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2001,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2002,
+    "country": "Yemen",
+    "total_killed": 3
+  },
+  {
+    "year": 2003,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2004,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2005,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2006,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2007,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2008,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2009,
+    "country": "Yemen",
+    "total_killed": 4
+  },
+  {
+    "year": 2010,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2011,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2012,
+    "country": "Yemen",
+    "total_killed": 1
+  },
+  {
+    "year": 2013,
+    "country": "Yemen",
+    "total_killed": 3
+  },
+  {
+    "year": 2014,
+    "country": "Yemen",
+    "total_killed": 2
+  },
+  {
+    "year": 2015,
+    "country": "Yemen",
+    "total_killed": 12
+  },
+  {
+    "year": 2016,
+    "country": "Yemen",
+    "total_killed": 6
+  },
+  {
+    "year": 2017,
+    "country": "Yemen",
+    "total_killed": 1
+  },
+  {
+    "year": 2018,
+    "country": "Yemen",
+    "total_killed": 2
+  },
+  {
+    "year": 2019,
+    "country": "Yemen",
+    "total_killed": 5
+  },
+  {
+    "year": 2020,
+    "country": "Yemen",
+    "total_killed": 7
+  },
+  {
+    "year": 2021,
+    "country": "Yemen",
+    "total_killed": 3
+  },
+  {
+    "year": 2022,
+    "country": "Yemen",
+    "total_killed": 0
+  },
+  {
+    "year": 2023,
+    "country": "Yemen",
+    "total_killed": 1
+  }
+]
+
 document.addEventListener('DOMContentLoaded', function () {
   const scrollAnimationContainer = document.createElement('div');
   scrollAnimationContainer.classList.add('scroll-animation-container');
@@ -104,31 +1907,31 @@ const minMaxY = [
 
 // Define the grid lines you want to show for each year
 const gridLinesByYear = {
-  2000: [10, 50, 100,150,200], // Grid lines at 5 and 10 for the year 2000
-  2001: [10, 50, 100,150,200],
-  2002: [10, 50, 100,150,200],
-  2003: [10, 50, 100,150,200],
-  2004: [10, 50, 100,150,200],
-  2005: [10, 50, 100,150,200],
-  2006: [10, 50, 100,150,200],
-  2007: [10, 50, 100,150,200],
-  2008: [10, 50, 100,150,200],
-  2009: [10, 50, 100,150,200],
-  2010: [10, 50, 100,150,200],
-  2011: [10, 50, 100,150,200],
-  2012: [10, 50, 100,150,200],
-  2012: [10, 50, 100,150,200],
-  2013: [10, 50, 100,150,200],
-  2014: [10, 50, 100,150,200],
-  2015: [10, 50, 100,150,200],
-  2016: [10, 50, 100,150,200],
-  2017: [10, 50, 100,150,200],
-  2018: [10, 50, 100,150,200],
-  2019: [10, 50, 100,150,200],
-  2020: [10, 50, 100,150,200],
-  2021: [10, 50, 100,150,200],
-  2022: [10, 50, 100,150,200],
-  2023: [10, 50, 100,150,200]
+  2000: [10, 50, 100, 150, 200], // Grid lines at 5 and 10 for the year 2000
+  2001: [10, 50, 100, 150, 200],
+  2002: [10, 50, 100, 150, 200],
+  2003: [10, 50, 100, 150, 200],
+  2004: [10, 50, 100, 150, 200],
+  2005: [10, 50, 100, 150, 200],
+  2006: [10, 50, 100, 150, 200],
+  2007: [10, 50, 100, 150, 200],
+  2008: [10, 50, 100, 150, 200],
+  2009: [10, 50, 100, 150, 200],
+  2010: [10, 50, 100, 150, 200],
+  2011: [10, 50, 100, 150, 200],
+  2012: [10, 50, 100, 150, 200],
+  2012: [10, 50, 100, 150, 200],
+  2013: [10, 50, 100, 150, 200],
+  2014: [10, 50, 100, 150, 200],
+  2015: [10, 50, 100, 150, 200],
+  2016: [10, 50, 100, 150, 200],
+  2017: [10, 50, 100, 150, 200],
+  2018: [10, 50, 100, 150, 200],
+  2019: [10, 50, 100, 150, 200],
+  2020: [10, 50, 100, 150, 200],
+  2021: [10, 50, 100, 150, 200],
+  2022: [10, 50, 100, 150, 200],
+  2023: [10, 50, 100, 150, 200]
 };
 
 // Define chart dimensions
@@ -147,7 +1950,7 @@ function initD3Chart() {
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
   // d3.csv('./data.csv').then(function (data) {
-  d3.csv('https://api.thenewhumanitarian.org/d3/data.csv').then(function (data) {
+  // d3.json(jsonData).then(function (data) {
     const firstYear = data[0].year; // Assuming data is sorted and the first element has the earliest year
 
     // Filter data to only show the countries from the array
@@ -184,7 +1987,7 @@ function initD3Chart() {
         .attr('x2', svgWidth + 38)
         .attr('y1', yScale(value))
         .attr('y2', yScale(value))
-        .attr('stroke', 'red')
+        .attr('stroke', '#282828')
         .attr('stroke-width', 2)
         .attr('stroke-dasharray', '2,2');
 
@@ -227,9 +2030,9 @@ function initD3Chart() {
     // Add y-axis to the chart
     svg.append("g")
       .call(d3.axisLeft(yScale));
-  }).catch(function (error) {
-    console.log(error);
-  });
+  // }).catch(function (error) {
+  //   console.log(error);
+  // });
 }
 
 // After loading the data and setting up the initial chart:
@@ -277,7 +2080,7 @@ function updateChartForYear(year) {
       .attr('y', d => yScale(+d.total_killed))
       .attr('height', d => svgHeight - yScale(parseInt(d.total_killed)))
       .attr('width', barWidth)
-      .attr('fill', '#007bff');
+      .attr('fill', '#9f3e52');
 
     // Exit selection - Remove any surplus rects
     bars.exit().remove();
