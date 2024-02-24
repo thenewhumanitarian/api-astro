@@ -2089,8 +2089,8 @@ function updateChartForYear(year) {
     // Enter selection - Append new rects for new data
     bars.enter().append('rect')
       .merge(bars) // Merge enter and update selections
-      .transition()
-      .duration(50)
+      // .transition()
+      // .duration(50)
       .attr('x', (d, i) => i * (barWidth + barPadding))
       .attr('y', d => yScale(+d.total_killed))
       .attr('height', d => svgHeight - yScale(parseInt(d.total_killed)))
