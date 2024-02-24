@@ -1803,6 +1803,21 @@ const data = [
   }
 ]
 
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function () {
+    var context = this, args = arguments;
+    var later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   const scrollAnimationContainer = document.createElement('div');
   scrollAnimationContainer.classList.add('scroll-animation-container');
@@ -1951,85 +1966,85 @@ function initD3Chart() {
 
   // d3.csv('./data.csv').then(function (data) {
   // d3.json(jsonData).then(function (data) {
-    const firstYear = data[0].year; // Assuming data is sorted and the first element has the earliest year
+  const firstYear = data[0].year; // Assuming data is sorted and the first element has the earliest year
 
-    // Filter data to only show the countries from the array
-    let filteredData = data.filter(d => countries.includes(d.country) && d.year === firstYear);
+  // Filter data to only show the countries from the array
+  let filteredData = data.filter(d => countries.includes(d.country) && d.year === firstYear);
 
-    // Determine the min and max Y values for the scale from minMaxY
-    const minY = 0; // Assuming 0 is the minimum value for the y-axis
-    const maxY = minMaxY[0][firstYear]; // Extract the max value for the year
+  // Determine the min and max Y values for the scale from minMaxY
+  const minY = 0; // Assuming 0 is the minimum value for the y-axis
+  const maxY = minMaxY[0][firstYear]; // Extract the max value for the year
 
-    // Create a y-scale
-    yScale = d3.scaleLinear()
-      .domain([minY, maxY])
-      .range([svgHeight, 0]); // Invert range to correctly display SVG
+  // Create a y-scale
+  yScale = d3.scaleLinear()
+    .domain([minY, maxY])
+    .range([svgHeight, 0]); // Invert range to correctly display SVG
 
-    barWidth = svgWidth / filteredData.length;
+  barWidth = svgWidth / filteredData.length;
 
-    // Plot the bars
-    svg.selectAll('rect')
-      .data(filteredData)
-      .enter()
-      .append('rect')
-      .attr('x', (d, i) => i * (barWidth + barPadding))
-      .attr('y', d => yScale(d.total_killed))
-      .attr('height', d => svgHeight - yScale(d.total_killed))
-      .attr('width', barWidth)
-      .attr('fill', '#000')
-      .attr('class', 'bar');
+  // Plot the bars
+  svg.selectAll('rect')
+    .data(filteredData)
+    .enter()
+    .append('rect')
+    .attr('x', (d, i) => i * (barWidth + barPadding))
+    .attr('y', d => yScale(d.total_killed))
+    .attr('height', d => svgHeight - yScale(d.total_killed))
+    .attr('width', barWidth)
+    .attr('fill', '#000')
+    .attr('class', 'bar');
 
-    // Add grid lines for the specified year
-    gridLinesByYear[firstYear].forEach(value => {
-      // Add grid line
-      svg.append('line')
-        .attr('x1', -5)
-        .attr('x2', svgWidth + 38)
-        .attr('y1', yScale(value))
-        .attr('y2', yScale(value))
-        .attr('stroke', '#282828')
-        .attr('stroke-width', 2)
-        .attr('stroke-dasharray', '2,2');
+  // Add grid lines for the specified year
+  gridLinesByYear[firstYear].forEach(value => {
+    // Add grid line
+    svg.append('line')
+      .attr('x1', -5)
+      .attr('x2', svgWidth + 38)
+      .attr('y1', yScale(value))
+      .attr('y2', yScale(value))
+      .attr('stroke', '#282828')
+      .attr('stroke-width', 2)
+      .attr('stroke-dasharray', '2,2');
 
-      const textWidth = 85; // Estimate the width based on your text length
-      const textHeight = 20; // Adjust as needed
+    const textWidth = 85; // Estimate the width based on your text length
+    const textHeight = 20; // Adjust as needed
 
-      // Add white background rect for the text label
-      svg.append('rect')
-        .attr('x', -margin.left)
-        .attr('y', yScale(value) - textHeight / 2)
-        .attr('width', textWidth)
-        .attr('height', textHeight)
-        .attr('fill', 'white');
+    // Add white background rect for the text label
+    svg.append('rect')
+      .attr('x', -margin.left)
+      .attr('y', yScale(value) - textHeight / 2)
+      .attr('width', textWidth)
+      .attr('height', textHeight)
+      .attr('fill', 'white');
 
-      // Add label for the grid line with styling
-      svg.append('text')
-        .attr('x', -margin.left + 5) // Adjust x position to not overlap with the background
-        .attr('y', yScale(value))
-        .attr('dy', '0.35em') // Center text vertically
-        .attr('text-anchor', 'start') // Align text to start at the x position
-        .style('font-size', '1rem')
-        .style('font-family', "'Roboto', sans-serif")
-        .text(`${value} deaths`);
-    });
-
-    // Correctly position country labels
-    svg.selectAll('.countryLabel')
-      .data(filteredData).enter().append('text')
-      .text(d => d.country)
-      .attr('class', 'countryLabel')
-      .attr('x', (d, i) => i * (barWidth + barPadding) + barWidth / 2) // Center label under each bar
-      .attr('y', svgHeight - 10) // Position below the bars
-      .attr('text-anchor', 'middle') // Center text
-      .attr('fill', '#000')
-      .style('font-size', '0.85rem') // Smaller font size
-      // .style('font-weight', 'bold') // Bold font size
+    // Add label for the grid line with styling
+    svg.append('text')
+      .attr('x', -margin.left + 5) // Adjust x position to not overlap with the background
+      .attr('y', yScale(value))
+      .attr('dy', '0.35em') // Center text vertically
+      .attr('text-anchor', 'start') // Align text to start at the x position
+      .style('font-size', '1rem')
       .style('font-family', "'Roboto', sans-serif")
-      .attr('dy', '2rem'); // Offset the text a bit down from the exact bottom
+      .text(`${value} deaths`);
+  });
 
-    // Add y-axis to the chart
-    svg.append("g")
-      .call(d3.axisLeft(yScale));
+  // Correctly position country labels
+  svg.selectAll('.countryLabel')
+    .data(filteredData).enter().append('text')
+    .text(d => d.country)
+    .attr('class', 'countryLabel')
+    .attr('x', (d, i) => i * (barWidth + barPadding) + barWidth / 2) // Center label under each bar
+    .attr('y', svgHeight - 10) // Position below the bars
+    .attr('text-anchor', 'middle') // Center text
+    .attr('fill', '#000')
+    .style('font-size', '0.85rem') // Smaller font size
+    // .style('font-weight', 'bold') // Bold font size
+    .style('font-family', "'Roboto', sans-serif")
+    .attr('dy', '2rem'); // Offset the text a bit down from the exact bottom
+
+  // Add y-axis to the chart
+  svg.append("g")
+    .call(d3.axisLeft(yScale));
   // }).catch(function (error) {
   //   console.log(error);
   // });
@@ -2088,6 +2103,24 @@ function updateChartForYear(year) {
     console.error('Error loading or processing data:', error);
   });
 }
+
+// Original scroll event handler
+function handleScroll() {
+  const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollProgress = window.scrollY / scrollableHeight;
+  const totalYears = 2023 - 2000 + 1;
+  const currentYearIndex = Math.min(Math.floor(scrollProgress * totalYears), totalYears - 1);
+  const currentYear = 2000 + currentYearIndex;
+  const progressIndicator = document.querySelector('.progress-indicator');
+  progressIndicator.textContent = currentYear;
+  updateChartForYear(currentYear);
+}
+
+// Debounced version of the scroll event handler
+var debouncedScrollHandler = debounce(handleScroll, 100);
+
+// Apply the debounced function to the scroll event
+window.addEventListener('scroll', debouncedScrollHandler);
 
 // Update chart on scroll
 window.addEventListener('scroll', function () {
