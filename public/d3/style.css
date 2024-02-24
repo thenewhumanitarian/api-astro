@@ -1,0 +1,57 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.article__bulk {
+  background: white;
+}
+
+.article__header {
+  display: none;
+}
+
+.scroll-animation-container {
+  z-index: -1;
+  position: sticky;
+  top: 90px;
+  /* Adjusted to push down starting from header's bottom */
+  height: calc(500vh - 134px);
+  /* 5 times the viewport height minus 90px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  background-color: white;
+}
+
+.progress-indicator,
+.chart {
+  position: fixed;
+  top: calc(50% + 67px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FFF;
+  /* Adjust color as needed */
+}
+
+.progress-indicator {
+  color: black;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  top: 2rem;
+  left: 3rem;
+}
+
+@media screen and (max-width: 601px) {
+  .scroll-animation-container {
+    top: 70px;
+  }
+
+  .progress-indicator {
+    top: calc(50% + 35px);
+  }
+}
+
+/* Chart styles */
