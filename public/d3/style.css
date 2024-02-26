@@ -60,3 +60,7 @@ html {
   display: none !important;
   /* Use !important to ensure override of other display styles */
 }
+
+.chart {
+  transition: opacity 1s ease-out;
+}

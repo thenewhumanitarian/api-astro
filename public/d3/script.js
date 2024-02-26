@@ -1830,15 +1830,15 @@ const chartSizes = {
 
 // Example min and max y values for each year
 const minMaxY = {
-  2000: 20,
-  2001: 20,
-  2002: 20,
-  2003: 20,
-  2004: 20,
-  2005: 20,
-  2006: 20,
-  2007: 20,
-  2008: 20,
+  2000: 10,
+  2001: 10,
+  2002: 10,
+  2003: 10,
+  2004: 10,
+  2005: 10,
+  2006: 10,
+  2007: 10,
+  2008: 10,
   2009: 20,
   2010: 20,
   2011: 20,
@@ -1858,15 +1858,15 @@ const minMaxY = {
 
 // Define the grid lines you want to show for each year
 const gridLinesByYear = {
-  2000: [5, 10, 20], // Grid lines at 5 and 10 for the year 2000
-  2001: [5, 10, 20],
-  2002: [5, 10, 20],
-  2003: [5, 10, 20],
-  2004: [5, 10, 20],
-  2005: [5, 10, 20],
-  2006: [5, 10, 20],
-  2007: [5, 10, 20],
-  2008: [5, 10, 20],
+  2000: [5, 10], // Grid lines at 5 and 10 for the year 2000
+  2001: [5, 10],
+  2002: [5, 10],
+  2003: [5, 10],
+  2004: [5, 10],
+  2005: [5, 10],
+  2006: [5, 10],
+  2007: [5, 10],
+  2008: [5, 10],
   2009: [5, 10, 20],
   2010: [5, 10, 20],
   2011: [5, 10, 20],
@@ -1889,7 +1889,9 @@ const gridLinesByYear = {
 // const countriesDesktop = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'S. Sudan', 'Syrian Arab Rep.', 'Yemen'];
 // const countriesMobile = ['Palestine', 'S. Sudan', 'Yemen'];
 
-let filteredData = allData.filter(data => data.country === 'Palestine');
+let palestineData = allData.filter(data => data.country === 'Palestine');
+
+let filteredData = palestineData
 
 function debounce(func, wait, immediate) {
   var timeout;
@@ -1972,21 +1974,21 @@ function initD3Chart() {
       .attr('x2', chartSizes.svg.width + (chartSizes.margin.right))
       .attr('y1', yScale(value))
       .attr('y2', yScale(value))
-      .attr('class', 'grid-line') // Assign a class for easy selection and removal
-      .attr('stroke', '#282828')
-      .attr('stroke-width', 2)
-      .attr('stroke-dasharray', '2,2');
+      .attr('class', 'grid-line'); // Assign a class for easy selection and removal
+      // .attr('stroke', '#282828')
+      // .attr('stroke-width', 2)
+      // .attr('stroke-dasharray', '2,2');
 
     const textWidth = 25; // Estimate the width based on your text length
     const textHeight = 20; // Adjust as needed
 
     // Add white background rect for the text label
-    svg.append('rect')
-      .attr('x', -chartSizes.margin.left)
-      .attr('y', yScale(value) - textHeight / 2)
-      .attr('width', textWidth)
-      .attr('height', textHeight)
-      .attr('fill', 'white');
+    // svg.append('rect')
+    //   .attr('x', -chartSizes.margin.left)
+    //   .attr('y', yScale(value) - textHeight / 2)
+    //   .attr('width', textWidth)
+    //   .attr('height', textHeight)
+    //   .attr('fill', 'white');
 
     // Add label for the grid line with styling
     svg.append('text')
@@ -1996,15 +1998,15 @@ function initD3Chart() {
       .attr('dy', '0.35em') // Center text vertically
       .attr('text-anchor', 'start') // Align text to start at the x position
       .style('font-size', fontSize)
-      .style('font-family', "'Roboto', sans-serif")
-      .text(`${value}`);
+      .style('font-family', "'Roboto', sans-serif");
+      // .text(`${value}`);
   });
 
   // Plot the bars
-  barWidth = chartSizes.svg.width / filteredData.length;
+  barWidth = chartSizes.svg.width / palestineData.length;
 
   svg.selectAll('rect')
-    .data(filteredData)
+    .data(palestineData)
     .enter()
     .append('rect')
     .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding))
@@ -2027,7 +2029,7 @@ function initD3Chart() {
 
   // Value labels selection and data binding
   var valueLabels = svg.selectAll('.value-label')
-    .data(filteredData, d => d.year);
+    .data(palestineData, d => d.year);
 
   // Enter selection - Create new labels for new data
   valueLabels.enter()
@@ -2053,12 +2055,12 @@ function initD3Chart() {
 
   // Correctly position and rotate country labels
   var yearLabels = svg.selectAll('.year-label')
-    .data(filteredData, d => d.country); // Bind data
+    .data(palestineData, d => d.country); // Bind data
 
   // Enter selection - Add new labels
   // Assuming svg, barWidth, chartSizes are already defined in your setup
   const labelGroups = svg.selectAll(".label-group")
-    .data(filteredData, d => d.country) // Binding data
+    .data(palestineData, d => d.country) // Binding data
     .enter()
     .append("g") // Append group for each country label
     .attr("class", "label-group")
@@ -2099,6 +2101,7 @@ function updateChartForYear(year) {
 
   // Update the domain of yScale based on new data
   const minY = 0; // Assuming 0 is the minimum value for the y-axis
+
   // Assuming the structure of minMaxY has been changed
   // Find the max Y value for the given year
   const maxY = minMaxY[year]
@@ -2115,8 +2118,6 @@ function updateChartForYear(year) {
 
   // Clear existing bars and grid lines
   // svg.selectAll('.bar').remove();
-  svg.selectAll('.gridLine').remove(); // Remove existing grid lines
-  svg.selectAll('.gridLabel').remove(); // Remove existing grid labels
 
   // Create a y-scale
   yScale = d3.scaleLinear()
@@ -2133,17 +2134,16 @@ function updateChartForYear(year) {
   // Enter + Update
   gridLines.enter()
     .append('line') // Add new grid lines
-    .attr('class', 'grid-line')
-    .attr('class', 'grid-line') // Assign a class for easy selection and removal
-    .attr('stroke', '#282828')
-    .attr('stroke-width', 2)
-    .attr('stroke-dasharray', '2,2')
     .merge(gridLines) // Merge enter and update selections
     .attr('x1', 0)
     .attr('x2', chartSizes.svg.width + chartSizes.margin.right)
+    .attr('class', 'grid-line') // Assign a class for easy selection and removal
     .transition() // Begin a transition for both new and updating lines
     .duration(transitionSpeed)
-    // .delay(500)
+    .delay(function (i) { return (i * 10) })
+    .attr('stroke', '#282828')
+    .attr('stroke-width', 1)
+    .attr('stroke-dasharray', '2,2')
     .attr('y1', d => yScale(d))
     .attr('y2', d => yScale(d));
 
@@ -2181,7 +2181,7 @@ function updateChartForYear(year) {
   svg.selectAll(".value-label").remove(); // Assuming you've added this class to your grid line labels
 
   var valueLabels = svg.selectAll('.value-label')
-    .data(filteredData, d => d.total_killed);
+    .data(palestineData, d => d.total_killed);
 
   // Enter selection - Create new labels for new data
   valueLabels
@@ -2236,9 +2236,16 @@ function handleScroll() {
   // Update the year indicator and the chart based on the current year
   updateChartForYear(currentYear);
 
-  // Optionally, update a progress indicator if you have one
-  const progressIndicator = document.querySelector('.progress-indicator');
-  if (progressIndicator) progressIndicator.textContent = currentYear;
+  // Fade out the chart once scrolled past contentBlockPosition
+  const fadeStartScrollPosition = contentBlockPosition;
+  const scrolledPastFadeStart = currentScroll - fadeStartScrollPosition;
+  if (scrolledPastFadeStart > 0) {
+    // Calculate fade out effect based on how far scrolled past contentBlockPosition
+    document.querySelector('.chart').style.opacity = 0;
+  } else {
+    // Ensure chart is fully visible if not yet scrolled past contentBlockPosition
+    document.querySelector('.chart').style.opacity = 1;
+  }
 }
 
 // Debounced version of the scroll event handler
