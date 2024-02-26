@@ -1946,13 +1946,13 @@ const gridLinesByYear = {
 const chartSizes = {
   svg: {
     width: window.innerWidth * 0.7,
-    height: window.innerHeight * 0.5,
+    height: window.innerHeight * 0.4,
   },
   barPadding: 5,
   margin: {
-    top: window.innerHeight * 0.1,
-    right: window.innerWidth * 0.05,
-    bottom: window.innerWidth * 0.2,
+    top: window.innerHeight * 0.6,
+    right: window.innerWidth * 0.1,
+    bottom: window.innerWidth * 0.4,
     left: window.innerWidth * 0.1
   }
 }
