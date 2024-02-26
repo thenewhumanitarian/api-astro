@@ -1804,8 +1804,8 @@ const allData = [
 ]
 
 // d3.csv('./data.csv').then(function (data) {
-  // d3.json(jsonData).then(function (data) {
-    const firstYear = allData[0].year; // Assuming data is sorted and the first element has the earliest year
+// d3.json(jsonData).then(function (data) {
+const firstYear = allData[0].year; // Assuming data is sorted and the first element has the earliest year
 
 // GLOBAL CHART VARIABLES
 
@@ -1957,8 +1957,8 @@ const gridLinesByYear = {
 };
 
 // Define chart dimensions
-let svgWidth = 800, svgHeight = 400, barPadding = 5;
-let margin = { top: 50, right: 50, bottom: 50, left: 168 }; // Adjusted to include space for labels
+let svgWidth = (window.innerWidth * 0.6), svgHeight = window.innerHeight * 0.6, barPadding = 5;
+let margin = { top: window.innerHeight * 0.15, right: 50, bottom: window.innerHeight * 0.2, left: 165 }; // Adjusted to include space for labels
 let svg, yScale, barWidth;
 
 // Initialize D3 chart
