@@ -1825,7 +1825,7 @@ const minMaxY = {
   2007: 200,
   2008: 200,
   2009: 200,
-  2090: 200,
+  2010: 200,
   2011: 200,
   2012: 200,
   2013: 200,
@@ -2106,6 +2106,10 @@ function initD3Chart() {
 // After loading the data and setting up the initial chart:
 function updateChartForYear(year) {
   console.log(year)
+
+  if (year > 2023) {
+    year = 2023
+  }
 
   // Filter data to only show the countries from the array
   let filteredData = filteredDataAllYears.filter(d => parseInt(d.year, 10) === year);
