@@ -2224,28 +2224,32 @@ function updateChartForYear(year) {
 
 // Original scroll event handler
 function handleScroll() {
-  const fullScreenBeforeEnd = window.innerHeight; // Height before the end where 100% is achieved
-  const adjustedScrollableHeight = document.documentElement.scrollHeight - window.innerHeight - fullScreenBeforeEnd;
+  // Get the position of #block-tnh-content from the top of the document
+  const contentBlockPosition = document.querySelector('#block-tnh-content').getBoundingClientRect().top + window.scrollY;
 
-  const scrollProgress = Math.min(window.scrollY / adjustedScrollableHeight, 1); // Ensuring it does not exceed 1
+  // Get the current scroll position
+  const currentScroll = window.scrollY;
 
-  // Calculate the current year based on scroll progress
-  const totalYears = 2023 - 2000 + 1;
+  // Calculate the height from the top to the content block as the "effective" document height for scrolling
+  const effectiveScrollHeight = contentBlockPosition - window.innerHeight;
+
+  // Calculate scroll progress as the current scroll position over the effective scroll height
+  let scrollProgress = currentScroll / effectiveScrollHeight;
+
+  // Cap the scrollProgress at 1 (100%)
+  scrollProgress = Math.min(scrollProgress, 1);
+
+  // Use scrollProgress to update your animation
+  const totalYears = 2023 - 2000 + 1; // Total number of years you are animating through
   const currentYearIndex = Math.floor(scrollProgress * totalYears);
   const currentYear = 2000 + currentYearIndex;
 
-  // Update the progress indicator and chart for the current year
-  // const progressIndicator = document.querySelector('.progress-indicator');
-  // progressIndicator.textContent = currentYear;
+  // Update the year indicator and the chart based on the current year
   updateChartForYear(currentYear);
 
-  // Determine if the scroll progress has reached 95% and hide the content if so
-  // const scrollAnimationContainer = document.querySelector('.scroll-animation-container');
-  // if (scrollProgress >= 0.95) {
-  //   scrollAnimationContainer.classList.add('hide-content');
-  // } else {
-  //   scrollAnimationContainer.classList.remove('hide-content');
-  // }
+  // Optionally, update a progress indicator if you have one
+  const progressIndicator = document.querySelector('.progress-indicator');
+  if (progressIndicator) progressIndicator.textContent = currentYear;
 }
 
 // Debounced version of the scroll event handler
