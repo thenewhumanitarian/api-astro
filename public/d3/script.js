@@ -1,6 +1,6 @@
 /* Script for changing Drupal CMS article style */
 
-const data = [
+const allData = [
   {
     "year": 2000,
     "country": "Afghanistan",
@@ -1803,6 +1803,18 @@ const data = [
   }
 ]
 
+// d3.csv('./data.csv').then(function (data) {
+  // d3.json(jsonData).then(function (data) {
+    const firstYear = allData[0].year; // Assuming data is sorted and the first element has the earliest year
+
+// GLOBAL CHART VARIABLES
+
+// Select five countries from the data and store in an array
+const countries = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'South Sudan', 'Syrian Arab Republic', 'Yemen'];
+
+// Filter data to only show the countries from the array
+let filteredData = allData.filter(d => countries.includes(d.country) && d.year === firstYear);
+
 function debounce(func, wait, immediate) {
   var timeout;
   return function () {
@@ -1861,11 +1873,6 @@ function updateChartColor(progress) {
     return interpolateColor(progress);
   });
 }
-
-// GLOBAL CHART VARIABLES
-
-// Select five countries from the data and store in an array
-const countries = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'South Sudan', 'Syrian Arab Republic', 'Yemen'];
 
 // Example min and max y values for each year
 const minMaxY = [
@@ -1963,13 +1970,6 @@ function initD3Chart() {
     .attr('height', svgHeight + margin.top + margin.bottom)
     .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-  // d3.csv('./data.csv').then(function (data) {
-  // d3.json(jsonData).then(function (data) {
-  const firstYear = data[0].year; // Assuming data is sorted and the first element has the earliest year
-
-  // Filter data to only show the countries from the array
-  let filteredData = data.filter(d => countries.includes(d.country) && d.year === firstYear);
 
   console.log(filteredData)
 
