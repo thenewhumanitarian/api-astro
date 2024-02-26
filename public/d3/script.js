@@ -1803,13 +1803,15 @@ const allData = [
   }
 ]
 
+const baseElement = document.querySelector('.main-content');
+
 // d3.csv('./data.csv').then(function (data) {
 // d3.json(jsonData).then(function (data) {
 const firstYear = allData[0].year; // Assuming data is sorted and the first element has the earliest year
 
 // GLOBAL CHART VARIABLES
-
 const transitionSpeed = 200
+const fontSize = '2rem'
 
 // Select five countries from the data and store in an array, three respectively for mobile devices
 const countriesDesktop = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'S. Sudan', 'Syrian Arab Rep.', 'Yemen'];
@@ -2031,7 +2033,7 @@ function initD3Chart() {
       .attr('y', yScale(value))
       .attr('dy', '0.35em') // Center text vertically
       .attr('text-anchor', 'start') // Align text to start at the x position
-      .style('font-size', '1rem')
+      .style('font-size', fontSize)
       .style('font-family', "'Roboto', sans-serif")
       .text(`${value}`);
   });
@@ -2047,7 +2049,7 @@ function initD3Chart() {
     .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
     .attr('y', d => yScale(d.total_killed) - 5) // Position above the bar
     .attr('text-anchor', 'middle') // Center the text above the ba
-    .style('font-size', '1rem')
+    .style('font-size', fontSize)
     .style('font-family', "'Roboto', sans-serif")
     .style('font-weight', "bold")
     .text(d => d.total_killed); // Set the label text to the value
@@ -2072,19 +2074,11 @@ function initD3Chart() {
     .attr('x', (d, i) => (chartSizes.margin.left - 20) + (i * (barWidth + chartSizes.barPadding)))
     .attr('y', chartSizes.svg.height + 25) // Position just below the bars; adjust as needed
     .style('text-anchor', 'start') // Ensures the text rotates around its end
-    .style('font-size', '1rem')
+    .style('font-size', fontSize)
     .style('font-family', "'Roboto', sans-serif")
     .style('font-weight', "bold")
     .attr('transform', (d, i) => `rotate(45, ${i * (barWidth + chartSizes.barPadding) + (barWidth / 2)}, ${chartSizes.svg.height + 5})`)
     .text(d => d.country);
-
-  // Update selection - Update existing labels if necessary
-  // countryLabels.transition()
-  //   .duration(200)
-  //   .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
-  //   .attr('y', chartSizes.svg.height + 5)
-  //   .attr('transform', (d, i) => `rotate(90, ${i * (barWidth + chartSizes.barPadding) + (barWidth / 2)}, ${chartSizes.svg.height + 5})`)
-  //   .text(d => d.country);
 
   // Exit selection - Remove labels for data that no longer exists
   countryLabels.exit().remove();
@@ -2169,7 +2163,7 @@ function updateChartForYear(year) {
       .attr('y', yScale(value))
       .attr('dy', '0.35em') // Center text vertically
       .attr('text-anchor', 'start') // Align text to start at the x position
-      .style('font-size', '1rem')
+      .style('font-size', fontSize)
       .style('font-family', "'Roboto', sans-serif")
       .text(`${value}`);
   });
@@ -2187,7 +2181,7 @@ function updateChartForYear(year) {
     .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
     .attr('y', d => yScale(d.total_killed) - 5) // Position above the bar
     .attr('text-anchor', 'middle') // Center the text above the ba
-    .style('font-size', '1rem')
+    .style('font-size', fontSize)
     .style('font-family', "'Roboto', sans-serif")
     .style('font-weight', "bold")
     .text(d => d.total_killed); // Set the label text to the value
