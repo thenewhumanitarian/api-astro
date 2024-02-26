@@ -1813,6 +1813,63 @@ const firstYear = allData[0].year; // Assuming data is sorted and the first elem
 const transitionSpeed = 200
 const fontSize = '2rem'
 
+// Example min and max y values for each year
+const minMaxY = {
+  2000: 200,
+  2001: 200,
+  2002: 200,
+  2003: 200,
+  2004: 200,
+  2005: 200,
+  2006: 200,
+  2007: 200,
+  2008: 200,
+  2009: 200,
+  2090: 200,
+  2011: 200,
+  2012: 200,
+  2013: 200,
+  2014: 200,
+  2015: 200,
+  2016: 200,
+  2017: 200,
+  2018: 200,
+  2019: 200,
+  2020: 200,
+  2021: 200,
+  2022: 200,
+  2023: 200
+}
+
+// Define the grid lines you want to show for each year
+const gridLinesByYear = {
+  2000: [50, 100, 150], // Grid lines at 5 and 10 for the year 2000
+  2001: [50, 100, 150],
+  2002: [50, 100, 150],
+  2003: [50, 100, 150],
+  2004: [50, 100, 150],
+  2005: [50, 100, 150],
+  2006: [50, 100, 150],
+  2007: [50, 100, 150],
+  2008: [50, 100, 150],
+  2009: [50, 100, 150],
+  2010: [50, 100, 150],
+  2011: [50, 100, 150],
+  2012: [50, 100, 150],
+  2012: [50, 100, 150],
+  2013: [50, 100, 150],
+  2014: [50, 100, 150],
+  2015: [50, 100, 150],
+  2016: [50, 100, 150],
+  2017: [50, 100, 150],
+  2018: [50, 100, 150],
+  2019: [50, 100, 150],
+  2020: [50, 100, 150],
+  2021: [50, 100, 150],
+  2022: [50, 100, 150],
+  2023: [50, 100, 150]
+};
+
 // Select five countries from the data and store in an array, three respectively for mobile devices
 const countriesDesktop = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'S. Sudan', 'Syrian Arab Rep.', 'Yemen'];
 const countriesMobile = ['Palestine', 'S. Sudan', 'Yemen'];
@@ -1884,63 +1941,6 @@ function updateChartColor(progress) {
     return interpolateColor(progress);
   });
 }
-
-// Example min and max y values for each year
-const minMaxY = {
-  2000: 100,
-  2001: 100,
-  2002: 100,
-  2003: 100,
-  2004: 100,
-  2005: 100,
-  2006: 100,
-  2007: 100,
-  2008: 100,
-  2009: 100,
-  2090: 100,
-  2011: 100,
-  2012: 100,
-  2013: 100,
-  2014: 100,
-  2015: 100,
-  2016: 100,
-  2017: 100,
-  2018: 100,
-  2019: 100,
-  2020: 100,
-  2021: 100,
-  2022: 100,
-  2023: 200
-}
-
-// Define the grid lines you want to show for each year
-const gridLinesByYear = {
-  2000: [10, 50, 100, 150, 200], // Grid lines at 5 and 10 for the year 2000
-  2001: [10, 50, 100, 150, 200],
-  2002: [10, 50, 100, 150, 200],
-  2003: [10, 50, 100, 150, 200],
-  2004: [10, 50, 100, 150, 200],
-  2005: [10, 50, 100, 150, 200],
-  2006: [10, 50, 100, 150, 200],
-  2007: [10, 50, 100, 150, 200],
-  2008: [10, 50, 100, 150, 200],
-  2009: [10, 50, 100, 150, 200],
-  2010: [10, 50, 100, 150, 200],
-  2011: [10, 50, 100, 150, 200],
-  2012: [10, 50, 100, 150, 200],
-  2012: [10, 50, 100, 150, 200],
-  2013: [10, 50, 100, 150, 200],
-  2014: [10, 50, 100, 150, 200],
-  2015: [10, 50, 100, 150, 200],
-  2016: [10, 50, 100, 150, 200],
-  2017: [10, 50, 100, 150, 200],
-  2018: [10, 50, 100, 150, 200],
-  2019: [10, 50, 100, 150, 200],
-  2020: [10, 50, 100, 150, 200],
-  2021: [10, 50, 100, 150, 200],
-  2022: [10, 50, 100, 150, 200],
-  2023: [10, 50, 100, 150, 200]
-};
 
 // Set chart sizes
 const chartSizes = {
@@ -2179,7 +2179,7 @@ function updateChartForYear(year) {
     .append('text')
     .attr('class', 'value-label') // Assign class for styling and selection
     .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
-    .attr('y', d => yScale(d.total_killed) - 5) // Position above the bar
+    .attr('y', d => yScale(d.total_killed) - 10) // Position above the bar
     .attr('text-anchor', 'middle') // Center the text above the ba
     .style('font-size', fontSize)
     .style('font-family', "'Roboto', sans-serif")
@@ -2190,7 +2190,7 @@ function updateChartForYear(year) {
   valueLabels.transition()
     .duration(transitionSpeed)
     .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
-    .attr('y', d => yScale(d.total_killed) - 5)
+    .attr('y', d => yScale(d.total_killed) - 10)
     .text(d => d.total_killed);
 
   // Exit selection - Remove labels for data that no longer exists
