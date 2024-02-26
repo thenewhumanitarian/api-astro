@@ -1971,6 +1971,8 @@ function initD3Chart() {
   // Filter data to only show the countries from the array
   let filteredData = data.filter(d => countries.includes(d.country) && d.year === firstYear);
 
+  console.log(filteredData)
+
   // Determine the min and max Y values for the scale from minMaxY
   const minY = 0; // Assuming 0 is the minimum value for the y-axis
   const maxY = minMaxY[0][firstYear]; // Extract the max value for the year
@@ -2089,8 +2091,8 @@ function updateChartForYear(year) {
     // Enter selection - Append new rects for new data
     bars.enter().append('rect')
       .merge(bars) // Merge enter and update selections
-      // .transition()
-      // .duration(50)
+      .transition()
+      .duration(200)
       .attr('x', (d, i) => i * (barWidth + barPadding))
       .attr('y', d => yScale(+d.total_killed))
       .attr('height', d => svgHeight - yScale(parseInt(d.total_killed)))
@@ -2121,23 +2123,3 @@ var debouncedScrollHandler = debounce(handleScroll, 100);
 
 // Apply the debounced function to the scroll event
 window.addEventListener('scroll', debouncedScrollHandler);
-
-// Update chart on scroll
-window.addEventListener('scroll', function () {
-  // Get sizes and positions
-  const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollProgress = window.scrollY / scrollableHeight;
-
-  // Get progressIndicator element
-  const progressIndicator = document.querySelector('.progress-indicator');
-
-  // Update chart data
-  const totalYears = 2023 - 2000 + 1;
-  const currentYearIndex = Math.min(Math.floor(scrollProgress * totalYears), totalYears - 1);
-  const currentYear = 2000 + currentYearIndex;
-
-  // Update progress indicator
-  progressIndicator.textContent = (currentYear);
-
-  updateChartForYear(currentYear);
-});
