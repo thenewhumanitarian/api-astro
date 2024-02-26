@@ -1803,85 +1803,93 @@ const allData = [
   }
 ]
 
+// Set base element
 const baseElement = document.querySelector('.main-content');
 
-// d3.csv('./data.csv').then(function (data) {
-// d3.json(jsonData).then(function (data) {
-const firstYear = allData[0].year; // Assuming data is sorted and the first element has the earliest year
+const firstYear = allData[0].year;
 
 // GLOBAL CHART VARIABLES
-const transitionSpeed = 200
+const transitionSpeed = 100
 const fontSize = '2rem'
+const barColor = '#9f3e52'
+
+// Set chart sizes
+const chartSizes = {
+  svg: {
+    width: window.innerWidth * 0.8,
+    height: window.innerHeight * 0.2,
+  },
+  barPadding: 5,
+  margin: {
+    top: 200,
+    bottom: window.innerWidth * 0.4,
+    right: 150,
+    left: 50
+  }
+}
 
 // Example min and max y values for each year
 const minMaxY = {
-  2000: 200,
-  2001: 200,
-  2002: 200,
-  2003: 200,
-  2004: 200,
-  2005: 200,
-  2006: 200,
-  2007: 200,
-  2008: 200,
-  2009: 200,
-  2010: 200,
-  2011: 200,
-  2012: 200,
-  2013: 200,
-  2014: 200,
-  2015: 200,
-  2016: 200,
-  2017: 200,
-  2018: 200,
-  2019: 200,
-  2020: 200,
-  2021: 200,
-  2022: 200,
-  2023: 200
+  2000: 20,
+  2001: 20,
+  2002: 20,
+  2003: 20,
+  2004: 20,
+  2005: 20,
+  2006: 20,
+  2007: 20,
+  2008: 20,
+  2009: 20,
+  2010: 20,
+  2011: 20,
+  2012: 20,
+  2013: 20,
+  2014: 20,
+  2015: 20,
+  2016: 20,
+  2017: 20,
+  2018: 20,
+  2019: 20,
+  2020: 20,
+  2021: 20,
+  2022: 20,
+  2023: 170
 }
 
 // Define the grid lines you want to show for each year
 const gridLinesByYear = {
-  2000: [50, 100, 150], // Grid lines at 5 and 10 for the year 2000
-  2001: [50, 100, 150],
-  2002: [50, 100, 150],
-  2003: [50, 100, 150],
-  2004: [50, 100, 150],
-  2005: [50, 100, 150],
-  2006: [50, 100, 150],
-  2007: [50, 100, 150],
-  2008: [50, 100, 150],
-  2009: [50, 100, 150],
-  2010: [50, 100, 150],
-  2011: [50, 100, 150],
-  2012: [50, 100, 150],
-  2012: [50, 100, 150],
-  2013: [50, 100, 150],
-  2014: [50, 100, 150],
-  2015: [50, 100, 150],
-  2016: [50, 100, 150],
-  2017: [50, 100, 150],
-  2018: [50, 100, 150],
-  2019: [50, 100, 150],
-  2020: [50, 100, 150],
-  2021: [50, 100, 150],
-  2022: [50, 100, 150],
+  2000: [5, 10, 20], // Grid lines at 5 and 10 for the year 2000
+  2001: [5, 10, 20],
+  2002: [5, 10, 20],
+  2003: [5, 10, 20],
+  2004: [5, 10, 20],
+  2005: [5, 10, 20],
+  2006: [5, 10, 20],
+  2007: [5, 10, 20],
+  2008: [5, 10, 20],
+  2009: [5, 10, 20],
+  2010: [5, 10, 20],
+  2011: [5, 10, 20],
+  2012: [5, 10, 20],
+  2012: [5, 10, 20],
+  2013: [5, 10, 20],
+  2014: [5, 10, 20],
+  2015: [5, 10, 20],
+  2016: [5, 10, 20],
+  2017: [5, 10, 20],
+  2018: [5, 10, 20],
+  2019: [5, 10, 20],
+  2020: [5, 10, 20],
+  2021: [5, 10, 20],
+  2022: [5, 10, 20],
   2023: [50, 100, 150]
 };
 
 // Select five countries from the data and store in an array, three respectively for mobile devices
-const countriesDesktop = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'S. Sudan', 'Syrian Arab Rep.', 'Yemen'];
-const countriesMobile = ['Palestine', 'S. Sudan', 'Yemen'];
+// const countriesDesktop = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'S. Sudan', 'Syrian Arab Rep.', 'Yemen'];
+// const countriesMobile = ['Palestine', 'S. Sudan', 'Yemen'];
 
-// Filter data to only show the countries from the array and only use first year
-let filteredDataFirstYear = allData.filter(d => countriesDesktop.includes(d.country) && d.year === firstYear);
-let filteredDataAllYears = allData.filter(d => countriesDesktop.includes(d.country));
-
-if (window.innerWidth < 500) {
-  filteredDataFirstYear = allData.filter(d => countriesMobile.includes(d.country) && d.year === firstYear);
-  filteredDataAllYears = allData.filter(d => countriesMobile.includes(d.country));
-}
+let filteredData = allData.filter(data => data.country === 'Palestine');
 
 function debounce(func, wait, immediate) {
   var timeout;
@@ -1898,15 +1906,15 @@ function debounce(func, wait, immediate) {
   };
 }
 
+function bringToFront(selection) {
+  selection.each(function () {
+    this.parentNode.appendChild(this);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   const scrollAnimationContainer = document.createElement('div');
   scrollAnimationContainer.classList.add('scroll-animation-container');
-
-  // const progressIndicator = document.createElement('div');
-  // progressIndicator.classList.add('progress-indicator');
-  // progressIndicator.textContent = '2000';
-
-  // scrollAnimationContainer.appendChild(progressIndicator);
 
   const mainContent = document.querySelector('.main-content');
   if (mainContent) {
@@ -1918,46 +1926,13 @@ document.addEventListener('DOMContentLoaded', function () {
   // Append the .chart div to the body or a specific container on your page
   const chartContainer = document.createElement('div');
   chartContainer.classList.add('chart');
-  scrollAnimationContainer.appendChild(chartContainer); // Append it where it makes sense for your layout
+  scrollAnimationContainer.appendChild(chartContainer);
 
   initD3Chart(); // Call this function to initialize the chart after creating the chart container
 });
 
-function interpolateColor(factor) {
-  const startColor = { r: 0, g: 0, b: 0 }; // White
-  const endColor = { r: 200, g: 200, b: 200 }; // Dark Gray
-  const r = Math.round(startColor.r + (endColor.r - startColor.r) * factor).toString(16);
-  const g = Math.round(startColor.g + (endColor.g - startColor.g) * factor).toString(16);
-  const b = Math.round(startColor.b + (endColor.b - startColor.b) * factor).toString(16);
-  return "#" + ("0" + r).slice(-2) + ("0" + g).slice(-2) + ("0" + b).slice(-2);
-}
 
-// Function to update chart based on scroll
-function updateChartColor(progress) {
-  // Select barChart
-  var barChart = d3.selectAll('rect');
-
-  barChart.style('fill', function () {
-    return interpolateColor(progress);
-  });
-}
-
-// Set chart sizes
-const chartSizes = {
-  svg: {
-    width: window.innerWidth * 0.7,
-    height: window.innerHeight * 0.4,
-  },
-  barPadding: 5,
-  margin: {
-    top: window.innerHeight * 0.6,
-    right: window.innerWidth * 0.1,
-    bottom: window.innerWidth * 0.4,
-    left: window.innerWidth * 0.1
-  }
-}
-
-let svg, yScale, barWidth;
+let svg, xScale, yScale, barWidth;
 
 // Initialize D3 chart
 function initD3Chart() {
@@ -1976,7 +1951,7 @@ function initD3Chart() {
   // At the end of initD3Chart function, add:
   let yearIndicator = svg.append("text")
     .attr("class", "year-indicator") // Assign a class for easy selection and styling
-    .attr("x", chartSizes.svg.width / 2 + (chartSizes.margin.left / 5)) // Position it above the y-axis; adjust as needed
+    .attr("x", chartSizes.svg.width / 2 + (chartSizes.margin.left)) // Position it above the y-axis; adjust as needed
     .attr("y", - chartSizes.svg.height / 8) // Adjust according to your layout
     .attr("text-anchor", "middle") // Center the text horizontally
     .style("font-size", "3rem") // Big text size
@@ -1989,36 +1964,12 @@ function initD3Chart() {
     .domain([minY, maxY])
     .range([chartSizes.svg.height, 0]); // Invert range to correctly display SVG
 
-  barWidth = chartSizes.svg.width / filteredDataFirstYear.length;
-
-  // Plot the bars
-  svg.selectAll('rect')
-    .data(filteredDataFirstYear)
-    .enter()
-    .append('rect')
-    .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding))
-    .attr('y', d => yScale(d.total_killed))
-    .attr('height', d => chartSizes.svg.height - yScale(d.total_killed))
-    .attr('width', barWidth)
-    .attr('fill', '#9f3e52')
-    .attr('class', 'bar');
-
-  // Add a baseline at the x-axis
-  svg.append('line')
-    .attr('class', 'baseline') // Optional: for styling via CSS
-    .attr('x1', -chartSizes.margin.left / 5) // Start at the left margin of the chart area
-    .attr('x2', chartSizes.svg.width + chartSizes.margin.right) // Extend to the right margin of the chart area
-    .attr('y1', yScale(0)) // Position at 0 on the yScale
-    .attr('y2', yScale(0)) // Same as y1 to make it horizontal
-    .attr('stroke', 'black') // Style the line color; adjust as needed
-    .attr('stroke-width', 2); // Style the line thickness; adjust as needed
-
   // Add grid lines for the specified year
   gridLinesByYear[firstYear].forEach(value => {
     // Add grid line
     svg.append('line')
       .attr('x1', -5)
-      .attr('x2', chartSizes.svg.width + 38)
+      .attr('x2', chartSizes.svg.width + (chartSizes.margin.right))
       .attr('y1', yScale(value))
       .attr('y2', yScale(value))
       .attr('class', 'grid-line') // Assign a class for easy selection and removal
@@ -2049,9 +2000,34 @@ function initD3Chart() {
       .text(`${value}`);
   });
 
+  // Plot the bars
+  barWidth = chartSizes.svg.width / filteredData.length;
+
+  svg.selectAll('rect')
+    .data(filteredData)
+    .enter()
+    .append('rect')
+    .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding))
+    .attr('y', d => yScale(d.total_killed))
+    // .attr('height', d => chartSizes.svg.height - yScale(d.total_killed))
+    .attr('height', d => d.year > firstYear ? 0 : chartSizes.svg.height - yScale(d.total_killed)) // Only show first bar
+    .attr('width', barWidth)
+    .attr('fill', barColor)
+    .attr('class', 'bar');
+
+  // Add a baseline at the x-axis
+  svg.append('line')
+    .attr('class', 'baseline') // Optional: for styling via CSS
+    .attr('x1', -chartSizes.margin.left / 5) // Start at the left margin of the chart area
+    .attr('x2', chartSizes.svg.width + (chartSizes.margin.right)) // Extend to the right margin of the chart area
+    .attr('y1', yScale(0)) // Position at 0 on the yScale
+    .attr('y2', yScale(0)) // Same as y1 to make it horizontal
+    .attr('stroke', 'black') // Style the line color; adjust as needed
+    .attr('stroke-width', 2); // Style the line thickness; adjust as needed
+
   // Value labels selection and data binding
   var valueLabels = svg.selectAll('.value-label')
-    .data(filteredDataFirstYear, d => d.country);
+    .data(filteredData, d => d.year);
 
   // Enter selection - Create new labels for new data
   valueLabels.enter()
@@ -2063,11 +2039,11 @@ function initD3Chart() {
     .style('font-size', fontSize)
     .style('font-family', "'Roboto', sans-serif")
     .style('font-weight', "bold")
-    .text(d => d.total_killed); // Set the label text to the value
+    // .text(d => firstYear > d.year ? '' : d.total_killed); // Set the label text to the value
+    .text(d => ''); // Set the label text to the value
 
   // Update selection - Update positions and text for existing labels
-  valueLabels.transition()
-    .duration(transitionSpeed)
+  valueLabels
     .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
     .attr('y', d => yScale(d.total_killed) - 5)
     .text(d => d.total_killed);
@@ -2076,13 +2052,13 @@ function initD3Chart() {
   valueLabels.exit().remove();
 
   // Correctly position and rotate country labels
-  var countryLabels = svg.selectAll('.country-label')
-    .data(filteredDataFirstYear, d => d.country); // Bind data
+  var yearLabels = svg.selectAll('.year-label')
+    .data(filteredData, d => d.country); // Bind data
 
   // Enter selection - Add new labels
   // Assuming svg, barWidth, chartSizes are already defined in your setup
   const labelGroups = svg.selectAll(".label-group")
-    .data(filteredDataFirstYear, d => d.country) // Binding data
+    .data(filteredData, d => d.country) // Binding data
     .enter()
     .append("g") // Append group for each country label
     .attr("class", "label-group")
@@ -2091,7 +2067,7 @@ function initD3Chart() {
 
   // Now append text elements to these groups
   labelGroups.append("text")
-    .text(d => d.country)
+    .text(d => d.year)
     .attr("text-anchor", "end") // Align text to the end for correct orientation after rotation
     .attr("transform", "rotate(-90)") // Rotate the text within the group
     .style("font-size", fontSize) // Adjust styling as needed
@@ -2111,14 +2087,15 @@ function updateChartForYear(year) {
     year = 2023
   }
 
-  // Filter data to only show the countries from the array
-  let filteredData = filteredDataAllYears.filter(d => parseInt(d.year, 10) === year);
+  // Update the year indicator text
+  svg.select(".year-indicator")
+    .text(year);
 
-  // Check if filteredData is empty or not structured correctly
-  if (!filteredData.length || !filteredData.every(d => 'country' in d)) {
-    console.warn('Filtered data is empty or missing expected properties');
-    return; // Exit the function to avoid further errors
-  }
+  // Update Y-axis to reflect the new scale
+  svg.select('.y-axis')
+    .transition()
+    .duration(transitionSpeed)
+    .call(d3.axisLeft(yScale));
 
   // Update the domain of yScale based on new data
   const minY = 0; // Assuming 0 is the minimum value for the y-axis
@@ -2129,9 +2106,12 @@ function updateChartForYear(year) {
   // Update yScale domain based on the current year's data
   yScale.domain([0, maxY]);
 
-  // At the beginning of updateChartForYear function, add:
-  svg.select(".year-indicator")
-    .text(year); // Update the text to the current year
+  // Update bar heights based on the current year
+  svg.selectAll('rect.bar')
+    .transition()
+    .duration(transitionSpeed)
+    .attr('y', d => d.year <= year ? yScale(d.total_killed) : yScale(0))
+    .attr('height', d => d.year <= year ? chartSizes.svg.height - yScale(d.total_killed) : 0);
 
   // Clear existing bars and grid lines
   // svg.selectAll('.bar').remove();
@@ -2143,61 +2123,69 @@ function updateChartForYear(year) {
     .domain([minY, maxY])
     .range([chartSizes.svg.height, 0]); // Invert range to correctly display SVG
 
-  // Bind filteredData to the bars
-  var bars = svg.selectAll('.bar')
-    .data(filteredData, d => d.country);
+  // Calculate new grid lines for the year
+  const gridValues = gridLinesByYear[year] || [];
 
-  // Enter selection - Append new rects for new data
-  bars.enter().append('rect')
-    .merge(bars) // Merge enter and update selections
+  // Bind the gridValues to the grid lines
+  const gridLines = svg.selectAll('.grid-line')
+    .data(gridValues, d => d);
+
+  // Enter + Update
+  gridLines.enter()
+    .append('line') // Add new grid lines
+    .attr('class', 'grid-line')
+    .attr('class', 'grid-line') // Assign a class for easy selection and removal
+    .attr('stroke', '#282828')
+    .attr('stroke-width', 2)
+    .attr('stroke-dasharray', '2,2')
+    .merge(gridLines) // Merge enter and update selections
+    .attr('x1', 0)
+    .attr('x2', chartSizes.svg.width + chartSizes.margin.right)
+    .transition() // Begin a transition for both new and updating lines
+    .duration(transitionSpeed)
+    // .delay(500)
+    .attr('y1', d => yScale(d))
+    .attr('y2', d => yScale(d));
+
+  // Exit
+  gridLines.exit()
     .transition()
     .duration(transitionSpeed)
-    .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding))
-    .attr('y', d => yScale(+d.total_killed))
-    .attr('height', d => chartSizes.svg.height - yScale(parseInt(d.total_killed)))
-    .attr('width', barWidth)
-    .attr('fill', '#9f3e52');
+    .style('opacity', 0)
+    .remove(); // Remove grid lines that are no longer needed
 
-  // Exit selection - Remove any surplus rects
-  bars.exit().remove();
+  // Update the grid line labels similarly, ensuring they transition smoothly
+  const gridLabels = svg.selectAll('.grid-label')
+    .data(gridValues, d => d);
 
-  // Remove old grid lines
-  svg.selectAll(".grid-line").remove();
-  svg.selectAll(".grid-label").remove(); // Assuming you've added this class to your grid line labels
+  gridLabels.enter()
+    .append('text')
+    .attr('class', 'grid-label')
+    .attr('text-anchor', 'start') // Align text to start at the x position
+    .style('font-size', fontSize)
+    .style('font-family', "'Roboto', sans-serif")
+    .merge(gridLabels) // Merge enter and update selections
+    .attr('x', -chartSizes.margin.left + 5)
+    .transition()
+    .duration(transitionSpeed)
+    .attr('y', d => yScale(d) + 5) // Adjust as needed for alignment
+    .text(d => d);
 
-  // Add new grid lines based on the updated yScale
-  gridLinesByYear[year].forEach(value => {
-    svg.append('line')
-      .attr('class', 'grid-line') // Assign a class for easy selection and removal
-      .attr('x1', 0)
-      .attr('x2', chartSizes.svg.width)
-      .attr('y1', yScale(value))
-      .attr('y2', yScale(value))
-      .attr('class', 'grid-line') // Assign a class for easy selection and removal
-      .attr('stroke', '#282828')
-      .attr('stroke-width', 2)
-      .attr('stroke-dasharray', '2,2');
-
-    // Add label for the grid line
-    svg.append('text')
-      .attr('class', 'grid-label')
-      .attr('x', -chartSizes.margin.left + 5) // Adjust x position to not overlap with the background
-      .attr('y', yScale(value))
-      .attr('dy', '0.35em') // Center text vertically
-      .attr('text-anchor', 'start') // Align text to start at the x position
-      .style('font-size', fontSize)
-      .style('font-family', "'Roboto', sans-serif")
-      .text(`${value}`);
-  });
-
-  svg.selectAll(".value-label").remove(); // Assuming you've added this class to your grid line labels
+  gridLabels.exit()
+    .transition()
+    .duration(transitionSpeed)
+    .style('opacity', 0)
+    .remove();
 
   // Value labels selection and data binding
+  svg.selectAll(".value-label").remove(); // Assuming you've added this class to your grid line labels
+
   var valueLabels = svg.selectAll('.value-label')
-    .data(filteredData, d => d.country);
+    .data(filteredData, d => d.total_killed);
 
   // Enter selection - Create new labels for new data
-  valueLabels.enter()
+  valueLabels
+    .enter()
     .append('text')
     .attr('class', 'value-label') // Assign class for styling and selection
     .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
@@ -2206,20 +2194,21 @@ function updateChartForYear(year) {
     .style('font-size', fontSize)
     .style('font-family', "'Roboto', sans-serif")
     .style('font-weight', "bold")
-    .text(d => d.total_killed); // Set the label text to the value
+    .text(d => d.year > year ? '' : d.total_killed); // Set the label text to the value
 
   // Update selection - Update positions and text for existing labels
-  valueLabels.transition()
-    .duration(transitionSpeed)
+  valueLabels
     .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
     .attr('y', d => yScale(d.total_killed) - 10)
-    .text(d => d.total_killed);
+    .text(d => d.year);
 
   // Exit selection - Remove labels for data that no longer exists
   valueLabels.exit().remove();
 
   // Re-render yAxis with updated scale
   svg.select(".y-axis").transition().duration(500).call(d3.axisLeft(yScale));
+
+  bringToFront(svg.selectAll('.bar'));
 }
 
 // Original scroll event handler

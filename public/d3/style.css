@@ -56,7 +56,7 @@ html {
 
 /* Chart styles */
 
-.hide-content {
+.hide-content, .y-axis {
   display: none !important;
   /* Use !important to ensure override of other display styles */
 }
