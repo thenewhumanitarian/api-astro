@@ -2080,19 +2080,22 @@ function initD3Chart() {
     .data(filteredDataFirstYear, d => d.country); // Bind data
 
   // Enter selection - Add new labels
-  countryLabels.enter().append('text')
-    .attr('class', 'country-label') // Assign class for styling and selection
-    .attr('x', (d, i) => (chartSizes.margin.left - 20) + (i * (barWidth + chartSizes.barPadding)))
-    .attr('y', chartSizes.svg.height) // Position just below the bars; adjust as needed
-    .style('text-anchor', 'start') // Ensures the text rotates around its end
-    .style('font-size', fontSize)
-    .style('font-family', "'Roboto', sans-serif")
-    .style('font-weight', "bold")
-    .attr('transform', (d, i) => `rotate(45, ${i * (barWidth + chartSizes.barPadding) + (barWidth / 2)}, ${chartSizes.svg.height + 5})`)
-    .text(d => d.country);
+  // Assuming svg, barWidth, chartSizes are already defined in your setup
+  const labelGroups = svg.selectAll(".label-group")
+    .data(filteredDataFirstYear, d => d.country) // Binding data
+    .enter()
+    .append("g") // Append group for each country label
+    .attr("class", "label-group")
+    // Position the group under the corresponding bar
+    .attr("transform", (d, i) => `translate(${i * (barWidth + chartSizes.barPadding) + barWidth / 2}, ${chartSizes.svg.height + 20})`);
 
-  // Exit selection - Remove labels for data that no longer exists
-  countryLabels.exit().remove();
+  // Now append text elements to these groups
+  labelGroups.append("text")
+    .text(d => d.country)
+    .attr("text-anchor", "end") // Align text to the end for correct orientation after rotation
+    .attr("transform", "rotate(-90)") // Rotate the text within the group
+    .style("font-size", fontSize) // Adjust styling as needed
+    .style("font-family", 'Roboto, sans-serif'); // Adjust styling as needed
 
   // Add y-axis to the chart
   svg.append("g")
