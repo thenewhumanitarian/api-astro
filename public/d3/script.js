@@ -1812,8 +1812,13 @@ const firstYear = allData[0].year; // Assuming data is sorted and the first elem
 // Select five countries from the data and store in an array
 const countries = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'South Sudan', 'Syrian Arab Republic', 'Yemen'];
 
+// Filter data to only show the countries from the array and only use first year
+let filteredDataFirstYear = allData.filter(d => countries.includes(d.country) && d.year === firstYear);
+console.log(filteredDataFirstYear)
+
 // Filter data to only show the countries from the array
-let filteredData = allData.filter(d => countries.includes(d.country) && d.year === firstYear);
+let filteredDataAllYears = allData.filter(d => countries.includes(d.country));
+console.log(filteredDataAllYears)
 
 function debounce(func, wait, immediate) {
   var timeout;
@@ -1958,7 +1963,7 @@ const gridLinesByYear = {
 
 // Define chart dimensions
 let svgWidth = (window.innerWidth * 0.6), svgHeight = window.innerHeight * 0.6, barPadding = 5;
-let margin = { top: window.innerHeight * 0.15, right: 50, bottom: window.innerHeight * 0.2, left: 165 }; // Adjusted to include space for labels
+let margin = { top: window.innerHeight * 0.15, right: 50, bottom: window.innerHeight * 0.2, left: window.innerWidth * 0.1 }; // Adjusted to include space for labels
 let svg, yScale, barWidth;
 
 // Initialize D3 chart
@@ -1971,8 +1976,6 @@ function initD3Chart() {
     .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-  console.log(filteredData)
-
   // Determine the min and max Y values for the scale from minMaxY
   const minY = 0; // Assuming 0 is the minimum value for the y-axis
   const maxY = minMaxY[0][firstYear]; // Extract the max value for the year
@@ -1982,18 +1985,18 @@ function initD3Chart() {
     .domain([minY, maxY])
     .range([svgHeight, 0]); // Invert range to correctly display SVG
 
-  barWidth = svgWidth / filteredData.length;
+  barWidth = svgWidth / filteredDataFirstYear.length;
 
   // Plot the bars
   svg.selectAll('rect')
-    .data(filteredData)
+    .data(filteredDataFirstYear)
     .enter()
     .append('rect')
     .attr('x', (d, i) => i * (barWidth + barPadding))
     .attr('y', d => yScale(d.total_killed))
     .attr('height', d => svgHeight - yScale(d.total_killed))
     .attr('width', barWidth)
-    .attr('fill', '#000')
+    .attr('fill', '#9f3e52')
     .attr('class', 'bar');
 
   // Add grid lines for the specified year
@@ -2032,7 +2035,7 @@ function initD3Chart() {
 
   // Correctly position country labels
   svg.selectAll('.countryLabel')
-    .data(filteredData).enter().append('text')
+    .data(filteredDataFirstYear).enter().append('text')
     .text(d => d.country)
     .attr('class', 'countryLabel')
     .attr('x', (d, i) => i * (barWidth + barPadding) + barWidth / 2) // Center label under each bar
@@ -2054,56 +2057,55 @@ function initD3Chart() {
 
 // After loading the data and setting up the initial chart:
 function updateChartForYear(year) {
-  d3.csv('./data.csv').then(function (data) {
-    // Filter data to only show the countries from the array
-    let filteredData = data.filter(d => countries.includes(d.country) && parseInt(d.year, 10) === year);
+  console.log(year)
 
-    // Check if filteredData is empty or not structured correctly
-    if (!filteredData.length || !filteredData.every(d => 'country' in d)) {
-      console.warn('Filtered data is empty or missing expected properties');
-      return; // Exit the function to avoid further errors
-    }
+  // Filter data to only show the countries from the array
+  let filteredData = filteredDataAllYears.filter(d => parseInt(d.year, 10) === year);
 
-    // Update the domain of yScale based on new data
-    const minY = 0; // Assuming 0 is the minimum value for the y-axis
-    // Assuming the structure of minMaxY has been changed
-    // Find the max Y value for the given year
-    const maxYObject = minMaxY.find(obj => obj[year] !== undefined);
-    const maxY = maxYObject ? maxYObject[year] : 50; // Default to 50 if year is not found
+  // Check if filteredData is empty or not structured correctly
+  if (!filteredData.length || !filteredData.every(d => 'country' in d)) {
+    console.warn('Filtered data is empty or missing expected properties');
+    return; // Exit the function to avoid further errors
+  }
 
-    // Update yScale domain based on the current year's data
-    yScale.domain([0, maxY]);
+  // Update the domain of yScale based on new data
+  const minY = 0; // Assuming 0 is the minimum value for the y-axis
+  // Assuming the structure of minMaxY has been changed
+  // Find the max Y value for the given year
+  const maxYObject = minMaxY.find(obj => obj[year] !== undefined);
+  const maxY = maxYObject ? maxYObject[year] : 50; // Default to 50 if year is not found
 
-    // Clear existing bars and grid lines
-    // svg.selectAll('.bar').remove();
-    svg.selectAll('.gridLine').remove(); // Remove existing grid lines
-    svg.selectAll('.gridLabel').remove(); // Remove existing grid labels
+  // Update yScale domain based on the current year's data
+  yScale.domain([0, maxY]);
 
-    // Create a y-scale
-    yScale = d3.scaleLinear()
-      .domain([minY, maxY])
-      .range([svgHeight, 0]); // Invert range to correctly display SVG
+  // Clear existing bars and grid lines
+  // svg.selectAll('.bar').remove();
+  svg.selectAll('.gridLine').remove(); // Remove existing grid lines
+  svg.selectAll('.gridLabel').remove(); // Remove existing grid labels
 
-    // Bind filteredData to the bars
-    var bars = svg.selectAll('.bar')
-      .data(filteredData, d => d.country);
+  // Create a y-scale
+  yScale = d3.scaleLinear()
+    .domain([minY, maxY])
+    .range([svgHeight, 0]); // Invert range to correctly display SVG
 
-    // Enter selection - Append new rects for new data
-    bars.enter().append('rect')
-      .merge(bars) // Merge enter and update selections
-      .transition()
-      .duration(200)
-      .attr('x', (d, i) => i * (barWidth + barPadding))
-      .attr('y', d => yScale(+d.total_killed))
-      .attr('height', d => svgHeight - yScale(parseInt(d.total_killed)))
-      .attr('width', barWidth)
-      .attr('fill', '#9f3e52');
+  // Bind filteredData to the bars
+  var bars = svg.selectAll('.bar')
+    .data(filteredData, d => d.country);
 
-    // Exit selection - Remove any surplus rects
-    bars.exit().remove();
-  }).catch(function (error) {
-    console.error('Error loading or processing data:', error);
-  });
+  // Enter selection - Append new rects for new data
+  bars.enter().append('rect')
+    .merge(bars) // Merge enter and update selections
+    .transition()
+    .duration(200)
+    .attr('x', (d, i) => i * (barWidth + barPadding))
+    .attr('y', d => yScale(+d.total_killed))
+    .attr('height', d => svgHeight - yScale(parseInt(d.total_killed)))
+    .attr('width', barWidth)
+    .attr('fill', '#9f3e52');
+
+  // Exit selection - Remove any surplus rects
+  bars.exit().remove();
+
 }
 
 // Original scroll event handler
