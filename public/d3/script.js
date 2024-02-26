@@ -1203,122 +1203,122 @@ const allData = [
   },
   {
     "year": 2000,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 0
   },
   {
     "year": 2001,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 0
   },
   {
     "year": 2002,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 1
   },
   {
     "year": 2003,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 1
   },
   {
     "year": 2004,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 0
   },
   {
     "year": 2005,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 2
   },
   {
     "year": 2006,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 0
   },
   {
     "year": 2007,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 0
   },
   {
     "year": 2008,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 0
   },
   {
     "year": 2009,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 0
   },
   {
     "year": 2010,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 0
   },
   {
     "year": 2011,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 9
   },
   {
     "year": 2012,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 9
   },
   {
     "year": 2013,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 15
   },
   {
     "year": 2014,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 11
   },
   {
     "year": 2015,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 15
   },
   {
     "year": 2016,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 26
   },
   {
     "year": 2017,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 33
   },
   {
     "year": 2018,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 16
   },
   {
     "year": 2019,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 6
   },
   {
     "year": 2020,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 24
   },
   {
     "year": 2021,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 29
   },
   {
     "year": 2022,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 23
   },
   {
     "year": 2023,
-    "country": "South Sudan",
+    "country": "S. Sudan",
     "total_killed": 34
   },
   {
@@ -1563,122 +1563,122 @@ const allData = [
   },
   {
     "year": 2000,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2001,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2002,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2003,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2004,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2005,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2006,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2007,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2008,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2009,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2010,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2011,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 0
   },
   {
     "year": 2012,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 19
   },
   {
     "year": 2013,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 25
   },
   {
     "year": 2014,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 18
   },
   {
     "year": 2015,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 9
   },
   {
     "year": 2016,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 37
   },
   {
     "year": 2017,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 43
   },
   {
     "year": 2018,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 56
   },
   {
     "year": 2019,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 36
   },
   {
     "year": 2020,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 24
   },
   {
     "year": 2021,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 14
   },
   {
     "year": 2022,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 6
   },
   {
     "year": 2023,
-    "country": "Syrian Arab Republic",
+    "country": "Syrian Arab Rep.",
     "total_killed": 1
   },
   {
@@ -1809,16 +1809,20 @@ const firstYear = allData[0].year; // Assuming data is sorted and the first elem
 
 // GLOBAL CHART VARIABLES
 
-// Select five countries from the data and store in an array
-const countries = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'South Sudan', 'Syrian Arab Republic', 'Yemen'];
+const transitionSpeed = 200
+
+// Select five countries from the data and store in an array, three respectively for mobile devices
+const countriesDesktop = ['Myanmar', 'CAR', 'Palestine', 'Somalia', 'S. Sudan', 'Syrian Arab Rep.', 'Yemen'];
+const countriesMobile = ['Palestine', 'S. Sudan', 'Yemen'];
 
 // Filter data to only show the countries from the array and only use first year
-let filteredDataFirstYear = allData.filter(d => countries.includes(d.country) && d.year === firstYear);
-console.log(filteredDataFirstYear)
+let filteredDataFirstYear = allData.filter(d => countriesDesktop.includes(d.country) && d.year === firstYear);
+let filteredDataAllYears = allData.filter(d => countriesDesktop.includes(d.country));
 
-// Filter data to only show the countries from the array
-let filteredDataAllYears = allData.filter(d => countries.includes(d.country));
-console.log(filteredDataAllYears)
+if (window.innerWidth < 500) {
+  filteredDataFirstYear = allData.filter(d => countriesMobile.includes(d.country) && d.year === firstYear);
+  filteredDataAllYears = allData.filter(d => countriesMobile.includes(d.country));
+}
 
 function debounce(func, wait, immediate) {
   var timeout;
@@ -1880,57 +1884,32 @@ function updateChartColor(progress) {
 }
 
 // Example min and max y values for each year
-const minMaxY = [
-  {
-    2000: 168
-  }, {
-    2001: 168
-  }, {
-    2002: 168
-  }, {
-    2003: 168
-  }, {
-    2004: 168
-  }, {
-    2005: 168
-  }, {
-    2006: 168
-  }, {
-    2007: 168
-  }, {
-    2008: 168
-  }, {
-    2009: 168
-  }, {
-    2090: 168
-  }, {
-    2011: 168
-  }, {
-    2012: 168
-  }, {
-    2013: 168
-  }, {
-    2014: 168
-  }, {
-    2015: 168
-  }, {
-    2016: 168
-  }, {
-    2017: 168
-  }, {
-    2018: 168
-  }, {
-    2019: 168
-  }, {
-    2020: 168
-  }, {
-    2021: 168
-  }, {
-    2022: 168
-  }, {
-    2023: 168
-  },
-]; // Extend this as needed
+const minMaxY = {
+  2000: 100,
+  2001: 100,
+  2002: 100,
+  2003: 100,
+  2004: 100,
+  2005: 100,
+  2006: 100,
+  2007: 100,
+  2008: 100,
+  2009: 100,
+  2090: 100,
+  2011: 100,
+  2012: 100,
+  2013: 100,
+  2014: 100,
+  2015: 100,
+  2016: 100,
+  2017: 100,
+  2018: 100,
+  2019: 100,
+  2020: 100,
+  2021: 100,
+  2022: 100,
+  2023: 200
+}
 
 // Define the grid lines you want to show for each year
 const gridLinesByYear = {
@@ -1961,9 +1940,21 @@ const gridLinesByYear = {
   2023: [10, 50, 100, 150, 200]
 };
 
-// Define chart dimensions
-let svgWidth = (window.innerWidth * 0.6), svgHeight = window.innerHeight * 0.6, barPadding = 5;
-let margin = { top: window.innerHeight * 0.15, right: 50, bottom: window.innerHeight * 0.2, left: window.innerWidth * 0.1 }; // Adjusted to include space for labels
+// Set chart sizes
+const chartSizes = {
+  svg: {
+    width: window.innerWidth * 0.7,
+    height: window.innerHeight * 0.5,
+  },
+  barPadding: 5,
+  margin: {
+    top: window.innerHeight * 0.1,
+    right: window.innerWidth * 0.05,
+    bottom: window.innerWidth * 0.2,
+    left: window.innerWidth * 0.1
+  }
+}
+
 let svg, yScale, barWidth;
 
 // Initialize D3 chart
@@ -1971,52 +1962,63 @@ function initD3Chart() {
   // Create SVG element
   svg = d3.select('.chart')
     .append('svg')
-    .attr('width', svgWidth + margin.left + margin.right)
-    .attr('height', svgHeight + margin.top + margin.bottom)
+    .attr('width', chartSizes.svg.width + chartSizes.margin.left + chartSizes.margin.right)
+    .attr('height', chartSizes.svg.height + chartSizes.margin.top + chartSizes.margin.bottom)
     .append('g')
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+    .attr('transform', 'translate(' + chartSizes.margin.left + ',' + chartSizes.margin.top + ')');
 
   // Determine the min and max Y values for the scale from minMaxY
   const minY = 0; // Assuming 0 is the minimum value for the y-axis
-  const maxY = minMaxY[0][firstYear]; // Extract the max value for the year
+  const maxY = minMaxY[firstYear]; // Extract the max value for the year
 
   // Create a y-scale
   yScale = d3.scaleLinear()
     .domain([minY, maxY])
-    .range([svgHeight, 0]); // Invert range to correctly display SVG
+    .range([chartSizes.svg.height, 0]); // Invert range to correctly display SVG
 
-  barWidth = svgWidth / filteredDataFirstYear.length;
+  barWidth = chartSizes.svg.width / filteredDataFirstYear.length;
 
   // Plot the bars
   svg.selectAll('rect')
     .data(filteredDataFirstYear)
     .enter()
     .append('rect')
-    .attr('x', (d, i) => i * (barWidth + barPadding))
+    .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding))
     .attr('y', d => yScale(d.total_killed))
-    .attr('height', d => svgHeight - yScale(d.total_killed))
+    .attr('height', d => chartSizes.svg.height - yScale(d.total_killed))
     .attr('width', barWidth)
     .attr('fill', '#9f3e52')
     .attr('class', 'bar');
+
+  // Add a baseline at the x-axis
+  svg.append('line')
+    .attr('class', 'baseline') // Optional: for styling via CSS
+    .attr('x1', -chartSizes.margin.left / 5) // Start at the left margin of the chart area
+    .attr('x2', chartSizes.svg.width + chartSizes.margin.right) // Extend to the right margin of the chart area
+    .attr('y1', yScale(0)) // Position at 0 on the yScale
+    .attr('y2', yScale(0)) // Same as y1 to make it horizontal
+    .attr('stroke', 'black') // Style the line color; adjust as needed
+    .attr('stroke-width', 2); // Style the line thickness; adjust as needed
 
   // Add grid lines for the specified year
   gridLinesByYear[firstYear].forEach(value => {
     // Add grid line
     svg.append('line')
       .attr('x1', -5)
-      .attr('x2', svgWidth + 38)
+      .attr('x2', chartSizes.svg.width + 38)
       .attr('y1', yScale(value))
       .attr('y2', yScale(value))
+      .attr('class', 'grid-line') // Assign a class for easy selection and removal
       .attr('stroke', '#282828')
       .attr('stroke-width', 2)
       .attr('stroke-dasharray', '2,2');
 
-    const textWidth = 85; // Estimate the width based on your text length
+    const textWidth = 25; // Estimate the width based on your text length
     const textHeight = 20; // Adjust as needed
 
     // Add white background rect for the text label
     svg.append('rect')
-      .attr('x', -margin.left)
+      .attr('x', -chartSizes.margin.left)
       .attr('y', yScale(value) - textHeight / 2)
       .attr('width', textWidth)
       .attr('height', textHeight)
@@ -2024,35 +2026,73 @@ function initD3Chart() {
 
     // Add label for the grid line with styling
     svg.append('text')
-      .attr('x', -margin.left + 5) // Adjust x position to not overlap with the background
+      .attr('class', 'grid-label')
+      .attr('x', -chartSizes.margin.left + 5) // Adjust x position to not overlap with the background
       .attr('y', yScale(value))
       .attr('dy', '0.35em') // Center text vertically
       .attr('text-anchor', 'start') // Align text to start at the x position
       .style('font-size', '1rem')
       .style('font-family', "'Roboto', sans-serif")
-      .text(`${value} deaths`);
+      .text(`${value}`);
   });
 
-  // Correctly position country labels
-  svg.selectAll('.countryLabel')
-    .data(filteredDataFirstYear).enter().append('text')
-    .text(d => d.country)
-    .attr('class', 'countryLabel')
-    .attr('x', (d, i) => i * (barWidth + barPadding) + barWidth / 2) // Center label under each bar
-    .attr('y', svgHeight - 10) // Position below the bars
-    .attr('text-anchor', 'middle') // Center text
-    .attr('fill', '#000')
-    .style('font-size', '0.85rem') // Smaller font size
-    // .style('font-weight', 'bold') // Bold font size
+  // Value labels selection and data binding
+  var valueLabels = svg.selectAll('.value-label')
+    .data(filteredDataFirstYear, d => d.country);
+
+  // Enter selection - Create new labels for new data
+  valueLabels.enter()
+    .append('text')
+    .attr('class', 'value-label') // Assign class for styling and selection
+    .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
+    .attr('y', d => yScale(d.total_killed) - 5) // Position above the bar
+    .attr('text-anchor', 'middle') // Center the text above the ba
+    .style('font-size', '1rem')
     .style('font-family', "'Roboto', sans-serif")
-    .attr('dy', '2rem'); // Offset the text a bit down from the exact bottom
+    .style('font-weight', "bold")
+    .text(d => d.total_killed); // Set the label text to the value
+
+  // Update selection - Update positions and text for existing labels
+  valueLabels.transition()
+    .duration(transitionSpeed)
+    .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
+    .attr('y', d => yScale(d.total_killed) - 5)
+    .text(d => d.total_killed);
+
+  // Exit selection - Remove labels for data that no longer exists
+  valueLabels.exit().remove();
+
+  // Correctly position and rotate country labels
+  var countryLabels = svg.selectAll('.country-label')
+    .data(filteredDataFirstYear, d => d.country); // Bind data
+
+  // Enter selection - Add new labels
+  countryLabels.enter().append('text')
+    .attr('class', 'country-label') // Assign class for styling and selection
+    .attr('x', (d, i) => (chartSizes.margin.left - 20) + (i * (barWidth + chartSizes.barPadding)))
+    .attr('y', chartSizes.svg.height + 25) // Position just below the bars; adjust as needed
+    .style('text-anchor', 'start') // Ensures the text rotates around its end
+    .style('font-size', '1rem')
+    .style('font-family', "'Roboto', sans-serif")
+    .style('font-weight', "bold")
+    .attr('transform', (d, i) => `rotate(45, ${i * (barWidth + chartSizes.barPadding) + (barWidth / 2)}, ${chartSizes.svg.height + 5})`)
+    .text(d => d.country);
+
+  // Update selection - Update existing labels if necessary
+  // countryLabels.transition()
+  //   .duration(200)
+  //   .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
+  //   .attr('y', chartSizes.svg.height + 5)
+  //   .attr('transform', (d, i) => `rotate(90, ${i * (barWidth + chartSizes.barPadding) + (barWidth / 2)}, ${chartSizes.svg.height + 5})`)
+  //   .text(d => d.country);
+
+  // Exit selection - Remove labels for data that no longer exists
+  countryLabels.exit().remove();
 
   // Add y-axis to the chart
   svg.append("g")
+    .attr("class", "y-axis")
     .call(d3.axisLeft(yScale));
-  // }).catch(function (error) {
-  //   console.log(error);
-  // });
 }
 
 // After loading the data and setting up the initial chart:
@@ -2072,8 +2112,7 @@ function updateChartForYear(year) {
   const minY = 0; // Assuming 0 is the minimum value for the y-axis
   // Assuming the structure of minMaxY has been changed
   // Find the max Y value for the given year
-  const maxYObject = minMaxY.find(obj => obj[year] !== undefined);
-  const maxY = maxYObject ? maxYObject[year] : 50; // Default to 50 if year is not found
+  const maxY = minMaxY[year]
 
   // Update yScale domain based on the current year's data
   yScale.domain([0, maxY]);
@@ -2086,7 +2125,7 @@ function updateChartForYear(year) {
   // Create a y-scale
   yScale = d3.scaleLinear()
     .domain([minY, maxY])
-    .range([svgHeight, 0]); // Invert range to correctly display SVG
+    .range([chartSizes.svg.height, 0]); // Invert range to correctly display SVG
 
   // Bind filteredData to the bars
   var bars = svg.selectAll('.bar')
@@ -2096,16 +2135,75 @@ function updateChartForYear(year) {
   bars.enter().append('rect')
     .merge(bars) // Merge enter and update selections
     .transition()
-    .duration(200)
-    .attr('x', (d, i) => i * (barWidth + barPadding))
+    .duration(transitionSpeed)
+    .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding))
     .attr('y', d => yScale(+d.total_killed))
-    .attr('height', d => svgHeight - yScale(parseInt(d.total_killed)))
+    .attr('height', d => chartSizes.svg.height - yScale(parseInt(d.total_killed)))
     .attr('width', barWidth)
     .attr('fill', '#9f3e52');
 
   // Exit selection - Remove any surplus rects
   bars.exit().remove();
 
+  // Remove old grid lines
+  svg.selectAll(".grid-line").remove();
+  svg.selectAll(".grid-label").remove(); // Assuming you've added this class to your grid line labels
+
+  // Add new grid lines based on the updated yScale
+  gridLinesByYear[year].forEach(value => {
+    svg.append('line')
+      .attr('class', 'grid-line') // Assign a class for easy selection and removal
+      .attr('x1', 0)
+      .attr('x2', chartSizes.svg.width)
+      .attr('y1', yScale(value))
+      .attr('y2', yScale(value))
+      .attr('class', 'grid-line') // Assign a class for easy selection and removal
+      .attr('stroke', '#282828')
+      .attr('stroke-width', 2)
+      .attr('stroke-dasharray', '2,2');
+
+    // Add label for the grid line
+    svg.append('text')
+      .attr('class', 'grid-label')
+      .attr('x', -chartSizes.margin.left + 5) // Adjust x position to not overlap with the background
+      .attr('y', yScale(value))
+      .attr('dy', '0.35em') // Center text vertically
+      .attr('text-anchor', 'start') // Align text to start at the x position
+      .style('font-size', '1rem')
+      .style('font-family', "'Roboto', sans-serif")
+      .text(`${value}`);
+  });
+
+  svg.selectAll(".value-label").remove(); // Assuming you've added this class to your grid line labels
+
+  // Value labels selection and data binding
+  var valueLabels = svg.selectAll('.value-label')
+    .data(filteredData, d => d.country);
+
+  // Enter selection - Create new labels for new data
+  valueLabels.enter()
+    .append('text')
+    .attr('class', 'value-label') // Assign class for styling and selection
+    .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
+    .attr('y', d => yScale(d.total_killed) - 5) // Position above the bar
+    .attr('text-anchor', 'middle') // Center the text above the ba
+    .style('font-size', '1rem')
+    .style('font-family', "'Roboto', sans-serif")
+    .style('font-weight', "bold")
+    .text(d => d.total_killed); // Set the label text to the value
+
+  // Update selection - Update positions and text for existing labels
+  valueLabels.transition()
+    .duration(transitionSpeed)
+    .attr('x', (d, i) => i * (barWidth + chartSizes.barPadding) + (barWidth / 2))
+    .attr('y', d => yScale(d.total_killed) - 5)
+    .text(d => d.total_killed);
+
+  // Exit selection - Remove labels for data that no longer exists
+  valueLabels.exit().remove();
+
+  // Re-render yAxis with updated scale
+  svg.select(".y-axis").transition().duration(500).call(d3.axisLeft(yScale));
 }
 
 // Original scroll event handler

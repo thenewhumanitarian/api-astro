@@ -44,7 +44,7 @@ html {
   left: 3rem;
 }
 
-@media screen and (max-width: 601px) {
+/* @media screen and (max-width: 601px) {
   .scroll-animation-container {
     top: 70px;
   }
@@ -52,6 +52,6 @@ html {
   .progress-indicator {
     top: calc(50% + 35px);
   }
-}
+} */
 
 /* Chart styles */
