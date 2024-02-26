@@ -2087,7 +2087,7 @@ function initD3Chart() {
     .append("g") // Append group for each country label
     .attr("class", "label-group")
     // Position the group under the corresponding bar
-    .attr("transform", (d, i) => `translate(${i * (barWidth + chartSizes.barPadding) + barWidth / 2}, ${chartSizes.svg.height + 20})`);
+    .attr("transform", (d, i) => `translate(${i * (barWidth + chartSizes.barPadding) + barWidth / 1.75}, ${chartSizes.svg.height + 20})`);
 
   // Now append text elements to these groups
   labelGroups.append("text")
