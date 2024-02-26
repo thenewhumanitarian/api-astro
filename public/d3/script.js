@@ -1902,11 +1902,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const scrollAnimationContainer = document.createElement('div');
   scrollAnimationContainer.classList.add('scroll-animation-container');
 
-  const progressIndicator = document.createElement('div');
-  progressIndicator.classList.add('progress-indicator');
-  progressIndicator.textContent = '2000';
+  // const progressIndicator = document.createElement('div');
+  // progressIndicator.classList.add('progress-indicator');
+  // progressIndicator.textContent = '2000';
 
-  scrollAnimationContainer.appendChild(progressIndicator);
+  // scrollAnimationContainer.appendChild(progressIndicator);
 
   const mainContent = document.querySelector('.main-content');
   if (mainContent) {
@@ -1972,6 +1972,17 @@ function initD3Chart() {
   // Determine the min and max Y values for the scale from minMaxY
   const minY = 0; // Assuming 0 is the minimum value for the y-axis
   const maxY = minMaxY[firstYear]; // Extract the max value for the year
+
+  // At the end of initD3Chart function, add:
+  let yearIndicator = svg.append("text")
+    .attr("class", "year-indicator") // Assign a class for easy selection and styling
+    .attr("x", chartSizes.svg.width / 2 + (chartSizes.margin.left / 5)) // Position it above the y-axis; adjust as needed
+    .attr("y", - chartSizes.svg.height / 8) // Adjust according to your layout
+    .attr("text-anchor", "middle") // Center the text horizontally
+    .style("font-size", "3rem") // Big text size
+    .style("font-weight", "bold") // Make it bold
+    .style("font-family", "Roboto, sans-serif") // Make it bold
+    .text(firstYear); // Initial year as the default text
 
   // Create a y-scale
   yScale = d3.scaleLinear()
@@ -2072,7 +2083,7 @@ function initD3Chart() {
   countryLabels.enter().append('text')
     .attr('class', 'country-label') // Assign class for styling and selection
     .attr('x', (d, i) => (chartSizes.margin.left - 20) + (i * (barWidth + chartSizes.barPadding)))
-    .attr('y', chartSizes.svg.height + 25) // Position just below the bars; adjust as needed
+    .attr('y', chartSizes.svg.height) // Position just below the bars; adjust as needed
     .style('text-anchor', 'start') // Ensures the text rotates around its end
     .style('font-size', fontSize)
     .style('font-family', "'Roboto', sans-serif")
@@ -2110,6 +2121,10 @@ function updateChartForYear(year) {
 
   // Update yScale domain based on the current year's data
   yScale.domain([0, maxY]);
+
+  // At the beginning of updateChartForYear function, add:
+  svg.select(".year-indicator")
+    .text(year); // Update the text to the current year
 
   // Clear existing bars and grid lines
   // svg.selectAll('.bar').remove();
@@ -2202,14 +2217,28 @@ function updateChartForYear(year) {
 
 // Original scroll event handler
 function handleScroll() {
-  const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollProgress = window.scrollY / scrollableHeight;
+  const fullScreenBeforeEnd = window.innerHeight; // Height before the end where 100% is achieved
+  const adjustedScrollableHeight = document.documentElement.scrollHeight - window.innerHeight - fullScreenBeforeEnd;
+
+  const scrollProgress = Math.min(window.scrollY / adjustedScrollableHeight, 1); // Ensuring it does not exceed 1
+
+  // Calculate the current year based on scroll progress
   const totalYears = 2023 - 2000 + 1;
-  const currentYearIndex = Math.min(Math.floor(scrollProgress * totalYears), totalYears - 1);
+  const currentYearIndex = Math.floor(scrollProgress * totalYears);
   const currentYear = 2000 + currentYearIndex;
-  const progressIndicator = document.querySelector('.progress-indicator');
-  progressIndicator.textContent = currentYear;
+
+  // Update the progress indicator and chart for the current year
+  // const progressIndicator = document.querySelector('.progress-indicator');
+  // progressIndicator.textContent = currentYear;
   updateChartForYear(currentYear);
+
+  // Determine if the scroll progress has reached 95% and hide the content if so
+  // const scrollAnimationContainer = document.querySelector('.scroll-animation-container');
+  // if (scrollProgress >= 0.95) {
+  //   scrollAnimationContainer.classList.add('hide-content');
+  // } else {
+  //   scrollAnimationContainer.classList.remove('hide-content');
+  // }
 }
 
 // Debounced version of the scroll event handler
